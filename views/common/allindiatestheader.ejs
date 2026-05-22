@@ -130,17 +130,17 @@
             </div>
             <div class="sidebar-divider"></div>
             <div class="sidebar-title">EXPLORE</div>
-            <div class="sidebar-item" data-nav="music">
+            <div class="sidebar-item" data-nav="music" onclick="TechInterview()">
                 <i class="fas fa-laptop-code"></i>
                 <span>Tech Interview</span>
             </div>
 
-            <div class="sidebar-item" data-nav="gaming">
+            <div class="sidebar-item" data-nav="gaming" onclick="BirthdaySoftware()">
                 <i class="fas fa-birthday-cake"></i>
                 <span>Birthday Software</span>
             </div>
 
-            <div class="sidebar-item" data-nav="movies">
+            <div class="sidebar-item" data-nav="movies" onclick="TestSeries()">
                 <i class="fas fa-file-alt"></i>
                 <span>Test Series</span>
             </div>
@@ -742,4 +742,14 @@ document.getElementById("logoutBtn")?.addEventListener("click", async () => {
     }
 
 });
+
+function BirthdaySoftware() {
+    window.location.href = "/rts/birthday-software";
+}
+function TechInterview(){
+    window.location.href="/tech-interview"
+}
+function TestSeries(){
+    window.location.href="/rts/dashboard"
+}
 </script>

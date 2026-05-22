@@ -100,7 +100,7 @@ router.get("/test/:id", async (req, res) => {
 }, { new: true, upsert: false });
 
     }
-console.log("TEST QUESTIONS:", test.questions);
+// console.log("TEST QUESTIONS:", test.questions);
     res.render("NationalTestSeries/NationalTestPage", {
       questions: test.questions || [],
       testTitle: test.name,

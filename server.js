@@ -10,7 +10,6 @@ const MongoStore = require('connect-mongo');
 const cors = require("cors");
 const crypto = require("crypto");
 const fs = require("fs");
-const fileUpload = require("express-fileupload");
 const nodemailer = require("nodemailer");
 const dashboardRoutes = require("./routes/dashboard-count-all-system.js");
 const candidateRoutes = require("./routes/candidateRoutes.js");
@@ -398,6 +397,17 @@ app.get("/logout", (req, res) => {
     res.status(404).sendFile(path.join(__dirname, "public", "404/404.html"));
   });
 };
+
+// birthday routes code 
+const birthdaygift = require("./middleware/birthdaygift");
+
+app.use(birthdaygift);
+
+app.use(express.json());
+
+app.use(express.urlencoded({
+    extended: true
+}));
 configureMiddleware(app);
 configureViews();
 // ======= RTS AUTH ROUTES (MUST BE BEFORE 404) =======
@@ -588,6 +598,7 @@ app.use(async (req, res, next) => {
 
   next();
 });
+
 app.get("/test-details", (req, res) => {
   res.render("NationalTestSeries/test-details");
 });

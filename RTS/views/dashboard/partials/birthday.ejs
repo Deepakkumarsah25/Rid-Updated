@@ -2,136 +2,549 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Website</title>
-<link rel="icon" type="image/png" href="/assets/signup.png">
-    <!-- OPTIONAL: agar CSS already hai to ye hata sakta hai -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>🎂 Birthday Magic | Popup Link Studio</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b81'%3E%3Cpath d='M12 2L15 8.5L22 9.5L17 14L18.5 21L12 17.5L5.5 21L7 14L2 9.5L9 8.5L12 2Z'/%3E%3C/svg%3E">
+    <!-- Font Awesome 6 (icons only) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body {
-            font-family: Arial;
-            background: #f5f6fa;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            background: linear-gradient(135deg, #ffe6f0 0%, #ffd9e5 100%);
+            font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, 'Inter', sans-serif;
+            min-height: 100vh;
+            padding: 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* decorative floating elements */
+        body::before {
+            content: "🎈🎂🎁";
+            font-size: 5rem;
+            position: fixed;
+            bottom: 0;
+            left: -20px;
+            opacity: 0.1;
+            pointer-events: none;
+            white-space: nowrap;
+            transform: rotate(-8deg);
+        }
+
+        body::after {
+            content: "✨🎊✨";
+            font-size: 4rem;
+            position: fixed;
+            top: 20px;
+            right: 10px;
+            opacity: 0.12;
+            pointer-events: none;
+        }
+
+        /* main wrapper - vertical center */
+        .calendar-page {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 90vh;
+        }
+
+        .calendar-container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            transition: all 0.2s;
+        }
+
+        /* main card */
+        .form-container {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(2px);
+            border-radius: 2.5rem;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 200, 200, 0.5);
+            padding: 2rem 2rem 2.2rem;
+            transition: transform 0.2s;
+        }
+
+        .form-container h2 {
+            font-size: 2rem;
+            background: linear-gradient(120deg, #ff5e7e, #ff8c5a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.4rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .form-container p {
+            color: #7c5f6e;
+            font-weight: 500;
+            margin-top: 0.3rem;
+        }
+
+        /* form group */
+        .form-group {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2c2b2e;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.95rem;
+        }
+
+        label i {
+            color: #ff6b81;
+            width: 1.5rem;
+        }
+
         .form-control {
             width: 100%;
-            padding: 10px;
-            margin-top: 5px;
+            padding: 0.85rem 1.2rem;
+            font-size: 0.95rem;
+            border: 2px solid #ffe2ea;
+            background: #fffdf9;
+            border-radius: 2rem;
+            transition: all 0.2s;
+            font-family: inherit;
+            outline: none;
         }
-        .form-group {
-            margin-bottom: 15px;
+
+        textarea.form-control {
+            border-radius: 1.5rem;
+            resize: vertical;
         }
-        .btn {
-            padding: 10px;
+
+        .form-control:focus {
+            border-color: #ff8ea3;
+            box-shadow: 0 5px 14px rgba(255, 107, 129, 0.2);
+            background-color: #ffffff;
+        }
+
+        /* file input style */
+        input[type="file"].form-control {
+            padding: 0.6rem 1rem;
+            background-color: #fff6f9;
             cursor: pointer;
         }
+
+        input[type="file"].form-control::file-selector-button {
+            background: #ffe4ec;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            color: #ff5a74;
+            margin-right: 1rem;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        input[type="file"].form-control::file-selector-button:hover {
+            background: #ffcdda;
+            color: #c23b54;
+        }
+
+        /* button */
+        .btn {
+            border: none;
+            border-radius: 3rem;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 0.85rem 1.8rem;
+            transition: 0.2s;
+            cursor: pointer;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+
         .btn-primary {
+            background: linear-gradient(95deg, #ff6b81, #ff8a62);
+            color: white;
+            width: 100%;
+            box-shadow: 0 10px 20px -8px #ff8585;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(95deg, #ff5670, #ff794b);
+            box-shadow: 0 16px 28px -10px #ff6b81;
+        }
+
+        /* ---------- MODAL POPUP (full centered) ---------- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.2s, opacity 0.25s ease;
+        }
+
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-card {
+            background: #fffef7;
+            max-width: 520px;
+            width: 90%;
+            border-radius: 2.5rem;
+            box-shadow: 0 40px 70px rgba(0, 0, 0, 0.4), 0 0 0 2px #ffd9e4 inset;
+            padding: 1.8rem 2rem 2rem;
+            text-align: center;
+            animation: modalPop 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: transform 0.2s;
+        }
+
+        @keyframes modalPop {
+            from {
+                transform: scale(0.92);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-card h3 {
+            font-size: 1.9rem;
+            background: linear-gradient(130deg, #ff6b81, #ff9f5a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+
+        .modal-card h3 i {
+            color: #ff8a6f;
+            font-size: 1.9rem;
+        }
+
+        .modal-link {
+            background: #fef2e8;
+            border: 2px solid #ffe0c5;
+            border-radius: 3rem;
+            padding: 0.9rem 1rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+            color: #362b2e;
+            margin: 1rem 0 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .modal-btn {
+            border: none;
+            padding: 0.7rem 1.3rem;
+            border-radius: 3rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #f0f0f0;
+            color: #2d2f36;
+        }
+
+        .modal-btn.open {
             background: #ff6b81;
             color: white;
-            border: none;
+            box-shadow: 0 4px 8px rgba(255, 107, 129, 0.3);
         }
-        .btn-outline {
-            border: 1px solid #333;
+
+        .modal-btn.copy {
+            background: #2b9348;
+            color: white;
+        }
+
+        .modal-btn.send {
+            background: #4c9aff;
+            color: white;
+        }
+
+        .modal-btn.cancel {
+            background: #e9ecef;
+            color: #5a5e6b;
+            border: 1px solid #dee2e6;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(0.97);
+        }
+
+        .modal-btn:active {
+            transform: translateY(1px);
+        }
+
+        .close-hint {
+            margin-top: 1.2rem;
+            font-size: 0.7rem;
+            color: #ad8d99;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        @media (max-width: 550px) {
+            .form-container {
+                padding: 1.5rem;
+            }
+            .modal-card {
+                padding: 1.4rem;
+                width: 92%;
+            }
+            .modal-buttons {
+                gap: 0.6rem;
+            }
+            .modal-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+            }
+            .modal-card h3 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
-
 <body>
 
-<!-- Birthday Website Page -->
 <div class="calendar-page" id="calendarPage">
-
-    <div style="text-align:center; margin-bottom:25px;">
-        <h2 style="color:#ff6b81;">🎂 Create a Beautiful Birthday Website</h2>
-        <p style="color:#666;">Fill the details below and generate a surprise birthday page</p>
-    </div>
-
-    <div class="calendar-container" style="max-width:700px; margin:auto;">
+    <div class="calendar-container">
         <div class="form-container">
+            <div style="text-align:center; margin-bottom:20px;">
+                <h2><i class="fas fa-cake-candles"></i> Birthday Magic Studio</h2>
+                <p><i class="fas fa-gift"></i> Fill details — create a custom surprise page & get your magic link!</p>
+            </div>
 
-            <!-- FORM -->
+            <!-- FORM - unchanged structure, same IDs, no js logic removed -->
             <form id="giftForm" enctype="multipart/form-data">
-
                 <div class="form-group">
-                    <label>Birthday Person's Name</label>
-                    <input type="text" name="didiName" class="form-control" required>
+                    <label><i class="fas fa-user-astronaut"></i> Birthday Person's Name</label>
+                    <input type="text" name="didiName" class="form-control" placeholder="e.g., Mom, Sarah, Bestie" required>
                 </div>
 
                 <div class="form-group">
-                    <label>Your Message</label>
-                    <textarea name="message" class="form-control" rows="4" required></textarea>
+                    <label><i class="fas fa-heart"></i> Your Message</label>
+                    <textarea name="message" class="form-control" rows="3" placeholder="Write a beautiful wish..." required></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>Birthday Person Photo</label>
+                    <label><i class="fas fa-image"></i> Birthday Person Photo</label>
                     <input type="file" name="didiImage" class="form-control" accept="image/*" required>
                 </div>
 
                 <div class="form-group">
-                    <label>Your Photo (Optional)</label>
+                    <label><i class="fas fa-camera-retro"></i> Your Photo (Optional)</label>
                     <input type="file" name="jijaImage" class="form-control" accept="image/*">
                 </div>
 
                 <div class="form-group">
-                    <label>Birthday Song (Optional)</label>
+                    <label><i class="fas fa-music"></i> Birthday Song (Optional)</label>
                     <input type="file" name="song" class="form-control" accept="audio/*">
                 </div>
 
-                <button type="submit" class="btn btn-primary" style="width:100%;">
-                    Create Birthday Website
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-wand-magic"></i> Create Birthday Website
                 </button>
-
             </form>
 
-            <!-- RESULT -->
-            <div id="result" style="display:none; margin-top:20px;">
-                <h3>🎉 Website Ready!</h3>
-                <input type="text" id="generatedLink" class="form-control" readonly>
-
-                <button onclick="copyLink()" class="btn btn-outline" style="margin-top:10px;">
-                    Copy Link
-                </button>
-            </div>
-
+            <!-- hidden old result div (not used anymore, but keep to avoid any conflict, but we will never show it) 
+                 we hide it permanently via style -->
+            <div id="result" style="display:none;"></div>
         </div>
     </div>
 </div>
 
-<!-- SCRIPT -->
+<!-- MODAL POPUP - appears center of screen with open/copy/send/cancel -->
+<div id="linkModal" class="modal-overlay">
+    <div class="modal-card">
+        <h3><i class="fas fa-link"></i> Your Birthday Link <i class="fas fa-grin-stars"></i></h3>
+        <div class="modal-link" id="modalLinkText">https://example.com/gift/...</div>
+        <div class="modal-buttons">
+            <button class="modal-btn open" id="modalOpenBtn"><i class="fas fa-external-link-alt"></i> Open</button>
+            <button class="modal-btn copy" id="modalCopyBtn"><i class="fas fa-copy"></i> Copy</button>
+            <button class="modal-btn send" id="modalSendBtn"><i class="fas fa-share-alt"></i> Send</button>
+            <button class="modal-btn cancel" id="modalCancelBtn"><i class="fas fa-times"></i> Cancel</button>
+        </div>
+        <div class="close-hint" id="modalBackdropClose">✨ click outside to close ✨</div>
+    </div>
+</div>
+
 <script>
-document.getElementById("giftForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
+    // Get DOM elements
+    const giftForm = document.getElementById("giftForm");
+    const modalOverlay = document.getElementById("linkModal");
+    const modalLinkSpan = document.getElementById("modalLinkText");
+    const openBtn = document.getElementById("modalOpenBtn");
+    const copyBtn = document.getElementById("modalCopyBtn");
+    const sendBtn = document.getElementById("modalSendBtn");
+    const cancelBtn = document.getElementById("modalCancelBtn");
 
-    const formData = new FormData(e.target);
+    // store the current generated link
+    let currentGeneratedLink = "";
 
-    try {
-        const res = await fetch("/create-gift", {
-            method: "POST",
-            body: formData
-        });
+    // Helper: open modal with link
+    function showModalWithLink(link) {
+        currentGeneratedLink = link;
+        modalLinkSpan.innerText = link;
+        modalOverlay.classList.add("active");
+    }
 
-        const data = await res.json();
+    function closeModal() {
+        modalOverlay.classList.remove("active");
+    }
 
-        if (!data.success) {
-            alert("Failed to create website");
+    // open link in new tab
+    function openLink() {
+        if (currentGeneratedLink) {
+            window.open(currentGeneratedLink, "_blank");
+        } else {
+            alert("No link available. Please generate first.");
+        }
+    }
+
+    // copy link to clipboard with feedback
+    async function copyLinkToClipboard() {
+        if (!currentGeneratedLink) {
+            alert("No link to copy.");
             return;
         }
-
-        const fullLink = window.location.origin + data.url;
-
-        document.getElementById("result").style.display = "block";
-        document.getElementById("generatedLink").value = fullLink;
-
-    } catch (err) {
-        console.error(err);
+        try {
+            await navigator.clipboard.writeText(currentGeneratedLink);
+            alert("🎉 Link copied to clipboard! Share it now.");
+        } catch (err) {
+            // fallback
+            const textarea = document.createElement("textarea");
+            textarea.value = currentGeneratedLink;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+            alert("✅ Link copied (manual method).");
+        }
     }
-});
 
-function copyLink() {
-    const link = document.getElementById("generatedLink");
-    link.select();
-    navigator.clipboard.writeText(link.value);
-    alert("Link copied!");
-}
+    // send action: if Web Share API exists, use it; else copy + instruction
+    function sendLink() {
+        if (!currentGeneratedLink) {
+            alert("Generate a link first.");
+            return;
+        }
+        if (navigator.share) {
+            navigator.share({
+                title: 'Birthday Surprise!',
+                text: 'Look at this beautiful birthday website made for you 🎂',
+                url: currentGeneratedLink,
+            }).catch(() => {
+                // user cancelled share, ignore
+            });
+        } else {
+            // fallback: copy and notify
+            copyLinkToClipboard();
+            alert("💖 Link copied! You can now paste & send via WhatsApp, Messenger, or any app.");
+        }
+    }
+
+    // MODAL EVENT LISTENERS
+    openBtn.addEventListener("click", openLink);
+    copyBtn.addEventListener("click", copyLinkToClipboard);
+    sendBtn.addEventListener("click", sendLink);
+    cancelBtn.addEventListener("click", closeModal);
+
+    // click on overlay background closes modal
+    modalOverlay.addEventListener("click", (e) => {
+        if (e.target === modalOverlay) {
+            closeModal();
+        }
+    });
+
+    // ESC key closes modal
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modalOverlay.classList.contains("active")) {
+            closeModal();
+        }
+    });
+
+    // ------------------------------------------------------------------
+    // ORIGINAL FORM SUBMIT LOGIC (unchanged except replacing result display)
+    // We keep all original fetch and error handling but replace old result style
+    // with elegant modal popup.
+    // ------------------------------------------------------------------
+    giftForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(giftForm);
+
+        try {
+            const res = await fetch("/create-gift", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await res.json();
+
+            if (!data.success) {
+                alert("❌ Failed to create website. Please try again.");
+                return;
+            }
+
+            const fullLink = window.location.origin + data.url;
+            // Show modal popup (center screen) instead of old result div
+            showModalWithLink(fullLink);
+
+        } catch (err) {
+            console.error(err);
+            alert("⚠️ Network error or server issue. Could not generate link.");
+        }
+    });
+
+    // Optional: preserve copy function no longer needed but we keep consistent.
+    // We've already implemented modern clipboard.
+    // We also remove any old interference with result div, but it's hidden.
+    // The modal appears on top, fully responsive, with open/copy/send/cancel.
+    // Also the link is displayed in center of screen on every generation.
 </script>
-
 </body>
 </html>

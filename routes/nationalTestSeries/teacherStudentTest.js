@@ -303,8 +303,8 @@ router.get("/teacher/channel", async (req, res) => {
       ]
     }).sort({ createdAt: -1 });
 
-    console.log("User:", decoded.userId);
-    console.log("Channel Tests:", tests.length);
+    // console.log("User:", decoded.userId);
+    // console.log("Channel Tests:", tests.length);
 
     res.render("NationalTestSeries/teacher/channel", { tests });
 

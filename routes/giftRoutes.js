@@ -7,7 +7,9 @@ const router = express.Router();
 /* ========= ENSURE FOLDERS ========= */
 
 const ensure = (p) => {
-  if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
+  if (!fs.existsSync(p)) {
+    fs.mkdirSync(p, { recursive: true });
+  }
 };
 
 ensure("data");
@@ -17,22 +19,39 @@ ensure("public/uploads/songs");
 /* ========= HELPER ========= */
 
 const loadGift = (id) => {
-  if (!fs.existsSync("data/gifts.json")) return null;
 
-  const gifts = JSON.parse(fs.readFileSync("data/gifts.json", "utf-8"));
+  if (!fs.existsSync("data/gifts.json")) {
+    return null;
+  }
+
+  const gifts = JSON.parse(
+    fs.readFileSync("data/gifts.json", "utf-8")
+  );
+
   return gifts[id] || null;
 };
 
-/* ========= CREATE GIFT ========= */
+/* ========= CREATE BIRTHDAY WEBSITE ========= */
 
 router.post("/create-gift", async (req, res) => {
+
   try {
 
-    if (!req.files || !req.files.didiImage) {
+    console.log("BODY:", req.body);
+    console.log("FILES:", req.files);
+
+    /* ========= CHECK FILE ========= */
+
+    if (
+      !req.files ||
+      !req.files.didiImage
+    ) {
+
       return res.json({
         success: false,
         message: "Birthday photo required"
       });
+
     }
 
     const filePath = "data/gifts.json";
@@ -40,31 +59,56 @@ router.post("/create-gift", async (req, res) => {
     let gifts = {};
 
     if (fs.existsSync(filePath)) {
-      gifts = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+
+      gifts = JSON.parse(
+        fs.readFileSync(filePath, "utf-8")
+      );
+
     }
 
-    const id = crypto.randomBytes(4).toString("hex");
+    /* ========= GENERATE ID ========= */
 
-    const didiImage = req.files.didiImage;
-    const jijaImage = req.files.jijaImage;
-    const song = req.files.song;
+    const id = crypto
+      .randomBytes(4)
+      .toString("hex");
 
-    /* ========= SAVE DIDi IMAGE ========= */
+    /* ========= GET FILES ========= */
 
-    const didiFile =
-      Date.now() + "-" + didiImage.name.replace(/\s+/g, "-");
+    const didiImage =
+req.files.didiImage;
 
-    await didiImage.mv("public/uploads/images/" + didiFile);
+const jijaImage =
+req.files.jijaImage;
 
-    /* ========= SAVE JIJA IMAGE ========= */
+const song =
+req.files.song;
 
-    let jijaFile = null;
+    /* ========= SAVE BIRTHDAY PHOTO ========= */
+
+    const birthdayFile =
+      Date.now() +
+      "-" +
+      didiImage.name.replace(/\s+/g, "-");
+
+    await didiImage.mv(
+      "public/uploads/images/" + birthdayFile
+    );
+
+    /* ========= SAVE YOUR PHOTO ========= */
+
+    let yourPhotoFile = null;
 
     if (jijaImage) {
-      jijaFile =
-        Date.now() + "-" + jijaImage.name.replace(/\s+/g, "-");
 
-      await jijaImage.mv("public/uploads/images/" + jijaFile);
+      yourPhotoFile =
+        Date.now() +
+        "-" +
+       jijaImage.name.replace(/\s+/g, "-");
+
+     await jijaImage.mv(
+        "public/uploads/images/" + yourPhotoFile
+      );
+
     }
 
     /* ========= SAVE SONG ========= */
@@ -72,92 +116,187 @@ router.post("/create-gift", async (req, res) => {
     let songFile = null;
 
     if (song) {
-      songFile =
-        Date.now() + "-" + song.name.replace(/\s+/g, "-");
 
-      await song.mv("public/uploads/songs/" + songFile);
+      songFile =
+        Date.now() +
+        "-" +
+        song.name.replace(/\s+/g, "-");
+
+      await song.mv(
+        "public/uploads/songs/" + songFile
+      );
+
     }
 
     /* ========= SAVE DATA ========= */
 
     gifts[id] = {
-      didiName: req.body.didiName,
-      message: req.body.message,
-      didiImage: "/uploads/images/" + didiFile,
-      jijaImage: jijaFile
-        ? "/uploads/images/" + jijaFile
-        : "/uploads/images/" + didiFile,
-      song: songFile ? "/uploads/songs/" + songFile : null,
-      createdAt: new Date().toISOString()
+
+      id,
+
+      didiName:
+req.body.didiName || "Birthday Person",
+
+      message:
+        req.body.message || "",
+
+      didiImage:
+"/uploads/images/" + birthdayFile,
+
+      jijaImage:
+        yourPhotoFile
+          ? "/uploads/images/" + yourPhotoFile
+          : "/uploads/images/" + birthdayFile,
+
+      song:
+        songFile
+          ? "/uploads/songs/" + songFile
+          : null,
+
+      createdAt:
+        new Date().toISOString()
+
     };
 
-    fs.writeFileSync(filePath, JSON.stringify(gifts, null, 2));
+    fs.writeFileSync(
+      filePath,
+      JSON.stringify(gifts, null, 2)
+    );
 
-    res.json({
+    /* ========= SUCCESS ========= */
+
+    return res.json({
+
       success: true,
+
       url: `/view/${id}`
+
     });
 
   } catch (err) {
+
     console.log("Gift Error:", err);
 
-    res.json({
+    return res.json({
+
       success: false,
-      message: "Upload failed"
+
+      message: err.message || "Upload failed"
+
     });
+
   }
+
 });
 
-/* ========= VIEW ROUTES ========= */
+/* ========= HOME ========= */
 
 router.get("/view/:id", (req, res) => {
+
   const gift = loadGift(req.params.id);
 
-  if (!gift) return res.send("Gift not found");
+  if (!gift) {
+    return res.send("Gift not found");
+  }
 
   gift.id = req.params.id;
 
-  res.render("Birthday_Celebration/index", { gift, page: "home" });
+  res.render(
+    "Birthday_Celebration/index",
+    {
+      gift,
+      page: "home"
+    }
+  );
+
 });
+
+/* ========= JOURNEY ========= */
 
 router.get("/view/:id/journey", (req, res) => {
+
   const gift = loadGift(req.params.id);
 
-  if (!gift) return res.send("Gift not found");
+  if (!gift) {
+    return res.send("Gift not found");
+  }
 
   gift.id = req.params.id;
 
-  res.render("Birthday_Celebration/journey", { gift, page: "journey" });
+  res.render(
+    "Birthday_Celebration/journey",
+    {
+      gift,
+      page: "journey"
+    }
+  );
+
 });
+
+/* ========= GIFT ========= */
 
 router.get("/view/:id/gift", (req, res) => {
+
   const gift = loadGift(req.params.id);
 
-  if (!gift) return res.send("Gift not found");
+  if (!gift) {
+    return res.send("Gift not found");
+  }
 
   gift.id = req.params.id;
 
-  res.render("Birthday_Celebration/gift", { gift, page: "gift" });
+  res.render(
+    "Birthday_Celebration/gift",
+    {
+      gift,
+      page: "gift"
+    }
+  );
+
 });
+
+/* ========= MEMORIES ========= */
 
 router.get("/view/:id/memories", (req, res) => {
+
   const gift = loadGift(req.params.id);
 
-  if (!gift) return res.send("Gift not found");
+  if (!gift) {
+    return res.send("Gift not found");
+  }
 
   gift.id = req.params.id;
 
-  res.render("Birthday_Celebration/memories", { gift, page: "memories" });
+  res.render(
+    "Birthday_Celebration/memories",
+    {
+      gift,
+      page: "memories"
+    }
+  );
+
 });
 
+/* ========= FEEDBACK ========= */
+
 router.get("/view/:id/feedback", (req, res) => {
+
   const gift = loadGift(req.params.id);
 
-  if (!gift) return res.send("Gift not found");
+  if (!gift) {
+    return res.send("Gift not found");
+  }
 
   gift.id = req.params.id;
 
-  res.render("Birthday_Celebration/feedback", { gift, page: "feedback" });
+  res.render(
+    "Birthday_Celebration/feedback",
+    {
+      gift,
+      page: "feedback"
+    }
+  );
+
 });
 
 module.exports = router;
