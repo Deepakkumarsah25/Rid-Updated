@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const TeacherTest = require("../../models/teacherTestModel");
+const User = require("../../models/user");
+const Teacher = require("../../models/Teacher");
 const upload = require("../../middlewares/upload");
 const cloudinary =
   require("../../config/cloudinary");
@@ -66,87 +68,65 @@ router.post("/save-temp-questions", (req, res) => {
 
 // ================= CREATE TEST =================
 router.post(
-
   "/create-test",
 
   (req, res, next) => {
 
-    upload.single("thumbnail")(
+    if (
+        req.headers["content-type"] &&
+        req.headers["content-type"].includes("multipart/form-data")
+    ) {
 
-      req,
-      res,
+        upload.single("thumbnail")(req, res, function(err){
 
-      function (err) {
+            if(err){
 
-        if (err) {
+                console.log("MULTER ERROR:", err);
 
-          console.log(
-            "UPLOAD ERROR:",
-            err
-          );
+                return res.status(500).json({
+                    success:false,
+                    msg: err.message
+                });
 
-          return res.status(500).json({
+            }
 
-            success: false,
+            next();
 
-            msg:
-              err.message ||
-              "Upload failed"
+        });
 
-          });
+    }
 
-        }
+    else {
 
         next();
 
-      }
+    }
 
-    );
-
-  },
+},
 
   async (req, res) => {
 
     try {
 
-      console.log(
-        "BODY:",
-        req.body
-      );
+      console.log("BODY:", req.body);
+      console.log("FILE:", req.file);
 
-      console.log(
-        "FILE:",
-        req.file
-      );
-
-      // TOKEN
-      const token =
-        req.cookies.token;
+      const token = req.cookies.token;
 
       if (!token) {
 
         return res.status(401).json({
-
           success: false,
-
-          msg:
-            "Login required"
-
+          msg: "Login required"
         });
 
       }
 
-      // VERIFY
-      const decoded =
-        jwt.verify(
+      const decoded = jwt.verify(
+        token,
+        process.env.JWT_SECRET
+      );
 
-          token,
-
-          process.env.JWT_SECRET
-
-        );
-
-      // QUESTIONS
       const rawQuestions =
         tempQuestionsStore[
           decoded.userId
@@ -155,17 +135,12 @@ router.post(
       if (!rawQuestions.length) {
 
         return res.json({
-
           success: false,
-
-          msg:
-            "No questions found"
-
+          msg: "No questions found"
         });
 
       }
 
-      // FORMAT QUESTIONS
       const formattedQuestions =
         rawQuestions.map((q) => {
 
@@ -192,13 +167,10 @@ router.post(
 
             ];
 
-          }
-
-          else {
+          } else {
 
             options =
               (q.options || []).map(
-
                 (opt) => ({
 
                   text:
@@ -210,7 +182,6 @@ router.post(
                     opt.isCorrect || false
 
                 })
-
               );
 
           }
@@ -232,7 +203,6 @@ router.post(
 
         });
 
-      // THUMBNAIL
       let thumbnailPath = "";
 
       if (req.file) {
@@ -247,7 +217,6 @@ router.post(
 
       }
 
-      // CREATE TEST
       const newTest =
         new TeacherTest({
 
@@ -269,26 +238,20 @@ router.post(
             req.body.subject || "General",
 
           duration:
-            Number(
-              req.body.duration
-            ) || 60,
+            Number(req.body.duration) || 60,
 
           thumbnail:
             thumbnailPath,
 
           visibility:
-            req.body.visibility ||
-            "private",
+            req.body.visibility || "private",
 
           questions:
             formattedQuestions,
 
           status:
-            req.body.visibility ===
-            "public"
-
+            req.body.visibility === "public"
               ? "published"
-
               : "pending"
 
         });
@@ -299,9 +262,7 @@ router.post(
         decoded.userId
       ];
 
-      console.log(
-        "✅ TEST CREATED"
-      );
+      console.log("✅ TEST CREATED");
 
       res.json({
 
@@ -337,9 +298,7 @@ router.post(
     }
 
   }
-
 );
-
 
 
 // ================= MY CHANNEL =================

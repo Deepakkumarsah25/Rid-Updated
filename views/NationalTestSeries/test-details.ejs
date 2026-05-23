@@ -757,7 +757,6 @@
 
         // ---------- SUBMIT TEST ----------
 // ================= SUBMIT TEST =================
-
 let isSubmitting = false;
 
 async function submitTest(
@@ -765,7 +764,7 @@ async function submitTest(
     e
 ) {
 
-    // ✅ STOP DEFAULT
+    // ✅ STOP FORM
     if (e) {
 
         e.preventDefault();
@@ -773,7 +772,7 @@ async function submitTest(
 
     }
 
-    // ✅ PREVENT DOUBLE SUBMIT
+    // ✅ PREVENT MULTIPLE CLICK
     if (isSubmitting) return;
 
     isSubmitting = true;
@@ -809,7 +808,7 @@ async function submitTest(
     const originalText =
         activeButton.innerHTML;
 
-    // ✅ LOADING
+    // ✅ BUTTON LOADING
     activeButton.disabled = true;
 
     activeButton.innerHTML =
@@ -818,11 +817,11 @@ async function submitTest(
 
             ? "⏳ Publishing..."
 
-            : "⏳ Saving Draft...";
+            : "⏳ Saving...";
 
     try {
 
-        // ✅ FORMDATA
+        // ✅ CREATE FORM DATA
         const formData =
             new FormData();
 
@@ -851,13 +850,18 @@ async function submitTest(
             visibility
         );
 
-        // ✅ FILE INPUT SAFE
+        // ✅ FILE INPUT
         const fileInput =
             document.getElementById(
                 "thumbnailInput"
             );
 
-        // ✅ APPEND FILE SAFELY
+        console.log(
+            "FILES:",
+            fileInput.files
+        );
+
+        // ✅ APPEND FILE
         if (
             fileInput &&
             fileInput.files &&
@@ -867,15 +871,28 @@ async function submitTest(
             const file =
                 fileInput.files[0];
 
+            // ✅ IMAGE CHECK
+            if (
+                !file.type.startsWith(
+                    "image/"
+                )
+            ) {
+
+                throw new Error(
+                    "Only image allowed"
+                );
+
+            }
+
             console.log(
                 "APPENDING FILE:",
                 file
             );
 
+            // ✅ IMPORTANT FIX
             formData.append(
                 "thumbnail",
-                file,
-                file.name
+                file
             );
 
         }
@@ -897,7 +914,7 @@ async function submitTest(
 
         }
 
-        // ✅ FETCH
+        // ✅ FETCH REQUEST
         const response =
             await fetch(
 
@@ -915,7 +932,7 @@ async function submitTest(
 
             );
 
-        // ✅ RESPONSE TEXT
+        // ✅ RAW TEXT
         const text =
             await response.text();
 
@@ -924,7 +941,8 @@ async function submitTest(
             text
         );
 
-        let data = {};
+        // ✅ SAFE JSON
+        let data;
 
         try {
 
@@ -935,13 +953,17 @@ async function submitTest(
 
         catch {
 
+            console.log(
+                "INVALID JSON RESPONSE"
+            );
+
             throw new Error(
-                "Invalid server response"
+                "Server returned invalid response"
             );
 
         }
 
-        // ❌ FAILED
+        // ✅ FAILED
         if (
             !response.ok ||
             !data.success
@@ -951,7 +973,7 @@ async function submitTest(
 
                 data.msg ||
 
-                "Server response failed"
+                "Failed to create test"
 
             );
 
@@ -968,13 +990,23 @@ async function submitTest(
 
         );
 
-        // ✅ RESET INPUT
-        thumbnailInput.value =
-            "";
+        // ✅ RESET FILE
+        if (fileInput) {
 
-        uploadThumbBtn.innerHTML =
+            fileInput.value = "";
 
-            "📸 Upload thumbnail";
+        }
+
+        // ✅ RESET BUTTON
+        if (
+            typeof uploadThumbBtn !==
+            "undefined"
+        ) {
+
+            uploadThumbBtn.innerHTML =
+                "📸 Upload thumbnail";
+
+        }
 
         // ✅ REDIRECT
         setTimeout(() => {
@@ -1021,7 +1053,6 @@ async function submitTest(
     }
 
 }
-
 // ================= EVENTS =================
 
 savePrivateBtn.onclick =

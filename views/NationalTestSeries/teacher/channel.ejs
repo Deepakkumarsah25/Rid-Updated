@@ -430,8 +430,13 @@
                         <div class="test-body"
                             onclick="window.location.href='/National-Test-Series/test/<%= test._id %>'">
                             <div class="test-avatar">
-                                <%= test.creatorName ? test.creatorName.charAt(0).toUpperCase() : 'U' %>
-                            </div>
+
+    <%= user && user.name
+        ? user.name.charAt(0).toUpperCase()
+        : "U"
+    %>
+
+</div>
                             <div class="test-info">
                                 <div class="test-title"><%= test.name %></div>
                                 <div class="test-subject"><%= test.subject %></div>
