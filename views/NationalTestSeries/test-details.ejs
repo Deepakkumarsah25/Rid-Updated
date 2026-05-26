@@ -1,1172 +1,924 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
     <title>National Test Series · Publish Assessment | RIDTECH Style</title>
-    <!-- Google Fonts: DM Sans & Space Grotesk (same as first design) -->
+
     <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-        :root {
-            /* Dark theme – exactly matching first code base */
-            --blue: #4d9eff;
-            --blue-dark: #3b82f6;
-            --purple: #a855f7;
-            --green: #22c55e;
-            --red: #ef4444;
-            --cyan: #06b6d4;
+      :root {
+        /* Dark theme – exactly matching first code base */
+        --blue: #4d9eff;
+        --blue-dark: #3b82f6;
+        --purple: #a855f7;
+        --green: #22c55e;
+        --red: #ef4444;
+        --cyan: #06b6d4;
 
-            --bg: #0a0a0a;
-            --surface: #141414;
-            --surface2: #1c1c1c;
-            --border: #2a2a2a;
-            --border2: #3a3a3a;
-            --text: #f0f0f0;
-            --text2: #b0b0b0;
-            --text3: #6a6a6a;
+        --bg: #0a0a0a;
+        --surface: #141414;
+        --surface2: #1c1c1c;
+        --border: #2a2a2a;
+        --border2: #3a3a3a;
+        --text: #f0f0f0;
+        --text2: #b0b0b0;
+        --text3: #6a6a6a;
 
-            --radius: 10px;
-            --radius-lg: 14px;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        }
+        --radius: 10px;
+        --radius-lg: 14px;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      }
 
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg);
-            min-height: 100vh;
-            color: var(--text);
-        }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--bg);
+        min-height: 100vh;
+        color: var(--text);
+      }
 
-        /* ========= HEADER (same as RIDTECH original) ========= */
-        .header {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            padding: 18px 32px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid rgba(79, 70, 229, 0.4);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-        }
+      /* ========= HEADER (same as RIDTECH original) ========= */
+      .header {
+        background: linear-gradient(
+          135deg,
+          #1a1a2e 0%,
+          #16213e 50%,
+          #0f3460 100%
+        );
+        padding: 18px 32px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border-bottom: 1px solid rgba(79, 70, 229, 0.4);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      }
 
-        .header-icon {
-            width: 36px;
-            height: 36px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+      .header-icon {
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
 
-        .header-icon svg {
-            width: 20px;
-            height: 20px;
-            stroke: #a855f7;
-            stroke-width: 1.8;
-            fill: none;
-        }
+      .header-icon svg {
+        width: 20px;
+        height: 20px;
+        stroke: #a855f7;
+        stroke-width: 1.8;
+        fill: none;
+      }
 
-        .header h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffffff 0%, #c084fc 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -0.3px;
-        }
+      .header h1 {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #ffffff 0%, #c084fc 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        letter-spacing: -0.3px;
+      }
 
-        /* main container + card panel (only one column, but consistent with first design) */
+      /* main container + card panel (only one column, but consistent with first design) */
+      .container {
+        padding: 28px 28px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      /* panel glassy dark card (same as first code) */
+      .panel {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        transition: border-color 0.2s;
+      }
+
+      .panel:hover {
+        border-color: rgba(77, 158, 255, 0.3);
+      }
+
+      .panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 20px;
+        border-bottom: 2px solid var(--blue);
+        background: rgba(20, 20, 20, 0.8);
+      }
+
+      .panel-header-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .panel-header-left svg {
+        width: 18px;
+        height: 18px;
+        color: var(--blue);
+        stroke: var(--blue);
+      }
+
+      .panel-body {
+        padding: 22px 24px;
+      }
+
+      /* ========= FORM FIELDS (dark style from first code) ========= */
+      .field-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .field-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text2);
+        margin-bottom: 8px;
+      }
+
+      .required-star {
+        color: var(--red);
+        margin-left: 3px;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid var(--border2);
+        border-radius: var(--radius);
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        color: var(--text);
+        background: #1a1a1a;
+        outline: none;
+        transition:
+          border-color 0.15s,
+          box-shadow 0.15s;
+      }
+
+      textarea.form-control {
+        min-height: 95px;
+        resize: vertical;
+        line-height: 1.5;
+      }
+
+      .form-control:focus {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 3px rgba(77, 158, 255, 0.2);
+        background: #1f1f1f;
+      }
+
+      /* word counter & hint line */
+      .inline-hint {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 12px;
+        color: var(--text3);
+        margin-top: 6px;
+      }
+
+      .word-counter {
+        font-weight: 500;
+        background: #1e1e2a;
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 24px;
+        font-size: 11px;
+        border: 1px solid var(--border2);
+      }
+
+      .word-counter.error {
+        color: #ff9e8f;
+        background: #391a1a;
+        border-color: var(--red);
+      }
+
+      /* thumbnail box – same style as first code but specific section */
+      .thumbnail-section {
+        background: #0f0f17;
+        border-radius: 1rem;
+        padding: 0.9rem 1.2rem;
+        margin: 1.5rem 0 1rem 0;
+        border: 1px solid var(--border);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.8rem;
+      }
+
+      .thumb-preview {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+        flex: 2;
+      }
+
+      .thumb-icon {
+        width: 52px;
+        height: 52px;
+        background: #13131c;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        border: 1px solid #2b2b38;
+      }
+
+      .thumb-text {
+        font-weight: 500;
+        font-size: 0.85rem;
+      }
+
+      .thumb-text small {
+        font-weight: normal;
+        color: #7982a0;
+        display: block;
+        font-size: 0.65rem;
+        margin-top: 2px;
+      }
+
+      .btn-outline-sm {
+        background: #0f0f17;
+        border: 1px solid #2d2d3c;
+        padding: 0.45rem 1.2rem;
+        border-radius: 40px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #cfdbf5;
+        cursor: pointer;
+        transition: 0.2s;
+        font-family: "DM Sans", sans-serif;
+      }
+
+      .btn-outline-sm:hover {
+        background: #1f1f2c;
+        border-color: var(--blue);
+        color: #b9d0ff;
+      }
+
+      /* action buttons (two like bottom bar but bigger) */
+      .action-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 1.8rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .btn {
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 16px;
+        border-radius: 40px;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: none;
+        background: #1e1e2a;
+        border: 1px solid #2e2e3e;
+        color: var(--text);
+      }
+
+      .btn:active {
+        transform: scale(0.98);
+      }
+
+      .btn-primary {
+        background: linear-gradient(95deg, #0f1a2e, #111c2c);
+        border-color: #3b5d8c;
+        color: white;
+      }
+
+      .btn-primary.rocket svg {
+        stroke: #c084fc;
+      }
+
+      .btn-primary:hover {
+        background: #1e2a44;
+        transform: translateY(-1px);
+        border-color: var(--blue);
+      }
+
+      .btn-secondary:hover {
+        background: #262633;
+        border-color: #4a4a62;
+      }
+
+      .footer-meta {
+        border-top: 1px solid #1e1e28;
+        padding: 1rem 1.2rem;
+        font-size: 0.7rem;
+        color: var(--text3);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        background: #0c0c0c;
+        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      }
+
+      /* toast like original */
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(80px);
+        background: #1e1e2e;
+        color: #e2e2e2;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 10px 22px;
+        border-radius: 40px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        z-index: 999;
+        white-space: nowrap;
+        backdrop-filter: blur(8px);
+        border: 1px solid #3a3a4a;
+        pointer-events: none;
+      }
+
+      .toast.show {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      @media (max-width: 680px) {
         .container {
-            padding: 28px 28px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        /* panel glassy dark card (same as first code) */
-        .panel {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            transition: border-color 0.2s;
-        }
-
-        .panel:hover {
-            border-color: rgba(77, 158, 255, 0.3);
-        }
-
-        .panel-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 20px;
-            border-bottom: 2px solid var(--blue);
-            background: rgba(20, 20, 20, 0.8);
-        }
-
-        .panel-header-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text);
-        }
-
-        .panel-header-left svg {
-            width: 18px;
-            height: 18px;
-            color: var(--blue);
-            stroke: var(--blue);
+          padding: 16px;
         }
 
         .panel-body {
-            padding: 22px 24px;
+          padding: 16px;
         }
 
-        /* ========= FORM FIELDS (dark style from first code) ========= */
-        .field-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .field-label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text2);
-            margin-bottom: 8px;
-        }
-
-        .required-star {
-            color: var(--red);
-            margin-left: 3px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1px solid var(--border2);
-            border-radius: var(--radius);
-            font-family: 'DM Sans', sans-serif;
-            font-size: 14px;
-            color: var(--text);
-            background: #1a1a1a;
-            outline: none;
-            transition: border-color 0.15s, box-shadow 0.15s;
-        }
-
-        textarea.form-control {
-            min-height: 95px;
-            resize: vertical;
-            line-height: 1.5;
-        }
-
-        .form-control:focus {
-            border-color: var(--blue);
-            box-shadow: 0 0 0 3px rgba(77, 158, 255, 0.2);
-            background: #1f1f1f;
-        }
-
-        /* word counter & hint line */
-        .inline-hint {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            font-size: 12px;
-            color: var(--text3);
-            margin-top: 6px;
-        }
-
-        .word-counter {
-            font-weight: 500;
-            background: #1e1e2a;
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 24px;
-            font-size: 11px;
-            border: 1px solid var(--border2);
-        }
-
-        .word-counter.error {
-            color: #ff9e8f;
-            background: #391a1a;
-            border-color: var(--red);
-        }
-
-        /* thumbnail box – same style as first code but specific section */
-        .thumbnail-section {
-            background: #0f0f17;
-            border-radius: 1rem;
-            padding: 0.9rem 1.2rem;
-            margin: 1.5rem 0 1rem 0;
-            border: 1px solid var(--border);
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.8rem;
-        }
-
-        .thumb-preview {
-            display: flex;
-            align-items: center;
-            gap: 0.9rem;
-            flex: 2;
-        }
-
-        .thumb-icon {
-            width: 52px;
-            height: 52px;
-            background: #13131c;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            border: 1px solid #2b2b38;
-        }
-
-        .thumb-text {
-            font-weight: 500;
-            font-size: 0.85rem;
-        }
-
-        .thumb-text small {
-            font-weight: normal;
-            color: #7982a0;
-            display: block;
-            font-size: 0.65rem;
-            margin-top: 2px;
-        }
-
-        .btn-outline-sm {
-            background: #0f0f17;
-            border: 1px solid #2d2d3c;
-            padding: 0.45rem 1.2rem;
-            border-radius: 40px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: #cfdbf5;
-            cursor: pointer;
-            transition: 0.2s;
-            font-family: 'DM Sans', sans-serif;
-        }
-
-        .btn-outline-sm:hover {
-            background: #1f1f2c;
-            border-color: var(--blue);
-            color: #b9d0ff;
-        }
-
-        /* action buttons (two like bottom bar but bigger) */
         .action-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 1.8rem;
-            margin-bottom: 0.8rem;
+          flex-direction: column;
         }
 
-        .btn {
-            flex: 1;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px 16px;
-            border-radius: 40px;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-            background: #1e1e2a;
-            border: 1px solid #2e2e3e;
-            color: var(--text);
-        }
-
-        .btn:active {
-            transform: scale(0.98);
-        }
-
-        .btn-primary {
-            background: linear-gradient(95deg, #0f1a2e, #111c2c);
-            border-color: #3b5d8c;
-            color: white;
-        }
-
-        .btn-primary.rocket svg {
-            stroke: #c084fc;
-        }
-
-        .btn-primary:hover {
-            background: #1e2a44;
-            transform: translateY(-1px);
-            border-color: var(--blue);
-        }
-
-        .btn-secondary:hover {
-            background: #262633;
-            border-color: #4a4a62;
-        }
-
-        .footer-meta {
-            border-top: 1px solid #1e1e28;
-            padding: 1rem 1.2rem;
-            font-size: 0.7rem;
-            color: var(--text3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            background: #0c0c0c;
-            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-        }
-
-        /* toast like original */
         .toast {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%) translateY(80px);
-            background: #1e1e2e;
-            color: #e2e2e2;
-            font-size: 13px;
-            font-weight: 500;
-            padding: 10px 22px;
-            border-radius: 40px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            z-index: 999;
-            white-space: nowrap;
-            backdrop-filter: blur(8px);
-            border: 1px solid #3a3a4a;
-            pointer-events: none;
+          white-space: normal;
+          max-width: 85%;
+          text-align: center;
         }
 
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
+        .thumbnail-section {
+          flex-direction: column;
+          align-items: flex-start;
         }
-
-        @media (max-width: 680px) {
-            .container {
-                padding: 16px;
-            }
-
-            .panel-body {
-                padding: 16px;
-            }
-
-            .action-buttons {
-                flex-direction: column;
-            }
-
-            .toast {
-                white-space: normal;
-                max-width: 85%;
-                text-align: center;
-            }
-
-            .thumbnail-section {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="header">
-        <div class="header-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M12 20h9" />
-                <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
-            </svg>
-        </div>
-        <h1>National Test Series · Publish Assessment</h1>
+      <div class="header-icon">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 20h9" />
+          <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+        </svg>
+      </div>
+      <h1>National Test Series · Publish Assessment</h1>
     </div>
 
     <div class="container">
-        <div class="panel">
-            <div class="panel-header">
-                <div class="panel-header-left">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M12 16v-4M12 8h.01" />
-                    </svg>
-                    Test Configuration
-                </div>
-                <div class="count-badge"
-                    style="background: var(--purple); color:white; border-radius: 20px; padding: 2px 12px; font-size:12px;">
-                    ✨ Publish</div>
-            </div>
-            <div class="panel-body">
-                <!-- Test Name -->
-                <div class="field-group">
-                    <label class="field-label">Test Name <span class="required-star">*</span></label>
-                    <input type="text" class="form-control" id="testName"
-                        placeholder="e.g., Ultimate Aptitude Simulator 2025" autocomplete="off">
-                </div>
-
-                <!-- Description with word limit (max 50 words) -->
-                <div class="field-group">
-                    <label class="field-label">Description <span style="font-weight:400;">(max 50 words)</span></label>
-                    <textarea class="form-control" id="testDesc"
-                        placeholder="Describe the test structure, topics, instructions... be clear and concise."
-                        rows="3"></textarea>
-                    <div class="inline-hint">
-                        <span>📝</span>
-                        <span>Word count: <span id="wordCountDisplay" class="word-counter">0</span> / 50 words</span>
-                        <span style="margin-left:auto;">💡 @ to mention channels</span>
-                    </div>
-                </div>
-
-                <!-- Duration -->
-                <div class="field-group">
-                    <label class="field-label">Duration (minutes)</label>
-                    <input type="number" class="form-control" id="durationMinutes" value="90" min="1" max="300"
-                        step="1">
-                    <div class="inline-hint">⏱️ Default 60 minutes if left empty/invalid</div>
-                </div>
-
-                <!-- Thumbnail mockup (same as second code but styled with first ui) -->
-                <div class="thumbnail-section">
-
-                    <div class="thumb-preview">
-
-                        <div class="thumb-icon">
-                            🎯
-                        </div>
-
-                        <div class="thumb-text">
-                            Set a thumbnail that stands out
-                            <small>
-                                1920x1080 recommended · catches attention
-                            </small>
-                        </div>
-
-                    </div>
-
-                    <input type="file" id="thumbnailInput" accept="image/*" hidden>
-
-                    <button type="button" class="btn-outline-sm" id="uploadThumbBtn">
-                        📸 Upload thumbnail
-                    </button>
-
-                </div>
-
-                <!-- Two action buttons (Save Private / Publish Public) -->
-                <div class="action-buttons">
-                    <button class="btn btn-secondary" type="button" id="savePrivateBtn">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" />
-                            <polyline points="17 21 17 13 7 13 7 21" />
-                            <polyline points="7 3 7 8 15 8" />
-                        </svg>
-                        Save Private (Draft)
-                    </button>
-                    <button type="button" class="btn btn-primary rocket" id="publishBtn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                        🚀 Publish (Public)
-                    </button>
-                </div>
-                <div class="inline-hint" style="justify-content: center; margin-top: 6px;">
-                    <span>⚡ Public tests appear in teacher channel. Private tests are draft-only.</span>
-                </div>
-            </div>
-            <div class="footer-meta">
-                <span>© National Test Series · Teacher Dashboard</span>
-                <span>🔒 visibility: draft / public</span>
-            </div>
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-header-left">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 16v-4M12 8h.01" />
+            </svg>
+            Test Configuration
+          </div>
+          <div
+            class="count-badge"
+            style="
+              background: var(--purple);
+              color: white;
+              border-radius: 20px;
+              padding: 2px 12px;
+              font-size: 12px;
+            "
+          >
+            ✨ Publish
+          </div>
         </div>
+        <div class="panel-body">
+          <!-- Test Name -->
+          <div class="field-group">
+            <label class="field-label"
+              >Test Name <span class="required-star">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="testName"
+              placeholder="e.g., Ultimate Aptitude Simulator 2025"
+              autocomplete="off"
+            />
+          </div>
+
+          <!-- Description with word limit (max 50 words) -->
+          <div class="field-group">
+            <label class="field-label"
+              >Description
+              <span style="font-weight: 400">(max 50 words)</span></label
+            >
+            <textarea
+              class="form-control"
+              id="testDesc"
+              placeholder="Describe the test structure, topics, instructions... be clear and concise."
+              rows="3"
+            ></textarea>
+            <div class="inline-hint">
+              <span>📝</span>
+              <span
+                >Word count:
+                <span id="wordCountDisplay" class="word-counter">0</span> / 50
+                words</span
+              >
+              <span style="margin-left: auto">💡 @ to mention channels</span>
+            </div>
+          </div>
+
+          <!-- Duration -->
+          <div class="field-group">
+            <label class="field-label">Duration (minutes)</label>
+            <input
+              type="number"
+              class="form-control"
+              id="durationMinutes"
+              value="90"
+              min="1"
+              max="300"
+              step="1"
+            />
+            <div class="inline-hint">
+              ⏱️ Default 60 minutes if left empty/invalid
+            </div>
+          </div>
+
+          <!-- Thumbnail mockup (same as second code but styled with first ui) -->
+          <div class="thumbnail-section">
+            <div class="thumb-preview">
+              <div class="thumb-icon">🎯</div>
+
+              <div class="thumb-text">
+                Set a thumbnail that stands out
+                <small> 1920x1080 recommended · catches attention </small>
+              </div>
+            </div>
+
+            <input type="file" id="thumbnailInput" accept="image/*" hidden />
+
+            <button type="button" class="btn-outline-sm" id="uploadThumbBtn">
+              📸 Upload thumbnail
+            </button>
+          </div>
+
+          <!-- Two action buttons (Save Private / Publish Public) -->
+          <div class="action-buttons">
+            <button class="btn btn-secondary" type="button" id="savePrivateBtn">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"
+                />
+                <polyline points="17 21 17 13 7 13 7 21" />
+                <polyline points="7 3 7 8 15 8" />
+              </svg>
+              Save Private (Draft)
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary rocket"
+              id="publishBtn"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+              🚀 Publish (Public)
+            </button>
+          </div>
+          <div
+            class="inline-hint"
+            style="justify-content: center; margin-top: 6px"
+          >
+            <span
+              >⚡ Public tests appear in teacher channel. Private tests are
+              draft-only.</span
+            >
+          </div>
+        </div>
+        <div class="footer-meta">
+          <span>© National Test Series · Teacher Dashboard</span>
+          <span>🔒 visibility: draft / public</span>
+        </div>
+      </div>
     </div>
 
     <div id="toastMsg" class="toast"></div>
     <script>
+      // ---------- DOM elements ----------
+      const testNameField = document.getElementById("testName");
 
-        // ---------- DOM elements ----------
-        const testNameField =
-            document.getElementById('testName');
+      const testDescField = document.getElementById("testDesc");
 
-        const testDescField =
-            document.getElementById('testDesc');
+      const durationField = document.getElementById("durationMinutes");
 
-        const durationField =
-            document.getElementById('durationMinutes');
+      const wordSpan = document.getElementById("wordCountDisplay");
 
-        const wordSpan =
-            document.getElementById('wordCountDisplay');
+      const savePrivateBtn = document.getElementById("savePrivateBtn");
 
-        const savePrivateBtn =
-            document.getElementById('savePrivateBtn');
+      const publishBtn = document.getElementById("publishBtn");
 
-        const publishBtn =
-            document.getElementById('publishBtn');
+      // ---------- TOAST ----------
+      function showToast(message, isError = false) {
+        const toast = document.getElementById("toastMsg");
 
-        // ---------- TOAST ----------
-        function showToast(
-            message,
-            isError = false
-        ) {
+        toast.textContent = message;
 
-            const toast =
-                document.getElementById(
-                    'toastMsg'
-                );
+        toast.style.background = isError ? "#2d1a1a" : "#1e2a3a";
 
-            toast.textContent =
-                message;
+        toast.style.borderColor = isError ? "#ef4444" : "#4d9eff";
 
-            toast.style.background =
-                isError
-                    ? '#2d1a1a'
-                    : '#1e2a3a';
+        toast.classList.add("show");
 
-            toast.style.borderColor =
-                isError
-                    ? '#ef4444'
-                    : '#4d9eff';
-
-            toast.classList.add(
-                'show'
-            );
-
-            setTimeout(() => {
-
-                toast.classList.remove(
-                    'show'
-                );
-
-            }, 2600);
-
-        }
-
-        // ---------- WORD COUNT ----------
-        function countWords(str) {
-
-            if (!str.trim())
-                return 0;
-
-            return str
-                .trim()
-                .split(/\s+/)
-                .filter(w => w.length > 0)
-                .length;
-
-        }
-
-        // ---------- UPDATE WORD COUNT ----------
-        function updateWordCount() {
-
-            const rawText =
-                testDescField.value;
-
-            const wordCount =
-                countWords(rawText);
-
-            wordSpan.innerText =
-                wordCount;
-
-            if (wordCount > 50) {
-
-                wordSpan.classList.add(
-                    'error'
-                );
-
-                wordSpan.style.color =
-                    "#ffa69e";
-
-            }
-
-            else {
-
-                wordSpan.classList.remove(
-                    'error'
-                );
-
-                wordSpan.style.color =
-                    "";
-
-            }
-
-            return wordCount;
-
-        }
-
-        // ---------- VALIDATION ----------
-        function validateForm(
-            visibility
-        ) {
-
-            const name =
-                testNameField.value.trim();
-
-            const description =
-                testDescField.value.trim();
-
-            let duration =
-                parseInt(
-                    durationField.value
-                );
-
-            // ✅ NAME REQUIRED
-            if (!name) {
-
-                showToast(
-                    "❌ Test name is required",
-                    true
-                );
-
-                testNameField.focus();
-
-                return null;
-
-            }
-
-            // ✅ DESCRIPTION LIMIT
-            const words =
-                countWords(description);
-
-            if (words > 50) {
-
-                showToast(
-                    `❌ Description exceeds 50 words (${words})`,
-                    true
-                );
-
-                testDescField.focus();
-
-                return null;
-
-            }
-
-            // ✅ DURATION FIX
-            if (
-                isNaN(duration) ||
-                duration < 1
-            ) {
-
-                duration = 60;
-
-            }
-
-            if (duration > 300) {
-
-                duration = 300;
-
-            }
-
-            // ✅ RETURN CLEAN DATA
-            return {
-
-                name,
-
-                description,
-
-                duration
-
-            };
-
-        }
-
-        // ---------- REALTIME DESCRIPTION ----------
-        testDescField.addEventListener(
-            'input',
-            () => {
-
-                updateWordCount();
-
-                const words =
-                    countWords(
-                        testDescField.value
-                    );
-
-                if (words > 50) {
-
-                    testDescField.style.borderColor =
-                        "#ef4444";
-
-                }
-
-                else {
-
-                    testDescField.style.borderColor =
-                        "var(--border2)";
-
-                }
-
-            }
-        );
-
-        // ---------- DESCRIPTION BLUR ----------
-        testDescField.addEventListener(
-            'blur',
-            () => {
-
-                const words =
-                    countWords(
-                        testDescField.value
-                    );
-
-                if (words > 50) {
-
-                    showToast(
-
-                        `❌ Description cannot exceed 50 words! Current: ${words} words.`,
-
-                        true
-
-                    );
-
-                    testDescField.focus();
-
-                }
-
-                else {
-
-                    testDescField.style.borderColor =
-                        "var(--border2)";
-
-                }
-
-            }
-        );
-
-        // ---------- SUBMIT TEST ----------
-// ================= SUBMIT TEST =================
-let isSubmitting = false;
-
-async function submitTest(
-    visibility,
-    e
-) {
-
-    // ✅ STOP FORM
-    if (e) {
-
-        e.preventDefault();
-        e.stopPropagation();
-
-    }
-
-    // ✅ PREVENT MULTIPLE CLICK
-    if (isSubmitting) return;
-
-    isSubmitting = true;
-
-    // ✅ VALIDATE
-    const validation =
-        validateForm(
-            visibility
-        );
-
-    if (!validation) {
-
-        isSubmitting = false;
-        return;
-
-    }
-
-    const {
-        name,
-        description,
-        duration
-    } = validation;
-
-    // ✅ ACTIVE BUTTON
-    const activeButton =
-
-        visibility === "public"
-
-            ? publishBtn
-
-            : savePrivateBtn;
-
-    const originalText =
-        activeButton.innerHTML;
-
-    // ✅ BUTTON LOADING
-    activeButton.disabled = true;
-
-    activeButton.innerHTML =
-
-        visibility === "public"
-
-            ? "⏳ Publishing..."
-
-            : "⏳ Saving...";
-
-    try {
-
-        // ✅ CREATE FORM DATA
-        const formData =
-            new FormData();
-
-        formData.append(
-            "name",
-            name
-        );
-
-        formData.append(
-            "description",
-            description
-        );
-
-        formData.append(
-            "subject",
-            "General"
-        );
-
-        formData.append(
-            "duration",
-            duration
-        );
-
-        formData.append(
-            "visibility",
-            visibility
-        );
-
-        // ✅ FILE INPUT
-        const fileInput =
-            document.getElementById(
-                "thumbnailInput"
-            );
-
-        console.log(
-            "FILES:",
-            fileInput.files
-        );
-
-        // ✅ APPEND FILE
-        if (
-            fileInput &&
-            fileInput.files &&
-            fileInput.files.length > 0
-        ) {
-
-            const file =
-                fileInput.files[0];
-
-            // ✅ IMAGE CHECK
-            if (
-                !file.type.startsWith(
-                    "image/"
-                )
-            ) {
-
-                throw new Error(
-                    "Only image allowed"
-                );
-
-            }
-
-            console.log(
-                "APPENDING FILE:",
-                file
-            );
-
-            // ✅ IMPORTANT FIX
-            formData.append(
-                "thumbnail",
-                file
-            );
-
-        }
-
-        // ✅ DEBUG
-        console.log(
-            "🚀 SENDING TEST..."
-        );
-
-        for (
-            let pair of
-            formData.entries()
-        ) {
-
-            console.log(
-                pair[0],
-                pair[1]
-            );
-
-        }
-
-        // ✅ FETCH REQUEST
-        const response =
-            await fetch(
-
-                "/National-Test-Series/create-test",
-
-                {
-
-                    method: "POST",
-
-                    credentials: "include",
-
-                    body: formData
-
-                }
-
-            );
-
-        // ✅ RAW TEXT
-        const text =
-            await response.text();
-
-        console.log(
-            "RAW RESPONSE:",
-            text
-        );
-
-        // ✅ SAFE JSON
-        let data;
-
-        try {
-
-            data =
-                JSON.parse(text);
-
-        }
-
-        catch {
-
-            console.log(
-                "INVALID JSON RESPONSE"
-            );
-
-            throw new Error(
-                "Server returned invalid response"
-            );
-
-        }
-
-        // ✅ FAILED
-        if (
-            !response.ok ||
-            !data.success
-        ) {
-
-            throw new Error(
-
-                data.msg ||
-
-                "Failed to create test"
-
-            );
-
-        }
-
-        // ✅ SUCCESS
-        showToast(
-
-            visibility === "public"
-
-                ? "🚀 Test Published Successfully"
-
-                : "💾 Draft Saved Successfully"
-
-        );
-
-        // ✅ RESET FILE
-        if (fileInput) {
-
-            fileInput.value = "";
-
-        }
-
-        // ✅ RESET BUTTON
-        if (
-            typeof uploadThumbBtn !==
-            "undefined"
-        ) {
-
-            uploadThumbBtn.innerHTML =
-                "📸 Upload thumbnail";
-
-        }
-
-        // ✅ REDIRECT
         setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2600);
+      }
 
-            window.location.href =
+      // ---------- WORD COUNT ----------
+      function countWords(str) {
+        if (!str.trim()) return 0;
 
-                "/National-Test-Series/teacher/channel";
+        return str
+          .trim()
+          .split(/\s+/)
+          .filter((w) => w.length > 0).length;
+      }
 
-        }, 1000);
+      // ---------- UPDATE WORD COUNT ----------
+      function updateWordCount() {
+        const rawText = testDescField.value;
 
-    }
+        const wordCount = countWords(rawText);
 
-    // ❌ ERROR
-    catch (err) {
+        wordSpan.innerText = wordCount;
 
-        console.log(
-            "SUBMIT ERROR:",
-            err
-        );
+        if (wordCount > 50) {
+          wordSpan.classList.add("error");
 
-        showToast(
+          wordSpan.style.color = "#ffa69e";
+        } else {
+          wordSpan.classList.remove("error");
 
-            err.message ||
+          wordSpan.style.color = "";
+        }
 
-            "Server Error",
+        return wordCount;
+      }
 
-            true
+      // ---------- VALIDATION ----------
+      function validateForm(visibility) {
+        const name = testNameField.value.trim();
 
-        );
+        const description = testDescField.value.trim();
 
-    }
+        let duration = parseInt(durationField.value);
 
-    // ✅ FINALLY
-    finally {
+        // ✅ NAME REQUIRED
+        if (!name) {
+          showToast("❌ Test name is required", true);
 
-        activeButton.disabled =
-            false;
+          testNameField.focus();
 
-        activeButton.innerHTML =
-            originalText;
+          return null;
+        }
 
-        isSubmitting = false;
+        // ✅ DESCRIPTION LIMIT
+        const words = countWords(description);
 
-    }
+        if (words > 50) {
+          showToast(`❌ Description exceeds 50 words (${words})`, true);
 
-}
-// ================= EVENTS =================
+          testDescField.focus();
 
-savePrivateBtn.onclick =
-    (e) => {
+          return null;
+        }
 
-        e.preventDefault();
-        e.stopPropagation();
+        // ✅ DURATION FIX
+        if (isNaN(duration) || duration < 1) {
+          duration = 60;
+        }
 
-        submitTest(
-            "private",
-            e
-        );
+        if (duration > 300) {
+          duration = 300;
+        }
 
-    };
+        // ✅ RETURN CLEAN DATA
+        return {
+          name,
 
-publishBtn.onclick =
-    (e) => {
+          description,
 
-        e.preventDefault();
-        e.stopPropagation();
+          duration,
+        };
+      }
 
-        submitTest(
-            "public",
-            e
-        );
-
-    };
+      // ---------- REALTIME DESCRIPTION ----------
+      testDescField.addEventListener("input", () => {
         updateWordCount();
 
-        // ---------- THUMBNAIL ----------
-        const thumbnailInput =
-            document.getElementById(
-                "thumbnailInput"
-            );
+        const words = countWords(testDescField.value);
 
-        const uploadThumbBtn =
-            document.getElementById(
-                "uploadThumbBtn"
-            );
+        if (words > 50) {
+          testDescField.style.borderColor = "#ef4444";
+        } else {
+          testDescField.style.borderColor = "var(--border2)";
+        }
+      });
 
-        let selectedThumbnail =
-            null;
+      // ---------- DESCRIPTION BLUR ----------
+      testDescField.addEventListener("blur", () => {
+        const words = countWords(testDescField.value);
 
-        uploadThumbBtn.addEventListener(
-            "click",
-            () => {
+        if (words > 50) {
+          showToast(
+            `❌ Description cannot exceed 50 words! Current: ${words} words.`,
 
-                thumbnailInput.click();
+            true,
+          );
 
+          testDescField.focus();
+        } else {
+          testDescField.style.borderColor = "var(--border2)";
+        }
+      });
+
+      // ---------- SUBMIT TEST ----------
+      // ================= SUBMIT TEST =================
+      let isSubmitting = false;
+
+      async function submitTest(visibility, e) {
+        // ✅ STOP FORM
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+
+        // ✅ PREVENT MULTIPLE CLICK
+        if (isSubmitting) return;
+
+        isSubmitting = true;
+
+        // ✅ VALIDATE
+        const validation = validateForm(visibility);
+
+        if (!validation) {
+          isSubmitting = false;
+          return;
+        }
+
+        const { name, description, duration } = validation;
+
+        // ✅ ACTIVE BUTTON
+        const activeButton =
+          visibility === "public" ? publishBtn : savePrivateBtn;
+
+        const originalText = activeButton.innerHTML;
+
+        // ✅ BUTTON LOADING
+        activeButton.disabled = true;
+
+        activeButton.innerHTML =
+          visibility === "public" ? "⏳ Publishing..." : "⏳ Saving...";
+
+        try {
+          // ✅ CREATE FORM DATA
+          const formData = new FormData();
+
+          formData.append("name", name);
+
+          formData.append("description", description);
+
+          formData.append("subject", "General");
+
+          formData.append("duration", duration);
+
+          formData.append("visibility", visibility);
+
+          // ✅ FILE INPUT
+          const fileInput = document.getElementById("thumbnailInput");
+
+          console.log("FILES:", fileInput.files);
+
+          // ✅ APPEND FILE
+          if (fileInput && fileInput.files && fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+
+            // ✅ IMAGE CHECK
+            if (!file.type.startsWith("image/")) {
+              throw new Error("Only image allowed");
             }
-        );
 
-        thumbnailInput.addEventListener(
-            "change",
-            (e) => {
+            console.log("APPENDING FILE:", file);
 
-                const file =
-                    e.target.files[0];
+            // ✅ IMPORTANT FIX
+            formData.append("thumbnail", file);
+          }
 
-                if (!file)
-                    return;
+          // ✅ DEBUG
+          console.log("🚀 SENDING TEST...");
 
-                selectedThumbnail =
-                    file;
+          for (let pair of formData.entries()) {
+            console.log(pair[0], pair[1]);
+          }
 
-                uploadThumbBtn.innerHTML =
+          // ✅ FETCH REQUEST
+          const response = await fetch(
+            "/National-Test-Series/create-test",
 
-                    `✅ ${file.name}`;
+            {
+              method: "POST",
 
-                showToast(
-                    "Thumbnail selected successfully"
-                );
+              credentials: "include",
 
-            }
-        );
+              body: formData,
+            },
+          );
 
-        // ---------- DURATION VALIDATION ----------
-        durationField.addEventListener(
-            'blur',
-            () => {
+          // ✅ RAW TEXT
+          const text = await response.text();
 
-                let val =
-                    parseInt(
-                        durationField.value,
-                        10
-                    );
+          console.log("RAW RESPONSE:", text);
 
-                if (
-                    isNaN(val) ||
-                    val < 1
-                ) {
+          // ✅ SAFE JSON
+          let data;
 
-                    durationField.value =
-                        '';
+          try {
+            data = JSON.parse(text);
+          } catch {
+            console.log("INVALID JSON RESPONSE");
 
-                }
+            throw new Error("Server returned invalid response");
+          }
 
-                else if (
-                    val > 300
-                ) {
+          // ✅ FAILED
+          if (!response.ok || !data.success) {
+            throw new Error(data.msg || "Failed to create test");
+          }
 
-                    durationField.value =
-                        300;
+          // ✅ SUCCESS
+          showToast(
+            visibility === "public"
+              ? "🚀 Test Published Successfully"
+              : "💾 Draft Saved Successfully",
+          );
 
-                }
+          // ✅ RESET FILE
+          if (fileInput) {
+            fileInput.value = "";
+          }
 
-            }
-        );
+          // ✅ RESET BUTTON
+          if (typeof uploadThumbBtn !== "undefined") {
+            uploadThumbBtn.innerHTML = "📸 Upload thumbnail";
+          }
 
-        console.log(
-            "✅ National Test Series Loaded Successfully"
-        );
+          // ✅ REDIRECT
+          setTimeout(() => {
+            window.location.href = "/National-Test-Series/teacher/channel";
+          }, 1000);
+        } catch (err) {
+          // ❌ ERROR
+          console.log("SUBMIT ERROR:", err);
 
+          showToast(
+            err.message || "Server Error",
+
+            true,
+          );
+        } finally {
+          //FINALLY
+          activeButton.disabled = false;
+
+          activeButton.innerHTML = originalText;
+
+          isSubmitting = false;
+        }
+      }
+      // ================= EVENTS =================
+
+      savePrivateBtn.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        submitTest("private", e);
+      };
+
+      publishBtn.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        submitTest("public", e);
+      };
+      updateWordCount();
+
+      // ---------- THUMBNAIL ----------
+      const thumbnailInput = document.getElementById("thumbnailInput");
+
+      const uploadThumbBtn = document.getElementById("uploadThumbBtn");
+
+      let selectedThumbnail = null;
+
+      uploadThumbBtn.addEventListener("click", () => {
+        thumbnailInput.click();
+      });
+
+      thumbnailInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+
+        if (!file) return;
+
+        selectedThumbnail = file;
+
+        uploadThumbBtn.innerHTML = ` ${file.name}`;
+
+        showToast("Thumbnail selected successfully");
+      });
+
+      // ---------- DURATION VALIDATION ----------
+      durationField.addEventListener("blur", () => {
+        let val = parseInt(durationField.value, 10);
+
+        if (isNaN(val) || val < 1) {
+          durationField.value = "";
+        } else if (val > 300) {
+          durationField.value = 300;
+        }
+      });
+
+      console.log("National Test Series Loaded Successfully");
     </script>
-</body>
-
+  </body>
 </html>

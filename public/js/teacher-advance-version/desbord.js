@@ -1,294 +1,315 @@
 // State management
 const state = {
-    paymentCompleted: true,
-    tests: [],
-    templates: [],
-    questions: [],
-    currentTestQuestions: [],
-    students: [],
-    currentSection: 'dashboard-section',
-    selectedColor: "#e34f26",
-    dashboardAnimationsPlayed: false,
-    profilePhoto: null,
-    editingQuestionId: null,
-    editingTestId: null,
-    currentCourseName: null
+  paymentCompleted: true,
+  tests: [],
+  templates: [],
+  questions: [],
+  currentTestQuestions: [],
+  students: [],
+  currentSection: "dashboard-section",
+  selectedColor: "#e34f26",
+  dashboardAnimationsPlayed: false,
+  profilePhoto: null,
+  editingQuestionId: null,
+  editingTestId: null,
+  currentCourseName: null,
 };
 
 // Course Data
-const coursesData = [
-
-];
+const coursesData = [];
 
 // Test Services Data for each course
-const testServicesData = {
-};
+const testServicesData = {};
 // DOM Elements
-const dashboardSection = document.getElementById('dashboard-section');
-const createTestSection = document.getElementById('create-test-section');
-const testServicesSection = document.getElementById('test-services-section');
-const templatesSection = document.getElementById('templates-section');
-const pythonServiceSection = document.getElementById('python-service-section');
-const analyticsSection = document.getElementById('analytics-section');
-const settingsSection = document.getElementById('settings-section');
-const researchSection = document.getElementById('research-section');
-const notesSection = document.getElementById('notes-section');
-const previousSection = document.getElementById('previous-section');
-const syllabusSection = document.getElementById('syllabus-section');
-const navSyllabus = document.getElementById('nav-syllabus');
-const syllabusLock = document.getElementById('syllabus-lock');
-const calculatorSection = document.getElementById('calculator-section');
-const calendarSection = document.getElementById('calendar-section');
-const alertsSection = document.getElementById('alerts-section');
-const navAlerts = document.getElementById('nav-alerts');
-const alertsLock = document.getElementById('alerts-lock');
-const sendEmailBtn = document.getElementById('send-email-btn');
-const navCalendar = document.getElementById('nav-calendar');
-const calendarLock = document.getElementById('calendar-lock');
-const navCalculator = document.getElementById('nav-calculator');
-const calculatorLock = document.getElementById('calculator-lock');
-const navPrevious = document.getElementById('nav-previous');
-const previousLock = document.getElementById('previous-lock');
-const navNotes = document.getElementById('nav-notes');
-const notesLock = document.getElementById('notes-lock');
-const navResearch = document.getElementById('nav-research');
-const researchLock = document.getElementById('research-lock');
-const navDashboard = document.getElementById('nav-dashboard');
-const navTests = document.getElementById('nav-tests-sidebar');
-const navTemplates = document.getElementById('nav-templates-sidebar');
-const navPython = document.getElementById('nav-python-sidebar');
-const navTestServices = document.getElementById('nav-test-services');
-const navStudents = document.getElementById('nav-students');
-const studentsSection = document.getElementById('students-section');
-const studentsLock = document.getElementById('students-lock');
-const navAnalytics = document.getElementById('nav-analytics');
-const navSettings = document.getElementById('nav-settings');
-const testForm = document.getElementById('test-creation-form');
-const accountStatus = document.getElementById('account-status');
-const currentStatus = document.getElementById('current-status');
-const settingsAccountType = document.getElementById('settings-account-type');
+const dashboardSection = document.getElementById("dashboard-section");
+const createTestSection = document.getElementById("create-test-section");
+const testServicesSection = document.getElementById("test-services-section");
+const templatesSection = document.getElementById("templates-section");
+const pythonServiceSection = document.getElementById("python-service-section");
+const analyticsSection = document.getElementById("analytics-section");
+const settingsSection = document.getElementById("settings-section");
+const researchSection = document.getElementById("research-section");
+const notesSection = document.getElementById("notes-section");
+const previousSection = document.getElementById("previous-section");
+const syllabusSection = document.getElementById("syllabus-section");
+const navSyllabus = document.getElementById("nav-syllabus");
+const syllabusLock = document.getElementById("syllabus-lock");
+const calculatorSection = document.getElementById("calculator-section");
+const calendarSection = document.getElementById("calendar-section");
+const alertsSection = document.getElementById("alerts-section");
+const navAlerts = document.getElementById("nav-alerts");
+const alertsLock = document.getElementById("alerts-lock");
+const sendEmailBtn = document.getElementById("send-email-btn");
+const navCalendar = document.getElementById("nav-calendar");
+const calendarLock = document.getElementById("calendar-lock");
+const navCalculator = document.getElementById("nav-calculator");
+const calculatorLock = document.getElementById("calculator-lock");
+const navPrevious = document.getElementById("nav-previous");
+const previousLock = document.getElementById("previous-lock");
+const navNotes = document.getElementById("nav-notes");
+const notesLock = document.getElementById("notes-lock");
+const navResearch = document.getElementById("nav-research");
+const researchLock = document.getElementById("research-lock");
+const navDashboard = document.getElementById("nav-dashboard");
+const navTests = document.getElementById("nav-tests-sidebar");
+const navTemplates = document.getElementById("nav-templates-sidebar");
+const navPython = document.getElementById("nav-python-sidebar");
+const navTestServices = document.getElementById("nav-test-services");
+const navStudents = document.getElementById("nav-students");
+const studentsSection = document.getElementById("students-section");
+const studentsLock = document.getElementById("students-lock");
+const navAnalytics = document.getElementById("nav-analytics");
+const navSettings = document.getElementById("nav-settings");
+const testForm = document.getElementById("test-creation-form");
+const accountStatus = document.getElementById("account-status");
+const currentStatus = document.getElementById("current-status");
+const settingsAccountType = document.getElementById("settings-account-type");
 // Test Services Elements
-const coursesContainer = document.getElementById('courses-container');
-const testServicesMainDashboard = document.getElementById('test-services-main-dashboard');
-const testServicesPage = document.getElementById('test-services-page');
-const testServicesContainer = document.getElementById('test-services-container');
-const backToDashboardBtn = document.getElementById('back-to-dashboard');
-const serviceTitle = document.getElementById('service-title');
-const serviceDescription = document.getElementById('service-description');
-const serviceIcon = document.getElementById('service-icon');
-const serviceHeader = document.getElementById('service-header');
-const servicePageTitle = document.getElementById('service-page-title');
-const serviceFooterText = document.getElementById('service-footer-text');
+const coursesContainer = document.getElementById("courses-container");
+const testServicesMainDashboard = document.getElementById(
+  "test-services-main-dashboard",
+);
+const testServicesPage = document.getElementById("test-services-page");
+const testServicesContainer = document.getElementById(
+  "test-services-container",
+);
+const backToDashboardBtn = document.getElementById("back-to-dashboard");
+const serviceTitle = document.getElementById("service-title");
+const serviceDescription = document.getElementById("service-description");
+const serviceIcon = document.getElementById("service-icon");
+const serviceHeader = document.getElementById("service-header");
+const servicePageTitle = document.getElementById("service-page-title");
+const serviceFooterText = document.getElementById("service-footer-text");
 // Lock overlays
-const dashboardLock = document.getElementById('dashboard-lock');
-const createTestLock = document.getElementById('create-test-lock');
-const testServicesLock = document.getElementById('test-services-lock');
-const templatesLock = document.getElementById('templates-lock');
-const pythonServiceLock = document.getElementById('python-service-lock');
-const analyticsLock = document.getElementById('analytics-lock');
-const settingsLock = document.getElementById('settings-lock');
+const dashboardLock = document.getElementById("dashboard-lock");
+const createTestLock = document.getElementById("create-test-lock");
+const testServicesLock = document.getElementById("test-services-lock");
+const templatesLock = document.getElementById("templates-lock");
+const pythonServiceLock = document.getElementById("python-service-lock");
+const analyticsLock = document.getElementById("analytics-lock");
+const settingsLock = document.getElementById("settings-lock");
 // Navigation buttons
 // Statistics elements
-const totalTestsElement = document.getElementById('total-tests');
-const totalQuestionsElement = document.getElementById('total-questions');
-const activeTemplatesElement = document.getElementById('active-templates');
-const templateTestCountElement = document.getElementById('template-test-count');
-const templateQuestionCountElement = document.getElementById('template-question-count');
-const templateSubjectCountElement = document.getElementById('template-subject-count');
+const totalTestsElement = document.getElementById("total-tests");
+const totalQuestionsElement = document.getElementById("total-questions");
+const activeTemplatesElement = document.getElementById("active-templates");
+const templateTestCountElement = document.getElementById("template-test-count");
+const templateQuestionCountElement = document.getElementById(
+  "template-question-count",
+);
+const templateSubjectCountElement = document.getElementById(
+  "template-subject-count",
+);
 // New elements for Create Test Card feature
-const createTestCardBtn = document.getElementById('create-test-card-btn');
-const totalCoursesCountElement = document.getElementById('total-courses-count');
-const footerCoursesCountElement = document.getElementById('footer-courses-count');
+const createTestCardBtn = document.getElementById("create-test-card-btn");
+const totalCoursesCountElement = document.getElementById("total-courses-count");
+const footerCoursesCountElement = document.getElementById(
+  "footer-courses-count",
+);
 // Quick create elements
-const quickTestNameInput = document.getElementById('quick-test-name');
-const quickSubjectInput = document.getElementById('quick-subject');
-const quickCreateBtn = document.getElementById('quick-create-btn');
-const colorOptions = document.getElementById('color-options');
+const quickTestNameInput = document.getElementById("quick-test-name");
+const quickSubjectInput = document.getElementById("quick-subject");
+const quickCreateBtn = document.getElementById("quick-create-btn");
+const colorOptions = document.getElementById("color-options");
 // Translator elements
-const translatorFromLang = document.getElementById('translator-from-lang');
-const translatorToLang = document.getElementById('translator-to-lang');
-const translatorInputText = document.getElementById('translator-input-text');
-const translatorOutputText = document.getElementById('translator-output-text');
-const translatorVoiceBtn = document.getElementById('translator-voice-btn');
-const translatorSpeakBtn = document.getElementById('translator-speak-btn');
-const translatorTranslateBtn = document.getElementById('translator-translate-btn');
-const translatorSwapBtn = document.getElementById('translator-swap-btn');
-const translatorClearBtn = document.getElementById('translator-clear-btn');
-const translatorHistoryList = document.getElementById('translator-history-list');
+const translatorFromLang = document.getElementById("translator-from-lang");
+const translatorToLang = document.getElementById("translator-to-lang");
+const translatorInputText = document.getElementById("translator-input-text");
+const translatorOutputText = document.getElementById("translator-output-text");
+const translatorVoiceBtn = document.getElementById("translator-voice-btn");
+const translatorSpeakBtn = document.getElementById("translator-speak-btn");
+const translatorTranslateBtn = document.getElementById(
+  "translator-translate-btn",
+);
+const translatorSwapBtn = document.getElementById("translator-swap-btn");
+const translatorClearBtn = document.getElementById("translator-clear-btn");
+const translatorHistoryList = document.getElementById(
+  "translator-history-list",
+);
 // Question management elements
-const manageQuestionsBtn = document.getElementById('manage-questions-btn');
-const questionCountElement = document.getElementById('question-count');
-const addStudentBtn = document.getElementById('add-student-btn');
-const addStudentModal = document.getElementById('addStudentModal');
-const addStudentForm = document.getElementById('add-student-form');
-const studentsTableBody = document.getElementById('students-table-body');
-const studentSearchInput = document.getElementById('student-search');
-const studentFirstNameInput = document.getElementById('student-first-name');
-const studentLastNameInput = document.getElementById('student-last-name');
-const studentEmailInput = document.getElementById('student-email-input');
-const studentClassInput = document.getElementById('student-class');
-const studentRollInput = document.getElementById('student-roll');
-const studentParentContactInput = document.getElementById('student-parent-contact');
-const questionPreviewElement = document.getElementById('question-preview');
-const createTestModal = document.getElementById('createTestModal');
-const questionListElement = document.getElementById('questionList');
-const questionTypeElement = document.getElementById('questionType');
-const questionTextElement = document.getElementById('questionText');
-const optionsContainer = document.getElementById('optionsContainer');
-const optionsList = document.getElementById('optionsList');
-const addOptionBtn = document.getElementById('addOptionBtn');
-const questionPointsElement = document.getElementById('questionPoints');
-const addQuestionBtn = document.getElementById('addQuestionBtn');
-const saveQuestionsBtn = document.getElementById('saveQuestionsBtn');
-const saveQuestionsBtnMobile = document.getElementById('saveQuestionsBtnMobile');
-const questionDifficultyElement = document.getElementById('questionDifficulty');
+const manageQuestionsBtn = document.getElementById("manage-questions-btn");
+const questionCountElement = document.getElementById("question-count");
+const addStudentBtn = document.getElementById("add-student-btn");
+const addStudentModal = document.getElementById("addStudentModal");
+const addStudentForm = document.getElementById("add-student-form");
+const studentsTableBody = document.getElementById("students-table-body");
+const studentSearchInput = document.getElementById("student-search");
+const studentFirstNameInput = document.getElementById("student-first-name");
+const studentLastNameInput = document.getElementById("student-last-name");
+const studentEmailInput = document.getElementById("student-email-input");
+const studentClassInput = document.getElementById("student-class");
+const studentRollInput = document.getElementById("student-roll");
+const studentParentContactInput = document.getElementById(
+  "student-parent-contact",
+);
+const questionPreviewElement = document.getElementById("question-preview");
+const createTestModal = document.getElementById("createTestModal");
+const questionListElement = document.getElementById("questionList");
+const questionTypeElement = document.getElementById("questionType");
+const questionTextElement = document.getElementById("questionText");
+const optionsContainer = document.getElementById("optionsContainer");
+const optionsList = document.getElementById("optionsList");
+const addOptionBtn = document.getElementById("addOptionBtn");
+const questionPointsElement = document.getElementById("questionPoints");
+const addQuestionBtn = document.getElementById("addQuestionBtn");
+const saveQuestionsBtn = document.getElementById("saveQuestionsBtn");
+const saveQuestionsBtnMobile = document.getElementById(
+  "saveQuestionsBtnMobile",
+);
+const questionDifficultyElement = document.getElementById("questionDifficulty");
 // Dashboard Animation Elements
-const testsProgress = document.getElementById('tests-progress');
-const questionsProgress = document.getElementById('questions-progress');
-const templatesProgress = document.getElementById('templates-progress');
-const testsProgressValue = document.getElementById('tests-progress-value');
-const questionsProgressValue = document.getElementById('questions-progress-value');
-const templatesProgressValue = document.getElementById('templates-progress-value');
-const testsProgressText = document.getElementById('tests-progress-text');
-const questionsProgressText = document.getElementById('questions-progress-text');
-const templatesProgressText = document.getElementById('templates-progress-text');
-const activityChart = document.getElementById('activity-chart');
+const testsProgress = document.getElementById("tests-progress");
+const questionsProgress = document.getElementById("questions-progress");
+const templatesProgress = document.getElementById("templates-progress");
+const testsProgressValue = document.getElementById("tests-progress-value");
+const questionsProgressValue = document.getElementById(
+  "questions-progress-value",
+);
+const templatesProgressValue = document.getElementById(
+  "templates-progress-value",
+);
+const testsProgressText = document.getElementById("tests-progress-text");
+const questionsProgressText = document.getElementById(
+  "questions-progress-text",
+);
+const templatesProgressText = document.getElementById(
+  "templates-progress-text",
+);
+const activityChart = document.getElementById("activity-chart");
 // Settings elements
-const profileImage = document.getElementById('profile-image');
-const avatarIcon = document.getElementById('avatarIcon');
-const userAvatar = document.getElementById('userAvatar');
-const uploadProfileBtn = document.getElementById('uploadProfileBtn');
-const profilePhotoInput = document.getElementById('profile-photo-input');
-const saveProfileBtn = document.getElementById('save-profile-btn');
+const profileImage = document.getElementById("profile-image");
+const avatarIcon = document.getElementById("avatarIcon");
+const userAvatar = document.getElementById("userAvatar");
+const uploadProfileBtn = document.getElementById("uploadProfileBtn");
+const profilePhotoInput = document.getElementById("profile-photo-input");
+const saveProfileBtn = document.getElementById("save-profile-btn");
 // Mobile sidebar elements
-const toggleBtn = document.getElementById('toggleSidebar');
-const sidebar = document.getElementById('sidebar');
-const sidebarOverlay = document.getElementById('sidebarOverlay');
+const toggleBtn = document.getElementById("toggleSidebar");
+const sidebar = document.getElementById("sidebar");
+const sidebarOverlay = document.getElementById("sidebarOverlay");
 
 // Initialize the app
 function initApp() {
-    // Force unlock everything and skip payment gating
-    state.paymentCompleted = true;
-    localStorage.setItem('teacherPaymentCompleted', 'true');
-    unlockAllFeatures();
-    showDashboard();
+  // Force unlock everything and skip payment gating
+  state.paymentCompleted = true;
+  localStorage.setItem("teacherPaymentCompleted", "true");
+  unlockAllFeatures();
+  showDashboard();
 
-    // Load saved templates
-    const savedTemplates = localStorage.getItem('teacherTemplates');
-    if (savedTemplates) {
-        state.templates = JSON.parse(savedTemplates);
-    }
+  // Load saved templates
+  const savedTemplates = localStorage.getItem("teacherTemplates");
+  if (savedTemplates) {
+    state.templates = JSON.parse(savedTemplates);
+  }
 
-    // Load saved questions
-    const savedQuestions = localStorage.getItem('teacherQuestions');
-    if (savedQuestions) {
-        state.questions = JSON.parse(savedQuestions);
-    }
+  // Load saved questions
+  const savedQuestions = localStorage.getItem("teacherQuestions");
+  if (savedQuestions) {
+    state.questions = JSON.parse(savedQuestions);
+  }
 
-    // Load students passed from server
-    if (typeof initialStudents !== 'undefined') {
-        state.students = initialStudents.map(student => ({
-            ...student,
-            className: student.class || student.className || ''
-        }));
-    }
+  // Load students passed from server
+  if (typeof initialStudents !== "undefined") {
+    state.students = initialStudents.map((student) => ({
+      ...student,
+      className: student.class || student.className || "",
+    }));
+  }
 
-    // Load profile photo
-    const savedProfilePhoto = localStorage.getItem('profilePhoto');
-    if (savedProfilePhoto) {
-        state.profilePhoto = savedProfilePhoto;
-        updateProfilePhoto(savedProfilePhoto);
-    }
+  // Load profile photo
+  const savedProfilePhoto = localStorage.getItem("profilePhoto");
+  if (savedProfilePhoto) {
+    state.profilePhoto = savedProfilePhoto;
+    updateProfilePhoto(savedProfilePhoto);
+  }
 
-    // Initialize test services
-    renderCourses();
+  // Initialize test services
+  renderCourses();
 
-    // Set up event listeners
-    setupEventListeners();
+  // Set up event listeners
+  setupEventListeners();
 
-    // Initialize question management
-    initializeQuestionManagement();
+  // Initialize question management
+  initializeQuestionManagement();
 
-    // Initialize chart
-    renderActivityChart();
+  // Initialize chart
+  renderActivityChart();
 
-    // Handle window resize
-    window.addEventListener('resize', handleResize);
+  // Handle window resize
+  window.addEventListener("resize", handleResize);
 
-    // Initialize mobile sidebar
-    setupMobileSidebar();
+  // Initialize mobile sidebar
+  setupMobileSidebar();
 
-    // ✅ IMPORTANT: Load tests from database
-    loadTestsFromDB();
+  // ✅ IMPORTANT: Load tests from database
+  loadTestsFromDB();
 
-    // ✅ ADD THESE TWO LINES HERE (theme system)
-    loadSavedTheme();
-    setupThemeControls();
-    attachTranslatorEvents();
+  // ✅ ADD THESE TWO LINES HERE (theme system)
+  loadSavedTheme();
+  setupThemeControls();
+  attachTranslatorEvents();
 }
-
 
 // Update profile photo
 function updateProfilePhoto(photoData) {
-    if (photoData) {
-        profileImage.src = photoData;
-        profileImage.style.display = 'block';
+  if (photoData) {
+    profileImage.src = photoData;
+    profileImage.style.display = "block";
 
-        // Update user avatar in header
-        const avatarImg = document.createElement('img');
-        avatarImg.src = photoData;
-        avatarImg.alt = 'Profile Photo';
+    // Update user avatar in header
+    const avatarImg = document.createElement("img");
+    avatarImg.src = photoData;
+    avatarImg.alt = "Profile Photo";
 
-        // Clear existing content
-        userAvatar.innerHTML = '';
-        userAvatar.appendChild(avatarImg);
-        avatarIcon.style.display = 'none';
-    }
+    // Clear existing content
+    userAvatar.innerHTML = "";
+    userAvatar.appendChild(avatarImg);
+    avatarIcon.style.display = "none";
+  }
 }
 
 // Setup mobile sidebar functionality
 function setupMobileSidebar() {
-    if (toggleBtn && sidebar && sidebarOverlay) {
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('show');
-            sidebarOverlay.classList.toggle('show');
-        });
-
-        sidebarOverlay.addEventListener('click', () => {
-            sidebar.classList.remove('show');
-            sidebarOverlay.classList.remove('show');
-        });
-    }
-
-
-    sidebarOverlay.addEventListener('click', () => {
-        sidebar.classList.remove('show');
-        sidebarOverlay.classList.remove('show');
+  if (toggleBtn && sidebar && sidebarOverlay) {
+    toggleBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("show");
+      sidebarOverlay.classList.toggle("show");
     });
 
-    // Close sidebar when clicking on a nav item (mobile)
-    document.querySelectorAll('.nav-item a').forEach(item => {
-        item.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                sidebar.classList.remove('show');
-                sidebarOverlay.classList.remove('show');
-            }
-        });
+    sidebarOverlay.addEventListener("click", () => {
+      sidebar.classList.remove("show");
+      sidebarOverlay.classList.remove("show");
     });
+  }
+
+  sidebarOverlay.addEventListener("click", () => {
+    sidebar.classList.remove("show");
+    sidebarOverlay.classList.remove("show");
+  });
+
+  // Close sidebar when clicking on a nav item (mobile)
+  document.querySelectorAll(".nav-item a").forEach((item) => {
+    item.addEventListener("click", () => {
+      if (window.innerWidth <= 768) {
+        sidebar.classList.remove("show");
+        sidebarOverlay.classList.remove("show");
+      }
+    });
+  });
 }
 
 // Handle window resize
 function handleResize() {
-    // Re-render chart on resize
-    if (state.currentSection === 'dashboard-section') {
-        renderActivityChart();
-    }
+  // Re-render chart on resize
+  if (state.currentSection === "dashboard-section") {
+    renderActivityChart();
+  }
 
-    // Close sidebar on desktop
-    if (window.innerWidth > 768) {
-        sidebar.classList.remove('show');
-        sidebarOverlay.classList.remove('show');
-    }
+  // Close sidebar on desktop
+  if (window.innerWidth > 768) {
+    sidebar.classList.remove("show");
+    sidebarOverlay.classList.remove("show");
+  }
 }
 
 // Initialize question management
@@ -298,801 +319,841 @@ function handleResize() {
 // }
 
 function initializeQuestionManagement(isEdit = false) {
-    if (!isEdit) {
-        state.currentTestQuestions = [];
-    }
+  if (!isEdit) {
+    state.currentTestQuestions = [];
+  }
 }
-
-
 
 // Render activity chart
 function renderActivityChart() {
-    // Sample data for the chart
-    const chartData = [
-        { month: 'Jan', value: 12 },
-        { month: 'Feb', value: 19 },
-        { month: 'Mar', value: 8 },
-        { month: 'Apr', value: 15 },
-        { month: 'May', value: 22 },
-        { month: 'Jun', value: 18 },
-        { month: 'Jul', value: 25 }
-    ];
+  // Sample data for the chart
+  const chartData = [
+    { month: "Jan", value: 12 },
+    { month: "Feb", value: 19 },
+    { month: "Mar", value: 8 },
+    { month: "Apr", value: 15 },
+    { month: "May", value: 22 },
+    { month: "Jun", value: 18 },
+    { month: "Jul", value: 25 },
+  ];
 
-    // Find max value for scaling
-    const maxValue = Math.max(...chartData.map(item => item.value));
+  // Find max value for scaling
+  const maxValue = Math.max(...chartData.map((item) => item.value));
 
-    activityChart.innerHTML = '';
+  activityChart.innerHTML = "";
 
-    chartData.forEach((item, index) => {
-        // Calculate height as percentage of max value
-        const heightPercentage = (item.value / maxValue) * 100;
+  chartData.forEach((item, index) => {
+    // Calculate height as percentage of max value
+    const heightPercentage = (item.value / maxValue) * 100;
 
-        const chartBar = document.createElement('div');
-        chartBar.className = 'chart-bar';
-        chartBar.style.height = `${heightPercentage}%`;
-        chartBar.style.animationDelay = `${index * 0.1}s`;
+    const chartBar = document.createElement("div");
+    chartBar.className = "chart-bar";
+    chartBar.style.height = `${heightPercentage}%`;
+    chartBar.style.animationDelay = `${index * 0.1}s`;
 
-        chartBar.innerHTML = `
+    chartBar.innerHTML = `
                     <div class="chart-value">${item.value}</div>
                     <div class="chart-label">${item.month}</div>
                 `;
 
-        activityChart.appendChild(chartBar);
-    });
+    activityChart.appendChild(chartBar);
+  });
 }
 
 // Lock all features (payment not completed)
 function lockAllFeatures() {
-    unlockAllFeatures();
+  unlockAllFeatures();
 }
 
 // Unlock all features
 function unlockAllFeatures() {
-    state.paymentCompleted = true;
-    localStorage.setItem('teacherPaymentCompleted', 'true');
+  state.paymentCompleted = true;
+  localStorage.setItem("teacherPaymentCompleted", "true");
 
-    if (accountStatus) accountStatus.textContent = "Premium Account";
-    if (currentStatus) {
-        currentStatus.textContent = "Premium Account (All Features Unlocked)";
-        currentStatus.style.color = "#27ae60";
-    }
-    if (settingsAccountType) settingsAccountType.textContent = "Premium Account";
+  if (accountStatus) accountStatus.textContent = "Premium Account";
+  if (currentStatus) {
+    currentStatus.textContent = "Premium Account (All Features Unlocked)";
+    currentStatus.style.color = "#27ae60";
+  }
+  if (settingsAccountType) settingsAccountType.textContent = "Premium Account";
 
-    enableFormElements();
+  enableFormElements();
 
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('locked');
-        const lockIcon = item.querySelector('.lock-icon');
-        if (lockIcon) lockIcon.remove();
-    });
+  document.querySelectorAll(".nav-item").forEach((item) => {
+    item.classList.remove("locked");
+    const lockIcon = item.querySelector(".lock-icon");
+    if (lockIcon) lockIcon.remove();
+  });
 }
 
 // Disable all form elements
 function disableFormElements() {
-    // Disable test form inputs
-    document.querySelectorAll('#test-creation-form input, #test-creation-form select, #test-creation-form textarea').forEach(el => {
-        el.disabled = true;
+  // Disable test form inputs
+  document
+    .querySelectorAll(
+      "#test-creation-form input, #test-creation-form select, #test-creation-form textarea",
+    )
+    .forEach((el) => {
+      el.disabled = true;
     });
 
-    // Disable quick create inputs
-    quickTestNameInput.disabled = true;
-    quickSubjectInput.disabled = true;
-    quickCreateBtn.disabled = true;
-    quickCreateBtn.classList.add('disabled');
+  // Disable quick create inputs
+  quickTestNameInput.disabled = true;
+  quickSubjectInput.disabled = true;
+  quickCreateBtn.disabled = true;
+  quickCreateBtn.classList.add("disabled");
 
-    // Disable buttons
-    document.querySelectorAll('#test-creation-form button, #refresh-tests, #view-all-tests').forEach(btn => {
-        btn.disabled = true;
-        btn.classList.add('disabled');
+  // Disable buttons
+  document
+    .querySelectorAll(
+      "#test-creation-form button, #refresh-tests, #view-all-tests",
+    )
+    .forEach((btn) => {
+      btn.disabled = true;
+      btn.classList.add("disabled");
     });
 
-    // Disable settings elements
-    uploadProfileBtn.disabled = true;
-    document.querySelectorAll('#settings-section input, #settings-section select').forEach(el => {
-        el.disabled = true;
+  // Disable settings elements
+  uploadProfileBtn.disabled = true;
+  document
+    .querySelectorAll("#settings-section input, #settings-section select")
+    .forEach((el) => {
+      el.disabled = true;
     });
-    saveProfileBtn.disabled = true;
+  saveProfileBtn.disabled = true;
 }
 
 // Enable all form elements
 function enableFormElements() {
-    // Enable test form inputs
-    document.querySelectorAll('#test-creation-form input, #test-creation-form select, #test-creation-form textarea').forEach(el => {
-        el.disabled = false;
+  // Enable test form inputs
+  document
+    .querySelectorAll(
+      "#test-creation-form input, #test-creation-form select, #test-creation-form textarea",
+    )
+    .forEach((el) => {
+      el.disabled = false;
     });
 
-    // Enable quick create inputs
-    quickTestNameInput.disabled = false;
-    quickSubjectInput.disabled = false;
-    quickCreateBtn.disabled = false;
-    quickCreateBtn.classList.remove('disabled');
+  // Enable quick create inputs
+  quickTestNameInput.disabled = false;
+  quickSubjectInput.disabled = false;
+  quickCreateBtn.disabled = false;
+  quickCreateBtn.classList.remove("disabled");
 
-    // Enable buttons
-    document.querySelectorAll('#test-creation-form button, #refresh-tests, #view-all-tests').forEach(btn => {
-        btn.disabled = false;
-        btn.classList.remove('disabled');
+  // Enable buttons
+  document
+    .querySelectorAll(
+      "#test-creation-form button, #refresh-tests, #view-all-tests",
+    )
+    .forEach((btn) => {
+      btn.disabled = false;
+      btn.classList.remove("disabled");
     });
 
-    // Enable question management button
-    manageQuestionsBtn.disabled = false;
-    manageQuestionsBtn.style.backgroundColor = '#3498db';
-    manageQuestionsBtn.style.color = 'white';
-    manageQuestionsBtn.onclick = openQuestionModal;
+  // Enable question management button
+  manageQuestionsBtn.disabled = false;
+  manageQuestionsBtn.style.backgroundColor = "#3498db";
+  manageQuestionsBtn.style.color = "white";
+  manageQuestionsBtn.onclick = openQuestionModal;
 
-    // Enable settings elements
-    uploadProfileBtn.disabled = false;
-    document.querySelectorAll('#settings-section input, #settings-section select').forEach(el => {
-        el.disabled = false;
+  // Enable settings elements
+  uploadProfileBtn.disabled = false;
+  document
+    .querySelectorAll("#settings-section input, #settings-section select")
+    .forEach((el) => {
+      el.disabled = false;
     });
-    saveProfileBtn.disabled = false;
+  saveProfileBtn.disabled = false;
 }
 
 // Set up all event listeners
 function setupEventListeners() {
-    // Navigation - with payment check
+  // Navigation - with payment check
 
-    navDashboard.addEventListener('click', () => {
-        if (state.paymentCompleted) {
-            showDashboard();
-        } else {
-            alert('Please complete payment first to access the dashboard.');
-            showDashboard();
-        }
-    });
+  navDashboard.addEventListener("click", () => {
+    if (state.paymentCompleted) {
+      showDashboard();
+    } else {
+      alert("Please complete payment first to access the dashboard.");
+      showDashboard();
+    }
+  });
 
-    navTests.addEventListener('click', () => {
-        if (state.paymentCompleted) {
-            showCreateTestSection();
-        } else {
-            alert('Please complete payment first to create tests.');
-            showDashboard();
-        }
-    });
+  navTests.addEventListener("click", () => {
+    if (state.paymentCompleted) {
+      showCreateTestSection();
+    } else {
+      alert("Please complete payment first to create tests.");
+      showDashboard();
+    }
+  });
 
-    navTestServices.addEventListener('click', () => {
-        if (state.paymentCompleted) {
-            showTestServicesSection();
-        } else {
-            alert('Please complete payment first to access Test Services.');
-            showDashboard();
-        }
-    });
+  navTestServices.addEventListener("click", () => {
+    if (state.paymentCompleted) {
+      showTestServicesSection();
+    } else {
+      alert("Please complete payment first to access Test Services.");
+      showDashboard();
+    }
+  });
 
-    navStudents.addEventListener('click', () => {
-        if (state.paymentCompleted) {
-            showStudentsSection();
-        } else {
-            alert('Please complete payment first to access Students.');
-            showDashboard();
-        }
-    });
+  navStudents.addEventListener("click", () => {
+    if (state.paymentCompleted) {
+      showStudentsSection();
+    } else {
+      alert("Please complete payment first to access Students.");
+      showDashboard();
+    }
+  });
 
-    navTemplates.addEventListener('click', () => {
-        if (state.paymentCompleted) {
-            showTemplatesSection();
-        } else {
-            alert('Please complete payment first to access templates.');
-            showDashboard();
-        }
-    });
+  navTemplates.addEventListener("click", () => {
+    if (state.paymentCompleted) {
+      showTemplatesSection();
+    } else {
+      alert("Please complete payment first to access templates.");
+      showDashboard();
+    }
+  });
 
-    navPython.addEventListener('click', () => {
-        if (state.paymentCompleted) {
-            showPythonServiceSection();
-        } else {
-            alert('Please complete payment first to access Python Test Service.');
-            showDashboard();
-        }
-    });
+  navPython.addEventListener("click", () => {
+    if (state.paymentCompleted) {
+      showPythonServiceSection();
+    } else {
+      alert("Please complete payment first to access Python Test Service.");
+      showDashboard();
+    }
+  });
 
-    navAnalytics.addEventListener('click', () => {
-        if (state.paymentCompleted) {
-            showAnalyticsSection();
-        } else {
-            alert('Please complete payment first to access Analytics.');
-            showDashboard();
-        }
-    });
+  navAnalytics.addEventListener("click", () => {
+    if (state.paymentCompleted) {
+      showAnalyticsSection();
+    } else {
+      alert("Please complete payment first to access Analytics.");
+      showDashboard();
+    }
+  });
 
-    navSettings.addEventListener('click', () => {
-        if (state.paymentCompleted) {
-            showSettingsSection();
-        } else {
-            alert('Please complete payment first to access Settings.');
-            showDashboard();
-        }
-    });
-    navResearch.addEventListener('click', () => {
-        if (state.paymentCompleted) {
-            showResearchSection();
-        } else {
-            alert('Please complete payment first to access Research Papers.');
-            showDashboard();
-        }
-    });
-    navNotes.addEventListener('click', () => {
-        if (state.paymentCompleted) {
-            showNotesSection();
-        } else {
-            alert('Please complete payment first to access Notes.');
-            showDashboard();
-        }
-    });
-    navPrevious.addEventListener('click', () => {
-        if (state.paymentCompleted) {
-            showPreviousSection();
-        } else {
-            alert('Please complete payment first to access Previous Papers.');
-            showDashboard();
-        }
-    });
-    navSyllabus.addEventListener('click', () => {
-        if (state.paymentCompleted) {
-            showSyllabusSection();
-        } else {
-            alert('Please complete payment first.');
-            showDashboard();
-        }
-    });
+  navSettings.addEventListener("click", () => {
+    if (state.paymentCompleted) {
+      showSettingsSection();
+    } else {
+      alert("Please complete payment first to access Settings.");
+      showDashboard();
+    }
+  });
+  navResearch.addEventListener("click", () => {
+    if (state.paymentCompleted) {
+      showResearchSection();
+    } else {
+      alert("Please complete payment first to access Research Papers.");
+      showDashboard();
+    }
+  });
+  navNotes.addEventListener("click", () => {
+    if (state.paymentCompleted) {
+      showNotesSection();
+    } else {
+      alert("Please complete payment first to access Notes.");
+      showDashboard();
+    }
+  });
+  navPrevious.addEventListener("click", () => {
+    if (state.paymentCompleted) {
+      showPreviousSection();
+    } else {
+      alert("Please complete payment first to access Previous Papers.");
+      showDashboard();
+    }
+  });
+  navSyllabus.addEventListener("click", () => {
+    if (state.paymentCompleted) {
+      showSyllabusSection();
+    } else {
+      alert("Please complete payment first.");
+      showDashboard();
+    }
+  });
 
-    navCalculator.addEventListener('click', () => {
-        if (state.paymentCompleted) {
-            showCalculatorSection();
-        } else {
-            alert('Please complete payment first.');
-            showDashboard();
-        }
-    });
-    navCalendar.addEventListener('click', () => {
-        if (state.paymentCompleted) {
-            showCalendarSection();
-        } else {
-            alert('Please complete payment first.');
-            showDashboard();
-        }
-    });
-    navAlerts.addEventListener('click', () => {
-        if (state.paymentCompleted) {
-            showAlertsSection();
-        } else {
-            alert('Please complete payment first.');
-            showDashboard();
-        }
-    });
-    const topNavAlerts = document.getElementById('top-nav-alerts');
+  navCalculator.addEventListener("click", () => {
+    if (state.paymentCompleted) {
+      showCalculatorSection();
+    } else {
+      alert("Please complete payment first.");
+      showDashboard();
+    }
+  });
+  navCalendar.addEventListener("click", () => {
+    if (state.paymentCompleted) {
+      showCalendarSection();
+    } else {
+      alert("Please complete payment first.");
+      showDashboard();
+    }
+  });
+  navAlerts.addEventListener("click", () => {
+    if (state.paymentCompleted) {
+      showAlertsSection();
+    } else {
+      alert("Please complete payment first.");
+      showDashboard();
+    }
+  });
+  const topNavAlerts = document.getElementById("top-nav-alerts");
 
-    if (topNavAlerts) {
-        topNavAlerts.addEventListener('click', (e) => {
-            e.preventDefault();
-            navAlerts.click();
+  if (topNavAlerts) {
+    topNavAlerts.addEventListener("click", (e) => {
+      e.preventDefault();
+      navAlerts.click();
+    });
+  }
+
+  // Payment
+  // Navigation buttons
+
+  addStudentBtn.addEventListener("click", () => {
+    if (state.paymentCompleted) {
+      addStudentModal.style.display = "flex";
+    } else {
+      alert("Please complete payment first to add students.");
+      showDashboard();
+    }
+  });
+
+  addStudentForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (state.paymentCompleted) {
+      handleAddStudent();
+    } else {
+      alert("Please complete payment first to add students.");
+      showDashboard();
+    }
+  });
+
+  studentSearchInput?.addEventListener("input", filterStudentsTable);
+
+  // Test form - only if payment completed
+  testForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (state.paymentCompleted) {
+      createTest(e);
+    } else {
+      alert("Please complete payment first to create tests.");
+      showDashboard();
+    }
+  });
+
+  document.getElementById("reset-form").addEventListener("click", function () {
+    if (state.paymentCompleted) {
+      resetTestForm();
+    } else {
+      alert("Please complete payment first to use this feature.");
+    }
+  });
+
+  // Create Test Card button
+  createTestCardBtn.addEventListener("click", function () {
+    if (state.paymentCompleted) {
+      createTestCardFromForm();
+    } else {
+      alert("Please complete payment first to create test cards.");
+      showDashboard();
+    }
+  });
+
+  // Quick Create button
+  quickCreateBtn.addEventListener("click", function () {
+    if (state.paymentCompleted) {
+      createQuickTestCard();
+    } else {
+      alert("Please complete payment first to create test cards.");
+      showDashboard();
+    }
+  });
+
+  // Color selection
+  colorOptions.addEventListener("click", function (e) {
+    if (e.target.classList.contains("color-option")) {
+      // Remove selected class from all color options
+      document.querySelectorAll(".color-option").forEach((option) => {
+        option.classList.remove("selected");
+      });
+
+      // Add selected class to clicked option
+      e.target.classList.add("selected");
+
+      // Update selected color
+      state.selectedColor = e.target.getAttribute("data-color");
+    }
+  });
+
+  // Test Services back button
+  backToDashboardBtn.addEventListener("click", function () {
+    testServicesMainDashboard.style.display = "block";
+    testServicesPage.style.display = "none";
+  });
+
+  // Test Services details buttons (event delegation)
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("delete-test-icon")) {
+      const testId = e.target.dataset.id;
+
+      if (!confirm("Delete this test?")) return;
+
+      fetch(`/teacher-tests/delete/${testId}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            // 🔥 FULL RELOAD (BEST)
+            loadTestsFromDB();
+
+            showNotification("Test deleted", "success");
+          }
+        });
+    }
+    const editBtn = e.target.closest(".edit-btn");
+
+    if (editBtn) {
+      const testId = editBtn.dataset.id;
+
+      console.log("Edit Clicked:", testId);
+
+      fetch(`/teacher-tests/api/${testId}`)
+        .then((res) => res.json())
+        .then((test) => {
+          openTestForEdit(test);
         });
     }
 
+    if (
+      e.target.classList.contains("details-btn") ||
+      e.target.closest(".details-btn")
+    ) {
+      if (!state.paymentCompleted) {
+        alert("Please complete payment first to access Test Services.");
+        showDashboard();
+        return;
+      }
 
-    // Payment
-    // Navigation buttons
+      const button = e.target.classList.contains("details-btn")
+        ? e.target
+        : e.target.closest(".details-btn");
+      const courseName = button.getAttribute("data-course");
+      showTestServicesPage(courseName);
+    }
 
-    addStudentBtn.addEventListener('click', () => {
-        if (state.paymentCompleted) {
-            addStudentModal.style.display = 'flex';
-        } else {
-            alert('Please complete payment first to add students.');
-            showDashboard();
-        }
-    });
+    // View button
+    if (
+      e.target.classList.contains("view-btn") ||
+      e.target.closest(".view-btn")
+    ) {
+      const button = e.target.classList.contains("view-btn")
+        ? e.target
+        : e.target.closest(".view-btn");
 
-    addStudentForm.addEventListener('submit', function (e) {
+      const testId = button.getAttribute("data-id");
+      window.location.href = `/teacher/analytics/${testId}`;
+    }
+
+    // Enroll buttons
+    if (
+      e.target.classList.contains("enroll-btn") ||
+      e.target.closest(".enroll-btn")
+    ) {
+      const button = e.target.classList.contains("enroll-btn")
+        ? e.target
+        : e.target.closest(".enroll-btn");
+      const card = button.closest(".test-service-card");
+      const testName = card.querySelector(".test-service-name").textContent;
+    }
+    // View button
+    if (
+      e.target.classList.contains("view-btn") ||
+      e.target.closest(".view-btn")
+    ) {
+      const button = e.target.classList.contains("view-btn")
+        ? e.target
+        : e.target.closest(".view-btn");
+
+      const testId = button.getAttribute("data-id");
+      window.location.href = `/teacher/analytics/${testId}`;
+    }
+
+    // ✅ RESULT BUTTON (ADD THIS HERE)
+    // RESULT BUTTON → open analytics section
+    if (
+      e.target.classList.contains("result-btn") ||
+      e.target.closest(".result-btn")
+    ) {
+      const button = e.target.closest(".result-btn");
+      const testId = button.dataset.id;
+
+      // analytics section open karo
+      showAnalyticsSection();
+
+      // analytics load karo specific test ke liye
+      loadAnalyticsCards();
+
+      // optionally testId store kar lo
+      state.currentAnalyticsTest = testId;
+    }
+  });
+
+  // Question Management
+  addQuestionBtn.addEventListener("click", addQuestion);
+  // ✅ Desktop click
+  // Desktop
+  function handleSaveAll(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (saveQuestionsBtn.dataset.loading === "true") return;
+
+    saveQuestionsBtn.dataset.loading = "true";
+
+    saveQuestionsBtn.disabled = true;
+
+    // SAVE QUESTIONS
+    saveQuestions();
+
+    // ✅ FORCE CLOSE MODAL
+    const modal = document.getElementById("createTestModal");
+
+    modal.style.display = "none";
+    modal.classList.remove("show");
+
+    document.body.style.overflow = "auto";
+
+    // ✅ BACK TO FIRST PAGE
+    hideAllSections();
+
+    createTestSection.classList.remove("hidden");
+
+    state.currentSection = "create-test-section";
+
+    // ✅ SCROLL TOP
+    window.scrollTo(0, 0);
+
+    // ENABLE AGAIN
+    setTimeout(() => {
+      saveQuestionsBtn.disabled = false;
+
+      delete saveQuestionsBtn.dataset.loading;
+    }, 1000);
+  }
+
+  // EVENTS
+  if (saveQuestionsBtn) {
+    saveQuestionsBtn.onclick = handleSaveAll;
+    saveQuestionsBtn.addEventListener("click", handleSaveAll);
+    saveQuestionsBtn.addEventListener(
+      "touchend",
+      function (e) {
         e.preventDefault();
-        if (state.paymentCompleted) {
-            handleAddStudent();
-        } else {
-            alert('Please complete payment first to add students.');
-            showDashboard();
-        }
-    });
+        handleSaveAll(e);
+      },
+      { passive: false },
+    );
+  }
 
-    studentSearchInput?.addEventListener('input', filterStudentsTable);
-
-    // Test form - only if payment completed
-    testForm.addEventListener('submit', function (e) {
+  if (saveQuestionsBtnMobile) {
+    saveQuestionsBtnMobile.onclick = handleSaveAll;
+    saveQuestionsBtnMobile.addEventListener("click", handleSaveAll);
+    saveQuestionsBtnMobile.addEventListener(
+      "touchend",
+      function (e) {
         e.preventDefault();
-        if (state.paymentCompleted) {
-            createTest(e);
-        } else {
-            alert('Please complete payment first to create tests.');
-            showDashboard();
-        }
-    });
+        handleSaveAll(e);
+      },
+      { passive: false },
+    );
+  }
 
-    document.getElementById('reset-form').addEventListener('click', function () {
-        if (state.paymentCompleted) {
-            resetTestForm();
-        } else {
-            alert('Please complete payment first to use this feature.');
-        }
-    });
+  addOptionBtn.addEventListener("click", addOption);
+  questionTypeElement.addEventListener("change", handleQuestionTypeChange);
 
-    // Create Test Card button
-    createTestCardBtn.addEventListener('click', function () {
-        if (state.paymentCompleted) {
-            createTestCardFromForm();
-        } else {
-            alert('Please complete payment first to create test cards.');
-            showDashboard();
-        }
-    });
+  // Profile photo upload
+  uploadProfileBtn.addEventListener("click", () => {
+    profilePhotoInput.click();
+  });
 
-    // Quick Create button
-    quickCreateBtn.addEventListener('click', function () {
-        if (state.paymentCompleted) {
-            createQuickTestCard();
-        } else {
-            alert('Please complete payment first to create test cards.');
-            showDashboard();
-        }
-    });
+  profilePhotoInput.addEventListener("change", handleProfilePhotoUpload);
+  saveProfileBtn.addEventListener("click", saveProfileSettings);
 
-    // Color selection
-    colorOptions.addEventListener('click', function (e) {
-        if (e.target.classList.contains('color-option')) {
-            // Remove selected class from all color options
-            document.querySelectorAll('.color-option').forEach(option => {
-                option.classList.remove('selected');
-            });
-
-            // Add selected class to clicked option
-            e.target.classList.add('selected');
-
-            // Update selected color
-            state.selectedColor = e.target.getAttribute('data-color');
-        }
-    });
-
-    // Test Services back button
-    backToDashboardBtn.addEventListener('click', function () {
-        testServicesMainDashboard.style.display = 'block';
-        testServicesPage.style.display = 'none';
-    });
-
-    // Test Services details buttons (event delegation)
-    document.addEventListener('click', function (e) {
-        if (e.target.classList.contains('delete-test-icon')) {
-            const testId = e.target.dataset.id;
-
-            if (!confirm("Delete this test?")) return;
-
-            fetch(`/teacher-tests/delete/${testId}`, {
-                method: "DELETE"
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-
-                        // 🔥 FULL RELOAD (BEST)
-                        loadTestsFromDB();
-
-                        showNotification("Test deleted", "success");
-                    }
-                });
-        }
-        const editBtn = e.target.closest('.edit-btn');
-
-        if (editBtn) {
-            const testId = editBtn.dataset.id;
-
-            console.log("Edit Clicked:", testId);
-
-            fetch(`/teacher-tests/api/${testId}`)
-                .then(res => res.json())
-                .then(test => {
-                    openTestForEdit(test);
-                });
-        }
-
-        if (e.target.classList.contains('details-btn') || e.target.closest('.details-btn')) {
-            if (!state.paymentCompleted) {
-                alert('Please complete payment first to access Test Services.');
-                showDashboard();
-                return;
-            }
-
-            const button = e.target.classList.contains('details-btn') ? e.target : e.target.closest('.details-btn');
-            const courseName = button.getAttribute('data-course');
-            showTestServicesPage(courseName);
-        }
-
-        // View button
-        if (e.target.classList.contains('view-btn') || e.target.closest('.view-btn')) {
-            const button = e.target.classList.contains('view-btn')
-                ? e.target
-                : e.target.closest('.view-btn');
-
-            const testId = button.getAttribute('data-id');
-            window.location.href = `/teacher/analytics/${testId}`;
-        }
-
-        // Enroll buttons
-        if (e.target.classList.contains('enroll-btn') || e.target.closest('.enroll-btn')) {
-            const button = e.target.classList.contains('enroll-btn') ? e.target : e.target.closest('.enroll-btn');
-            const card = button.closest('.test-service-card');
-            const testName = card.querySelector('.test-service-name').textContent;
-
-        }
-        // View button
-        if (e.target.classList.contains('view-btn') || e.target.closest('.view-btn')) {
-            const button = e.target.classList.contains('view-btn')
-                ? e.target
-                : e.target.closest('.view-btn');
-
-            const testId = button.getAttribute('data-id');
-            window.location.href = `/teacher/analytics/${testId}`;
-        }
-
-        // ✅ RESULT BUTTON (ADD THIS HERE)
-        // RESULT BUTTON → open analytics section
-        if (e.target.classList.contains('result-btn') || e.target.closest('.result-btn')) {
-            const button = e.target.closest('.result-btn');
-            const testId = button.dataset.id;
-
-            // analytics section open karo
-            showAnalyticsSection();
-
-            // analytics load karo specific test ke liye
-            loadAnalyticsCards();
-
-            // optionally testId store kar lo
-            state.currentAnalyticsTest = testId;
-        }
-
-
-    });
-
-    // Question Management
-    addQuestionBtn.addEventListener('click', addQuestion);
-    // ✅ Desktop click
-    // Desktop
-    function handleSaveAll(e) {
-
-        e.preventDefault();
-        e.stopPropagation();
-
-        if (saveQuestionsBtn.dataset.loading === "true") return;
-
-        saveQuestionsBtn.dataset.loading = "true";
-
-        saveQuestionsBtn.disabled = true;
-
-        // SAVE QUESTIONS
-        saveQuestions();
-
-        // ✅ FORCE CLOSE MODAL
-        const modal = document.getElementById('createTestModal');
-
-        modal.style.display = "none";
-        modal.classList.remove("show");
-
-        document.body.style.overflow = "auto";
-
-        // ✅ BACK TO FIRST PAGE
-        hideAllSections();
-
-        createTestSection.classList.remove("hidden");
-
-        state.currentSection = 'create-test-section';
-
-        // ✅ SCROLL TOP
-        window.scrollTo(0, 0);
-
-        // ENABLE AGAIN
-        setTimeout(() => {
-
-            saveQuestionsBtn.disabled = false;
-
-            delete saveQuestionsBtn.dataset.loading;
-
-        }, 1000);
+  // Modal close on outside click
+  window.addEventListener("click", function (e) {
+    if (e.target === createTestModal) {
+      closeModal("createTestModal");
     }
+  });
 
-    // EVENTS
-    if (saveQuestionsBtn) {
-        saveQuestionsBtn.onclick = handleSaveAll;
-        saveQuestionsBtn.addEventListener("click", handleSaveAll);
-        saveQuestionsBtn.addEventListener("touchend", function (e) {
-            e.preventDefault();
-            handleSaveAll(e);
-        }, { passive: false });
-    }
+  // Top navbar elements
+  const topNavTests = document.getElementById("top-nav-tests");
+  const topNavTemplates = document.getElementById("top-nav-templates");
+  const topNavPython = document.getElementById("top-nav-python");
+  const topNavResearch = document.getElementById("top-nav-research");
+  const topNavCalculator = document.getElementById("top-nav-calculator");
+  const topNavBirthday = document.getElementById("top-nav-birthday");
 
-    if (saveQuestionsBtnMobile) {
-        saveQuestionsBtnMobile.onclick = handleSaveAll;
-        saveQuestionsBtnMobile.addEventListener("click", handleSaveAll);
-        saveQuestionsBtnMobile.addEventListener("touchend", function (e) {
-            e.preventDefault();
-            handleSaveAll(e);
-        }, { passive: false });
-    }
-
-    addOptionBtn.addEventListener('click', addOption);
-    questionTypeElement.addEventListener('change', handleQuestionTypeChange);
-
-    // Profile photo upload
-    uploadProfileBtn.addEventListener('click', () => {
-        profilePhotoInput.click();
+  // Same actions as sidebar
+  if (topNavTests) {
+    topNavTests.addEventListener("click", (e) => {
+      e.preventDefault();
+      navTests.click();
     });
+  }
 
-    profilePhotoInput.addEventListener('change', handleProfilePhotoUpload);
-    saveProfileBtn.addEventListener('click', saveProfileSettings);
-
-    // Modal close on outside click
-    window.addEventListener('click', function (e) {
-        if (e.target === createTestModal) {
-            closeModal('createTestModal');
-        }
+  if (topNavTemplates) {
+    topNavTemplates.addEventListener("click", (e) => {
+      e.preventDefault();
+      navTemplates.click();
     });
+  }
 
-    // Top navbar elements
-    const topNavTests = document.getElementById('top-nav-tests');
-    const topNavTemplates = document.getElementById('top-nav-templates');
-    const topNavPython = document.getElementById('top-nav-python');
-    const topNavResearch = document.getElementById('top-nav-research');
-    const topNavCalculator = document.getElementById('top-nav-calculator');
-    const topNavBirthday = document.getElementById('top-nav-birthday');
+  if (topNavPython) {
+    topNavPython.addEventListener("click", (e) => {
+      e.preventDefault();
+      navPython.click();
+    });
+  }
 
-    // Same actions as sidebar
-    if (topNavTests) {
-        topNavTests.addEventListener('click', (e) => {
-            e.preventDefault();
-            navTests.click();
-        });
-    }
+  if (topNavResearch) {
+    topNavResearch.addEventListener("click", (e) => {
+      e.preventDefault();
+      navResearch.click();
+    });
+  }
 
-    if (topNavTemplates) {
-        topNavTemplates.addEventListener('click', (e) => {
-            e.preventDefault();
-            navTemplates.click();
-        });
-    }
+  if (topNavCalculator) {
+    topNavCalculator.addEventListener("click", (e) => {
+      e.preventDefault();
+      navCalculator.click();
+    });
+  }
 
-    if (topNavPython) {
-        topNavPython.addEventListener('click', (e) => {
-            e.preventDefault();
-            navPython.click();
-        });
-    }
-
-    if (topNavResearch) {
-        topNavResearch.addEventListener('click', (e) => {
-            e.preventDefault();
-            navResearch.click();
-        });
-    }
-
-    if (topNavCalculator) {
-        topNavCalculator.addEventListener('click', (e) => {
-            e.preventDefault();
-            navCalculator.click();
-        });
-    }
-
-    if (topNavBirthday) {
-        topNavBirthday.addEventListener('click', (e) => {
-            e.preventDefault();
-            const birthdayLink = document.querySelector('#nav-birthday a');
-            if (birthdayLink) {
-                birthdayLink.click();
-            } else {
-                window.location.href = '/rts/birthday-software';
-            }
-        });
-    }
-
+  if (topNavBirthday) {
+    topNavBirthday.addEventListener("click", (e) => {
+      e.preventDefault();
+      const birthdayLink = document.querySelector("#nav-birthday a");
+      if (birthdayLink) {
+        birthdayLink.click();
+      } else {
+        window.location.href = "/rts/birthday-software";
+      }
+    });
+  }
 }
 if (sendEmailBtn) {
-    sendEmailBtn.addEventListener('click', async () => {
-        const studentEmail = document.getElementById('student-email').value;
-        const subject = document.getElementById('email-subject').value;
-        const message = document.getElementById('email-message').value;
+  sendEmailBtn.addEventListener("click", async () => {
+    const studentEmail = document.getElementById("student-email").value;
+    const subject = document.getElementById("email-subject").value;
+    const message = document.getElementById("email-message").value;
 
-        if (!studentEmail || !subject || !message) {
-            alert("Please fill all fields.");
-            return;
-        }
+    if (!studentEmail || !subject || !message) {
+      alert("Please fill all fields.");
+      return;
+    }
 
-        try {
-            const res = await fetch("/api/send-email", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ studentEmail, subject, message })
-            });
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ studentEmail, subject, message }),
+      });
 
-            const data = await res.json();
+      const data = await res.json();
 
-            if (data.success) {
-                alert("Email sent successfully!");
-                document.getElementById('student-email').value = "";
-                document.getElementById('email-subject').value = "";
-                document.getElementById('email-message').value = "";
-            } else {
-                alert("Email failed.");
-            }
-        } catch (err) {
-            console.error(err);
-            alert("Server error.");
-        }
-    });
+      if (data.success) {
+        alert("Email sent successfully!");
+        document.getElementById("student-email").value = "";
+        document.getElementById("email-subject").value = "";
+        document.getElementById("email-message").value = "";
+      } else {
+        alert("Email failed.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Server error.");
+    }
+  });
 }
-
-
 
 // Handle profile photo upload
 function handleProfilePhotoUpload(e) {
-    const file = e.target.files[0];
-    if (!file) return;
+  const file = e.target.files[0];
+  if (!file) return;
 
-    // Check if file is an image
-    if (!file.type.match('image.*')) {
-        alert('Please select an image file.');
-        return;
-    }
+  // Check if file is an image
+  if (!file.type.match("image.*")) {
+    alert("Please select an image file.");
+    return;
+  }
 
-    // Check file size (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-        alert('Image size should be less than 5MB.');
-        return;
-    }
+  // Check file size (max 5MB)
+  if (file.size > 5 * 1024 * 1024) {
+    alert("Image size should be less than 5MB.");
+    return;
+  }
 
-    const reader = new FileReader();
-    reader.onload = function (event) {
-        const photoData = event.target.result;
-        state.profilePhoto = photoData;
+  const reader = new FileReader();
+  reader.onload = function (event) {
+    const photoData = event.target.result;
+    state.profilePhoto = photoData;
 
-        // Update UI
-        updateProfilePhoto(photoData);
+    // Update UI
+    updateProfilePhoto(photoData);
 
-        // Save to localStorage
-        localStorage.setItem('profilePhoto', photoData);
+    // Save to localStorage
+    localStorage.setItem("profilePhoto", photoData);
 
-        showNotification('Profile photo updated successfully!', 'success');
-    };
+    showNotification("Profile photo updated successfully!", "success");
+  };
 
-    reader.readAsDataURL(file);
+  reader.readAsDataURL(file);
 }
 
 // Save profile settings
 function saveProfileSettings() {
-    // In a real app, you would send this to a server
-    showNotification('Profile settings saved successfully!', 'success');
+  // In a real app, you would send this to a server
+  showNotification("Profile settings saved successfully!", "success");
 }
 
 // Show notification
-function showNotification(message, type = 'info') {
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.innerHTML = `
-                <div style="position: fixed; top: 80px; right: 20px; left: 20px; background-color: ${type === 'success' ? '#27ae60' : '#3498db'}; color: white; padding: 12px 15px; border-radius: 5px; box-shadow: 0 3px 10px rgba(0,0,0,0.2); z-index: 1000; display: flex; align-items: center; gap: 10px; font-size: 0.9rem;">
-                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+function showNotification(message, type = "info") {
+  // Create notification element
+  const notification = document.createElement("div");
+  notification.className = `notification notification-${type}`;
+  notification.innerHTML = `
+                <div style="position: fixed; top: 80px; right: 20px; left: 20px; background-color: ${type === "success" ? "#27ae60" : "#3498db"}; color: white; padding: 12px 15px; border-radius: 5px; box-shadow: 0 3px 10px rgba(0,0,0,0.2); z-index: 1000; display: flex; align-items: center; gap: 10px; font-size: 0.9rem;">
+                    <i class="fas fa-${type === "success" ? "check-circle" : "info-circle"}"></i>
                     <span>${message}</span>
                 </div>
             `;
 
-    document.body.appendChild(notification);
+  document.body.appendChild(notification);
 
-    // Remove notification after 3 seconds
-    setTimeout(() => {
-        notification.remove();
-    }, 3000);
+  // Remove notification after 3 seconds
+  setTimeout(() => {
+    notification.remove();
+  }, 3000);
 }
 
 // Show payment section
 function showPaymentSection() {
-    showDashboard();
+  showDashboard();
 }
 
 // Show dashboard section with animations
 function showDashboard() {
-    hideAllSections();
-    dashboardSection.classList.remove('hidden');
-    updateActiveNav('nav-dashboard');
-    state.currentSection = 'dashboard-section';
+  hideAllSections();
+  dashboardSection.classList.remove("hidden");
+  updateActiveNav("nav-dashboard");
+  state.currentSection = "dashboard-section";
 
-    // Show local counts immediately, then refresh from server
-    updateDashboard();
-    loadDashboardStats();
+  // Show local counts immediately, then refresh from server
+  updateDashboard();
+  loadDashboardStats();
 
-    if (!state.dashboardAnimationsPlayed) {
-        setTimeout(() => {
-            animateDashboard();
-            state.dashboardAnimationsPlayed = true;
-        }, 300);
-    }
+  if (!state.dashboardAnimationsPlayed) {
+    setTimeout(() => {
+      animateDashboard();
+      state.dashboardAnimationsPlayed = true;
+    }, 300);
+  }
 }
 
 // Show create test section
 function showCreateTestSection() {
-    hideAllSections();
-    createTestSection.classList.remove('hidden');
-    updateActiveNav('nav-tests');
-    state.currentSection = 'create-test-section';
+  hideAllSections();
+  createTestSection.classList.remove("hidden");
+  updateActiveNav("nav-tests");
+  state.currentSection = "create-test-section";
 }
 
 // Show test services section
 function showTestServicesSection() {
-    hideAllSections();
-    testServicesSection.classList.remove('hidden');
-    updateActiveNav('nav-test-services');
-    state.currentSection = 'test-services-section';
+  hideAllSections();
+  testServicesSection.classList.remove("hidden");
+  updateActiveNav("nav-test-services");
+  state.currentSection = "test-services-section";
 
-    // Ensure test services dashboard is visible
-    testServicesMainDashboard.style.display = 'block';
-    testServicesPage.style.display = 'none';
+  // Ensure test services dashboard is visible
+  testServicesMainDashboard.style.display = "block";
+  testServicesPage.style.display = "none";
 }
 
 // Show templates section
 function showTemplatesSection() {
-    hideAllSections();
-    templatesSection.classList.remove('hidden');
-    updateActiveNav('nav-templates');
-    state.currentSection = 'templates-section';
+  hideAllSections();
+  templatesSection.classList.remove("hidden");
+  updateActiveNav("nav-templates");
+  state.currentSection = "templates-section";
 }
 
 // Show Python service section
 function showPythonServiceSection() {
-    hideAllSections();
-    pythonServiceSection.classList.remove('hidden');
-    updateActiveNav('nav-python-sidebar');
-    state.currentSection = 'python-service-section';
+  hideAllSections();
+  pythonServiceSection.classList.remove("hidden");
+  updateActiveNav("nav-python-sidebar");
+  state.currentSection = "python-service-section";
 }
 
 // Show analytics section
 function showAnalyticsSection() {
-    hideAllSections();
-    analyticsSection.classList.remove('hidden');
-    updateActiveNav('nav-analytics');
-    state.currentSection = 'analytics-section';
+  hideAllSections();
+  analyticsSection.classList.remove("hidden");
+  updateActiveNav("nav-analytics");
+  state.currentSection = "analytics-section";
 
-    loadAnalyticsCards(); // ye zaroor hona chahiye
+  loadAnalyticsCards(); // ye zaroor hona chahiye
 }
 
 function showStudentsSection() {
-    hideAllSections();
-    studentsSection.classList.remove('hidden');
-    updateActiveNav('nav-students');
-    state.currentSection = 'students-section';
-    renderStudentsTable();
+  hideAllSections();
+  studentsSection.classList.remove("hidden");
+  updateActiveNav("nav-students");
+  state.currentSection = "students-section";
+  renderStudentsTable();
 }
 
-function renderStudentsTable(filter = '') {
-    const students = state.students.filter(student => {
-        if (!filter) return true;
-        const value = filter.toLowerCase();
-        return [student.name, student.className, student.roll, student.email, student.parentContact]
-            .filter(Boolean)
-            .some(text => text.toLowerCase().includes(value));
-    });
+function renderStudentsTable(filter = "") {
+  const students = state.students.filter((student) => {
+    if (!filter) return true;
+    const value = filter.toLowerCase();
+    return [
+      student.name,
+      student.className,
+      student.roll,
+      student.email,
+      student.parentContact,
+    ]
+      .filter(Boolean)
+      .some((text) => text.toLowerCase().includes(value));
+  });
 
-    if (!studentsTableBody) return;
-    studentsTableBody.innerHTML = '';
+  if (!studentsTableBody) return;
+  studentsTableBody.innerHTML = "";
 
-    if (students.length === 0) {
-        studentsTableBody.innerHTML = `
+  if (students.length === 0) {
+    studentsTableBody.innerHTML = `
             <tr>
                 <td colspan="6" style="text-align:center; color:#7f8c8d; padding:20px;">
                     No students added yet.
                 </td>
             </tr>
         `;
-        return;
-    }
+    return;
+  }
 
-    students.forEach(student => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
+  students.forEach((student) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
             <td>${student.name}</td>
-            <td>${student.className || '-'}</td>
-            <td>${student.roll || '-'}</td>
-            <td>${student.email || '-'}</td>
-            <td>${student.parentContact || '-'}</td>
+            <td>${student.className || "-"}</td>
+            <td>${student.roll || "-"}</td>
+            <td>${student.email || "-"}</td>
+            <td>${student.parentContact || "-"}</td>
             <td>
                 <!-- VIEW -->
     <button class="btn btn-sm btn-info" onclick="viewStudent('${student._id}')">
@@ -1110,411 +1171,481 @@ function renderStudentsTable(filter = '') {
     </button>
             </td>
         `;
-        studentsTableBody.appendChild(row);
-    });
+    studentsTableBody.appendChild(row);
+  });
 }
 
 async function handleAddStudent() {
-    const firstName = studentFirstNameInput.value.trim();
-    const lastName = studentLastNameInput.value.trim();
-    const email = studentEmailInput.value.trim();
-    const className = studentClassInput.value.trim();
-    const roll = studentRollInput.value.trim();
-    const parentContact = studentParentContactInput.value.trim();
+  const firstName = studentFirstNameInput.value.trim();
+  const lastName = studentLastNameInput.value.trim();
+  const email = studentEmailInput.value.trim();
+  const className = studentClassInput.value.trim();
+  const roll = studentRollInput.value.trim();
+  const parentContact = studentParentContactInput.value.trim();
 
-    if (!firstName || !lastName) {
-        alert('Please enter student first and last name.');
-        return;
+  if (!firstName || !lastName) {
+    alert("Please enter student first and last name.");
+    return;
+  }
+
+  const isEditing = addStudentModal.dataset.editingId;
+  const url = isEditing
+    ? `/teacher/update-student/${isEditing}`
+    : "/teacher/add-student";
+  const method = isEditing ? "PUT" : "POST";
+
+  try {
+    const response = await fetch(url, {
+      method: method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        className,
+        roll,
+        parentContact,
+      }),
+    });
+
+    const result = await response.json();
+    if (!result.success) {
+      alert(
+        `Unable to ${isEditing ? "update" : "add"} student. Please try again.`,
+      );
+      return;
     }
 
-    const isEditing = addStudentModal.dataset.editingId;
-    const url = isEditing ? `/teacher/update-student/${isEditing}` : '/teacher/add-student';
-    const method = isEditing ? 'PUT' : 'POST';
-
-
-
-    try {
-        const response = await fetch(url, {
-            method: method,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                firstName,
-                lastName,
-                email,
-                className,
-                roll,
-                parentContact
-            })
-        });
-
-        const result = await response.json();
-        if (!result.success) {
-            alert(`Unable to ${isEditing ? 'update' : 'add'} student. Please try again.`);
-            return;
-        }
-
-        if (isEditing) {
-            // Update existing student in state
-            const index = state.students.findIndex(s => s._id === isEditing);
-            if (index !== -1) {
-                state.students[index] = {
-                    ...state.students[index],
-                    name: `${firstName} ${lastName}`,
-                    email,
-                    className,
-                    roll,
-                    parentContact
-                };
-            }
-        } else {
-            // Add new student to state
-            const savedStudent = result.student;
-            state.students.push({
-                ...savedStudent,
-                className: savedStudent.class || savedStudent.className || ''
-            });
-        }
-
-        renderStudentsTable(studentSearchInput?.value || '');
-        closeModal('addStudentModal');
-        addStudentForm.reset();
-
-        // Reset modal state
-        delete addStudentModal.dataset.editingId;
-        const modalTitle = addStudentModal.querySelector('h2');
-        const submitBtn = addStudentModal.querySelector('.btn-primary');
-        if (modalTitle) modalTitle.textContent = 'Add Student';
-        if (submitBtn) submitBtn.textContent = 'Add Student';
-
-        showNotification(`Student ${isEditing ? 'updated' : 'added'} successfully!`, 'success');
-    } catch (err) {
-        console.error(`${isEditing ? 'Update' : 'Add'} student failed:`, err);
-        alert(`An error occurred while ${isEditing ? 'updating' : 'saving'} student.`);
+    if (isEditing) {
+      // Update existing student in state
+      const index = state.students.findIndex((s) => s._id === isEditing);
+      if (index !== -1) {
+        state.students[index] = {
+          ...state.students[index],
+          name: `${firstName} ${lastName}`,
+          email,
+          className,
+          roll,
+          parentContact,
+        };
+      }
+    } else {
+      // Add new student to state
+      const savedStudent = result.student;
+      state.students.push({
+        ...savedStudent,
+        className: savedStudent.class || savedStudent.className || "",
+      });
     }
+
+    renderStudentsTable(studentSearchInput?.value || "");
+    closeModal("addStudentModal");
+    addStudentForm.reset();
+
+    // Reset modal state
+    delete addStudentModal.dataset.editingId;
+    const modalTitle = addStudentModal.querySelector("h2");
+    const submitBtn = addStudentModal.querySelector(".btn-primary");
+    if (modalTitle) modalTitle.textContent = "Add Student";
+    if (submitBtn) submitBtn.textContent = "Add Student";
+
+    showNotification(
+      `Student ${isEditing ? "updated" : "added"} successfully!`,
+      "success",
+    );
+  } catch (err) {
+    console.error(`${isEditing ? "Update" : "Add"} student failed:`, err);
+    alert(
+      `An error occurred while ${isEditing ? "updating" : "saving"} student.`,
+    );
+  }
 }
 
 function filterStudentsTable(e) {
-    renderStudentsTable(e.target.value);
+  renderStudentsTable(e.target.value);
 }
 
 async function editStudent(studentId) {
-    const student = state.students.find(s => s._id === studentId);
-    if (!student) return;
+  const student = state.students.find((s) => s._id === studentId);
+  if (!student) return;
 
-    // Populate the modal with student data
-    const parts = student.name.split(' ');
-    studentFirstNameInput.value = parts[0] || '';
-    studentLastNameInput.value = parts.slice(1).join(' ') || '';
-    studentEmailInput.value = student.email || '';
-    studentClassInput.value = student.className || '';
-    studentRollInput.value = student.roll || '';
-    studentParentContactInput.value = student.parentContact || '';
+  // Populate the modal with student data
+  const parts = student.name.split(" ");
+  studentFirstNameInput.value = parts[0] || "";
+  studentLastNameInput.value = parts.slice(1).join(" ") || "";
+  studentEmailInput.value = student.email || "";
+  studentClassInput.value = student.className || "";
+  studentRollInput.value = student.roll || "";
+  studentParentContactInput.value = student.parentContact || "";
 
-    // Set editing mode
-    addStudentModal.dataset.editingId = studentId;
-    addStudentModal.style.display = 'flex';
+  // Set editing mode
+  addStudentModal.dataset.editingId = studentId;
+  addStudentModal.style.display = "flex";
 
-    // Update modal title and button
-    const modalTitle = addStudentModal.querySelector('h2');
-    const submitBtn = addStudentModal.querySelector('.btn-primary');
-    if (modalTitle) modalTitle.textContent = 'Edit Student';
-    if (submitBtn) submitBtn.textContent = 'Update Student';
+  // Update modal title and button
+  const modalTitle = addStudentModal.querySelector("h2");
+  const submitBtn = addStudentModal.querySelector(".btn-primary");
+  if (modalTitle) modalTitle.textContent = "Edit Student";
+  if (submitBtn) submitBtn.textContent = "Update Student";
 }
 
 async function deleteStudent(studentId) {
-    if (!confirm('Are you sure you want to delete this student? This action cannot be undone.')) {
-        return;
-    }
+  if (
+    !confirm(
+      "Are you sure you want to delete this student? This action cannot be undone.",
+    )
+  ) {
+    return;
+  }
 
-    try {
-        const response = await fetch(`/teacher/delete-student/${studentId}`, {
-            method: 'DELETE'
-        });
+  try {
+    const response = await fetch(`/teacher/delete-student/${studentId}`, {
+      method: "DELETE",
+    });
 
-        const result = await response.json();
-        if (result.success) {
-            // Remove from state
-            state.students = state.students.filter(s => s._id !== studentId);
-            renderStudentsTable(studentSearchInput?.value || '');
-            showNotification('Student deleted successfully!', 'success');
-        } else {
-            alert('Unable to delete student. Please try again.');
-        }
-    } catch (err) {
-        console.error('Delete student failed:', err);
-        alert('An error occurred while deleting student.');
+    const result = await response.json();
+    if (result.success) {
+      // Remove from state
+      state.students = state.students.filter((s) => s._id !== studentId);
+      renderStudentsTable(studentSearchInput?.value || "");
+      showNotification("Student deleted successfully!", "success");
+    } else {
+      alert("Unable to delete student. Please try again.");
     }
+  } catch (err) {
+    console.error("Delete student failed:", err);
+    alert("An error occurred while deleting student.");
+  }
 }
-
 
 // Show settings section
 function showSettingsSection() {
-    hideAllSections();
-    settingsSection.classList.remove('hidden');
-    updateActiveNav('nav-settings');
-    state.currentSection = 'settings-section';
+  hideAllSections();
+  settingsSection.classList.remove("hidden");
+  updateActiveNav("nav-settings");
+  state.currentSection = "settings-section";
 }
 
 // Hide all sections
 function hideAllSections() {
-    const paymentSection = document.getElementById('payment-section');
-    if (paymentSection) paymentSection.classList.add('hidden');
-    dashboardSection.classList.add('hidden');
-    createTestSection.classList.add('hidden');
-    testServicesSection.classList.add('hidden');
-    templatesSection.classList.add('hidden');
-    pythonServiceSection.classList.add('hidden');
-    analyticsSection.classList.add('hidden');
-    studentsSection.classList.add('hidden');
-    settingsSection.classList.add('hidden');
-    researchSection.classList.add('hidden');
-    notesSection.classList.add('hidden');
-    previousSection.classList.add('hidden');
-    syllabusSection.classList.add('hidden');
-    calculatorSection.classList.add('hidden');
-    calendarSection.classList.add('hidden');
-    alertsSection.classList.add('hidden');
+  const paymentSection = document.getElementById("payment-section");
+  if (paymentSection) paymentSection.classList.add("hidden");
+  dashboardSection.classList.add("hidden");
+  createTestSection.classList.add("hidden");
+  testServicesSection.classList.add("hidden");
+  templatesSection.classList.add("hidden");
+  pythonServiceSection.classList.add("hidden");
+  analyticsSection.classList.add("hidden");
+  studentsSection.classList.add("hidden");
+  settingsSection.classList.add("hidden");
+  researchSection.classList.add("hidden");
+  notesSection.classList.add("hidden");
+  previousSection.classList.add("hidden");
+  syllabusSection.classList.add("hidden");
+  calculatorSection.classList.add("hidden");
+  calendarSection.classList.add("hidden");
+  alertsSection.classList.add("hidden");
 }
 
 // Update active navigation item
 function updateActiveNav(activeId) {
-    // Remove active class from all nav items
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('active');
-    });
+  // Remove active class from all nav items
+  document.querySelectorAll(".nav-item").forEach((item) => {
+    item.classList.remove("active");
+  });
 
-    // Add active class to current nav item
-    const activeNav = document.getElementById(activeId);
-    if (activeNav) {
-        activeNav.classList.add('active');
-    }
+  // Add active class to current nav item
+  const activeNav = document.getElementById(activeId);
+  if (activeNav) {
+    activeNav.classList.add("active");
+  }
 
-    // Update top navbar active state
-    document.querySelectorAll('.top-navbar a').forEach(link => {
-        link.classList.remove('active');
-    });
+  // Update top navbar active state
+  document.querySelectorAll(".top-navbar a").forEach((link) => {
+    link.classList.remove("active");
+  });
 
-    // Find and activate corresponding top navbar link
-    const topNavId = activeId === 'nav-python-sidebar' ? 'top-nav-python' : activeId.replace('nav-', 'top-nav-');
-    const topNavLink = document.getElementById(topNavId);
-    if (topNavLink) {
-        topNavLink.classList.add('active');
-    }
+  // Find and activate corresponding top navbar link
+  const topNavId =
+    activeId === "nav-python-sidebar"
+      ? "top-nav-python"
+      : activeId.replace("nav-", "top-nav-");
+  const topNavLink = document.getElementById(topNavId);
+  if (topNavLink) {
+    topNavLink.classList.add("active");
+  }
 }
 
 function attachTranslatorEvents() {
-    if (!translatorTranslateBtn) return;
+  if (!translatorTranslateBtn) return;
 
-    translatorTranslateBtn.addEventListener('click', translatorTranslate);
-    translatorVoiceBtn?.addEventListener('click', translatorStartVoice);
-    translatorSpeakBtn?.addEventListener('click', translatorSpeak);
-    translatorSwapBtn?.addEventListener('click', translatorSwapLang);
-    translatorClearBtn?.addEventListener('click', translatorClearInputs);
+  translatorTranslateBtn.addEventListener("click", translatorTranslate);
+  translatorVoiceBtn?.addEventListener("click", translatorStartVoice);
+  translatorSpeakBtn?.addEventListener("click", translatorSpeak);
+  translatorSwapBtn?.addEventListener("click", translatorSwapLang);
+  translatorClearBtn?.addEventListener("click", translatorClearInputs);
 
-    loadTranslatorHistory();
+  loadTranslatorHistory();
 }
 
 function translatorDetectLanguage(text) {
-    const hindiRegex = /[\u0900-\u097F]/;
-    const hinglishWords = [
-        'aaj', 'kya', 'kaise', 'mera', 'tera', 'hai', 'nahi', 'kyu', 'kaam', 'bahut', 'acha', 'haan'
-    ];
+  const hindiRegex = /[\u0900-\u097F]/;
+  const hinglishWords = [
+    "aaj",
+    "kya",
+    "kaise",
+    "mera",
+    "tera",
+    "hai",
+    "nahi",
+    "kyu",
+    "kaam",
+    "bahut",
+    "acha",
+    "haan",
+  ];
 
-    if (hindiRegex.test(text)) return 'hi';
+  if (hindiRegex.test(text)) return "hi";
 
-    let score = 0;
-    hinglishWords.forEach(word => {
-        if (text.toLowerCase().includes(word)) score++;
-    });
+  let score = 0;
+  hinglishWords.forEach((word) => {
+    if (text.toLowerCase().includes(word)) score++;
+  });
 
-    return score >= 2 ? 'hi' : 'en';
+  return score >= 2 ? "hi" : "en";
 }
 
 async function translatorTranslate() {
-    const text = translatorInputText?.value.trim();
-    if (!text) return alert('Enter text to translate.');
+  const text = translatorInputText?.value.trim();
+  if (!text) return alert("Enter text to translate.");
 
-    const source = translatorFromLang?.value === 'auto' ? translatorDetectLanguage(text) : translatorFromLang?.value;
-    const target = translatorToLang?.value || 'en';
+  const source =
+    translatorFromLang?.value === "auto"
+      ? translatorDetectLanguage(text)
+      : translatorFromLang?.value;
+  const target = translatorToLang?.value || "en";
 
-    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${source}|${target}`;
+  const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${source}|${target}`;
 
-    try {
-        const res = await fetch(url);
-        const data = await res.json();
-        const translated = data?.responseData?.translatedText || '';
-        if (translatorOutputText) translatorOutputText.value = translated;
-        saveTranslatorHistory(text, translated);
-    } catch (err) {
-        console.error(err);
-        alert('Translation error.');
-    }
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    const translated = data?.responseData?.translatedText || "";
+    if (translatorOutputText) translatorOutputText.value = translated;
+    saveTranslatorHistory(text, translated);
+  } catch (err) {
+    console.error(err);
+    alert("Translation error.");
+  }
 }
 
 function translatorStartVoice() {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) return alert('Voice input not supported in this browser.');
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition)
+    return alert("Voice input not supported in this browser.");
 
-    const recognition = new SpeechRecognition();
-    recognition.lang = 'hi-IN';
-    recognition.start();
-    recognition.onresult = (e) => {
-        const transcript = e.results[0][0].transcript;
-        if (translatorInputText) translatorInputText.value = transcript;
-    };
+  const recognition = new SpeechRecognition();
+  recognition.lang = "hi-IN";
+  recognition.start();
+  recognition.onresult = (e) => {
+    const transcript = e.results[0][0].transcript;
+    if (translatorInputText) translatorInputText.value = transcript;
+  };
 }
 
 function translatorSpeak() {
-    if (!translatorOutputText?.value) return;
-    const msg = new SpeechSynthesisUtterance(translatorOutputText.value);
-    msg.lang = translatorToLang?.value === 'hi' ? 'hi-IN' : 'en-US';
-    speechSynthesis.speak(msg);
+  if (!translatorOutputText?.value) return;
+  const msg = new SpeechSynthesisUtterance(translatorOutputText.value);
+  msg.lang = translatorToLang?.value === "hi" ? "hi-IN" : "en-US";
+  speechSynthesis.speak(msg);
 }
 
 function saveTranslatorHistory(src, res) {
-    if (!src || !res) return;
-    const history = JSON.parse(localStorage.getItem('translatorHistory') || '[]');
-    history.unshift({ src, res });
-    localStorage.setItem('translatorHistory', JSON.stringify(history.slice(0, 10)));
-    loadTranslatorHistory();
+  if (!src || !res) return;
+  const history = JSON.parse(localStorage.getItem("translatorHistory") || "[]");
+  history.unshift({ src, res });
+  localStorage.setItem(
+    "translatorHistory",
+    JSON.stringify(history.slice(0, 10)),
+  );
+  loadTranslatorHistory();
 }
 
 function loadTranslatorHistory() {
-    if (!translatorHistoryList) return;
-    const history = JSON.parse(localStorage.getItem('translatorHistory') || '[]');
-    if (!history.length) {
-        translatorHistoryList.innerHTML = '<p style="color:#7f8c8d; margin:0;">No history yet.</p>';
-        return;
-    }
-    translatorHistoryList.innerHTML = history.slice(0, 5).map(item =>
-        `<div class="history-item" style="background:#fff; padding:10px; border-radius:8px; border:1px solid #e2e8f0;"><strong>${item.src}</strong><br>→ ${item.res}</div>`
-    ).join('');
+  if (!translatorHistoryList) return;
+  const history = JSON.parse(localStorage.getItem("translatorHistory") || "[]");
+  if (!history.length) {
+    translatorHistoryList.innerHTML =
+      '<p style="color:#7f8c8d; margin:0;">No history yet.</p>';
+    return;
+  }
+  translatorHistoryList.innerHTML = history
+    .slice(0, 5)
+    .map(
+      (item) =>
+        `<div class="history-item" style="background:#fff; padding:10px; border-radius:8px; border:1px solid #e2e8f0;"><strong>${item.src}</strong><br>→ ${item.res}</div>`,
+    )
+    .join("");
 }
 
 function translatorSwapLang() {
-    if (!translatorFromLang || !translatorToLang) return;
-    const fromValue = translatorFromLang.value;
-    translatorFromLang.value = translatorToLang.value;
-    translatorToLang.value = fromValue;
-    const inputValue = translatorInputText?.value || '';
-    const outputValue = translatorOutputText?.value || '';
-    if (translatorInputText) translatorInputText.value = outputValue;
-    if (translatorOutputText) translatorOutputText.value = inputValue;
+  if (!translatorFromLang || !translatorToLang) return;
+  const fromValue = translatorFromLang.value;
+  translatorFromLang.value = translatorToLang.value;
+  translatorToLang.value = fromValue;
+  const inputValue = translatorInputText?.value || "";
+  const outputValue = translatorOutputText?.value || "";
+  if (translatorInputText) translatorInputText.value = outputValue;
+  if (translatorOutputText) translatorOutputText.value = inputValue;
 }
 
 function translatorClearInputs() {
-    if (translatorInputText) translatorInputText.value = '';
-    if (translatorOutputText) translatorOutputText.value = '';
+  if (translatorInputText) translatorInputText.value = "";
+  if (translatorOutputText) translatorOutputText.value = "";
 }
 
 // Animate dashboard elements
 function animateDashboard() {
-    // Update progress bars with animation
-    const testsCount = Array.isArray(state.tests) && state.tests.length > 0
-        ? state.tests.length
-        : Object.values(testServicesData).reduce((sum, arr) => sum + (Array.isArray(arr) ? arr.length : 0), 0);
+  // Update progress bars with animation
+  const testsCount =
+    Array.isArray(state.tests) && state.tests.length > 0
+      ? state.tests.length
+      : Object.values(testServicesData).reduce(
+          (sum, arr) => sum + (Array.isArray(arr) ? arr.length : 0),
+          0,
+        );
 
-    const questionsCount = Array.isArray(state.tests)
-        ? state.tests.reduce((total, test) => total + (test.questions ? test.questions.length : 0), 0)
-        : 0;
+  const questionsCount = Array.isArray(state.tests)
+    ? state.tests.reduce(
+        (total, test) => total + (test.questions ? test.questions.length : 0),
+        0,
+      )
+    : 0;
 
-    const templatesCount = state.templates.filter(t => t && t.active).length || Object.keys(testServicesData).length;
+  const templatesCount =
+    state.templates.filter((t) => t && t.active).length ||
+    Object.keys(testServicesData).length;
 
-    // Set target values for progress bars
-    const testsTarget = 50;
-    const questionsTarget = 200;
-    const templatesTarget = 10;
+  // Set target values for progress bars
+  const testsTarget = 50;
+  const questionsTarget = 200;
+  const templatesTarget = 10;
 
-    // Calculate percentages
-    const testsPercentage = Math.min((testsCount / testsTarget) * 100, 100);
-    const questionsPercentage = Math.min((questionsCount / questionsTarget) * 100, 100);
-    const templatesPercentage = Math.min((templatesCount / templatesTarget) * 100, 100);
+  // Calculate percentages
+  const testsPercentage = Math.min((testsCount / testsTarget) * 100, 100);
+  const questionsPercentage = Math.min(
+    (questionsCount / questionsTarget) * 100,
+    100,
+  );
+  const templatesPercentage = Math.min(
+    (templatesCount / templatesTarget) * 100,
+    100,
+  );
 
-    // Animate progress bars
-    animateProgressBar(testsProgress, testsPercentage, testsProgressValue, testsProgressText);
-    animateProgressBar(questionsProgress, questionsPercentage, questionsProgressValue, questionsProgressText);
-    animateProgressBar(templatesProgress, templatesPercentage, templatesProgressValue, templatesProgressText);
+  // Animate progress bars
+  animateProgressBar(
+    testsProgress,
+    testsPercentage,
+    testsProgressValue,
+    testsProgressText,
+  );
+  animateProgressBar(
+    questionsProgress,
+    questionsPercentage,
+    questionsProgressValue,
+    questionsProgressText,
+  );
+  animateProgressBar(
+    templatesProgress,
+    templatesPercentage,
+    templatesProgressValue,
+    templatesProgressText,
+  );
 
-    // Animate stat numbers
-    animateCounter(totalTestsElement, testsCount);
-    animateCounter(totalQuestionsElement, questionsCount);
-    animateCounter(activeTemplatesElement, templatesCount);
+  // Animate stat numbers
+  animateCounter(totalTestsElement, testsCount);
+  animateCounter(totalQuestionsElement, questionsCount);
+  animateCounter(activeTemplatesElement, templatesCount);
 }
 
-
 // Animate progress bar
-function animateProgressBar(progressBar, percentage, valueElement, textElement) {
-    // Set CSS custom property for animation
-    progressBar.style.width = `${percentage}%`;
+function animateProgressBar(
+  progressBar,
+  percentage,
+  valueElement,
+  textElement,
+) {
+  // Set CSS custom property for animation
+  progressBar.style.width = `${percentage}%`;
 
-    // Update text elements
-    valueElement.textContent = `${Math.round(percentage)}%`;
-    textElement.textContent = `${Math.round(percentage)}%`;
+  // Update text elements
+  valueElement.textContent = `${Math.round(percentage)}%`;
+  textElement.textContent = `${Math.round(percentage)}%`;
 
-    // Trigger animation
-    progressBar.style.transition = 'width 1.5s ease-in-out';
+  // Trigger animation
+  progressBar.style.transition = "width 1.5s ease-in-out";
 }
 
 // Animate counter
 function animateCounter(element, targetValue) {
-    const duration = 1500; // ms
-    const step = targetValue / (duration / 16); // 60fps
-    let current = 0;
+  const duration = 1500; // ms
+  const step = targetValue / (duration / 16); // 60fps
+  let current = 0;
 
-    const timer = setInterval(() => {
-        current += step;
-        if (current >= targetValue) {
-            current = targetValue;
-            clearInterval(timer);
-        }
-        element.textContent = Math.floor(current);
-    }, 16);
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= targetValue) {
+      current = targetValue;
+      clearInterval(timer);
+    }
+    element.textContent = Math.floor(current);
+  }, 16);
 }
 
 // Process payment
 function processPayment() {
-    state.paymentCompleted = true;
-    localStorage.setItem('teacherPaymentCompleted', 'true');
-    unlockAllFeatures();
-    showDashboard();
+  state.paymentCompleted = true;
+  localStorage.setItem("teacherPaymentCompleted", "true");
+  unlockAllFeatures();
+  showDashboard();
 }
-
 
 // Open question modal
 function openQuestionModal() {
-    createTestModal.style.display = 'flex';
-    renderQuestionList();
+  createTestModal.style.display = "flex";
+  renderQuestionList();
 }
 
 // Close modal
 function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.style.display = 'none';
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = "none";
 
-        // Reset student modal edit state
-        if (modalId === 'addStudentModal') {
-            delete modal.dataset.editingId;
-            const modalTitle = modal.querySelector('h2');
-            const submitBtn = modal.querySelector('.btn-primary');
-            if (modalTitle) modalTitle.textContent = 'Add Student';
-            if (submitBtn) submitBtn.textContent = 'Add Student';
-            addStudentForm.reset();
-        }
+    // Reset student modal edit state
+    if (modalId === "addStudentModal") {
+      delete modal.dataset.editingId;
+      const modalTitle = modal.querySelector("h2");
+      const submitBtn = modal.querySelector(".btn-primary");
+      if (modalTitle) modalTitle.textContent = "Add Student";
+      if (submitBtn) submitBtn.textContent = "Add Student";
+      addStudentForm.reset();
     }
+  }
 }
 
 // Handle question type change
 function handleQuestionTypeChange() {
-    const questionType = questionTypeElement.value;
+  const questionType = questionTypeElement.value;
 
-    if (questionType === 'multiple-choice') {
-        optionsContainer.style.display = 'block';
+  if (questionType === "multiple-choice") {
+    optionsContainer.style.display = "block";
 
-        // Reset to default 4 options
-        optionsList.innerHTML = `
+    // Reset to default 4 options
+    optionsList.innerHTML = `
                     <div class="question-option-input">
                         <input type="radio" name="correctOption" value="0">
                         <input type="text" class="form-control" placeholder="Option 1">
@@ -1532,11 +1663,9 @@ function handleQuestionTypeChange() {
                         <input type="text" class="form-control" placeholder="Option 4">
                     </div>
                 `;
-    }
-
-    else if (questionType === 'true-false') {
-        optionsContainer.style.display = 'block';
-        optionsList.innerHTML = `
+  } else if (questionType === "true-false") {
+    optionsContainer.style.display = "block";
+    optionsList.innerHTML = `
                     <div class="question-option-input">
                         <input type="radio" name="correctOption" value="true">
                         <input type="text" class="form-control" value="True" readonly>
@@ -1546,21 +1675,19 @@ function handleQuestionTypeChange() {
                         <input type="text" class="form-control" value="False" readonly>
                     </div>
                 `;
-    }
-
-    else {
-        optionsContainer.style.display = 'none';
-    }
+  } else {
+    optionsContainer.style.display = "none";
+  }
 }
 
 // Add option for MCQ
 function addOption() {
-    const optionCount = optionsList.children.length;
-    const optionNumber = optionCount + 1;
+  const optionCount = optionsList.children.length;
+  const optionNumber = optionCount + 1;
 
-    const optionDiv = document.createElement('div');
-    optionDiv.className = 'question-option-input';
-    optionDiv.innerHTML = `
+  const optionDiv = document.createElement("div");
+  optionDiv.className = "question-option-input";
+  optionDiv.innerHTML = `
                 <input type="radio" name="correctOption" value="${optionCount}">
                 <input type="text" class="form-control" placeholder="Option ${optionNumber}">
                 <button type="button" class="btn btn-sm" onclick="removeOption(this)" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">
@@ -1568,180 +1695,172 @@ function addOption() {
                 </button>
             `;
 
-    optionsList.appendChild(optionDiv);
+  optionsList.appendChild(optionDiv);
 }
 
 // Remove option
 function removeOption(button) {
-    const optionDiv = button.parentElement;
+  const optionDiv = button.parentElement;
 
-    // Minimum 2 options required
-    if (optionsList.children.length > 2) {
-        optionDiv.remove();
+  // Minimum 2 options required
+  if (optionsList.children.length > 2) {
+    optionDiv.remove();
 
-        // Reassign values and placeholders
-        Array.from(optionsList.children).forEach((div, index) => {
-            const radio = div.querySelector('input[type="radio"]');
-            radio.value = index;
+    // Reassign values and placeholders
+    Array.from(optionsList.children).forEach((div, index) => {
+      const radio = div.querySelector('input[type="radio"]');
+      radio.value = index;
 
-            const input = div.querySelector('input[type="text"]');
-            input.placeholder = `Option ${index + 1}`;
-        });
-    } else {
-        alert('At least 2 options are required for MCQ questions.');
-    }
+      const input = div.querySelector('input[type="text"]');
+      input.placeholder = `Option ${index + 1}`;
+    });
+  } else {
+    alert("At least 2 options are required for MCQ questions.");
+  }
 }
 // Add question
 function addQuestion() {
+  const questionText = questionTextElement.value.trim();
+  const questionType = questionTypeElement.value;
+  const points = parseInt(questionPointsElement.value);
+  const difficulty = questionDifficultyElement.value;
 
-    const questionText = questionTextElement.value.trim();
-    const questionType = questionTypeElement.value;
-    const points = parseInt(questionPointsElement.value);
-    const difficulty = questionDifficultyElement.value;
+  if (!questionText) {
+    alert("Please enter question text.");
+    return;
+  }
 
-    if (!questionText) {
-        alert('Please enter question text.');
-        return;
+  // 🔥 MongoDB type fix
+  let mongoType = "MCQ";
+
+  if (questionType === "true-false") {
+    mongoType = "TF";
+  }
+
+  // 🔴 IMPORTANT: keep same ID while editing
+  let questionId = state.editingQuestionId
+    ? state.editingQuestionId
+    : Date.now();
+
+  let question = {
+    id: questionId,
+    text: questionText,
+    type: mongoType,
+    points,
+    difficulty,
+  };
+
+  // ===== MCQ =====
+  if (questionType === "multiple-choice") {
+    const options = [];
+    const optionInputs = optionsList.querySelectorAll('input[type="text"]');
+
+    const correctOption = document.querySelector(
+      'input[name="correctOption"]:checked',
+    );
+
+    if (!correctOption) {
+      alert("Please select the correct answer.");
+      return;
     }
 
-    // 🔥 MongoDB type fix
-    let mongoType = "MCQ";
-
-    if (questionType === "true-false") {
-        mongoType = "TF";
-    }
-
-    // 🔴 IMPORTANT: keep same ID while editing
-    let questionId = state.editingQuestionId
-        ? state.editingQuestionId
-        : Date.now();
-
-    let question = {
-        id: questionId,
-        text: questionText,
-        type: mongoType,
-        points,
-        difficulty
-    };
-
-    // ===== MCQ =====
-    if (questionType === 'multiple-choice') {
-
-        const options = [];
-        const optionInputs = optionsList.querySelectorAll('input[type="text"]');
-
-        const correctOption =
-            document.querySelector('input[name="correctOption"]:checked');
-
-        if (!correctOption) {
-            alert('Please select the correct answer.');
-            return;
-        }
-
-        optionInputs.forEach((input, index) => {
-
-            if (input.value.trim()) {
-
-                options.push({
-                    id: index,
-                    text: input.value.trim(),
-                    isCorrect: index === parseInt(correctOption.value)
-                });
-
-            }
+    optionInputs.forEach((input, index) => {
+      if (input.value.trim()) {
+        options.push({
+          id: index,
+          text: input.value.trim(),
+          isCorrect: index === parseInt(correctOption.value),
         });
+      }
+    });
 
-        if (options.length < 2) {
-            alert('At least 2 options required.');
-            return;
-        }
-
-        question.options = options;
-        question.correctAnswer = parseInt(correctOption.value);
+    if (options.length < 2) {
+      alert("At least 2 options required.");
+      return;
     }
 
-    // ===== TRUE/FALSE =====
-    else if (questionType === 'true-false') {
+    question.options = options;
+    question.correctAnswer = parseInt(correctOption.value);
+  }
 
-        const correctOption =
-            document.querySelector('input[name="correctOption"]:checked');
+  // ===== TRUE/FALSE =====
+  else if (questionType === "true-false") {
+    const correctOption = document.querySelector(
+      'input[name="correctOption"]:checked',
+    );
 
-        if (!correctOption) {
-            alert('Select True or False.');
-            return;
-        }
-
-        question.correctAnswer = correctOption.value === 'true';
-
-        question.options = [
-            {
-                id: 0,
-                text: 'True',
-                isCorrect: correctOption.value === 'true'
-            },
-            {
-                id: 1,
-                text: 'False',
-                isCorrect: correctOption.value === 'false'
-            }
-        ];
+    if (!correctOption) {
+      alert("Select True or False.");
+      return;
     }
 
-    // ===== UPDATE or ADD =====
-    if (state.editingQuestionId) {
+    question.correctAnswer = correctOption.value === "true";
 
-        const index = state.currentTestQuestions.findIndex(
-            q => String(q.id) === String(state.editingQuestionId)
-        );
+    question.options = [
+      {
+        id: 0,
+        text: "True",
+        isCorrect: correctOption.value === "true",
+      },
+      {
+        id: 1,
+        text: "False",
+        isCorrect: correctOption.value === "false",
+      },
+    ];
+  }
 
-        if (index !== -1) {
-            state.currentTestQuestions[index] = question;
-        }
+  // ===== UPDATE or ADD =====
+  if (state.editingQuestionId) {
+    const index = state.currentTestQuestions.findIndex(
+      (q) => String(q.id) === String(state.editingQuestionId),
+    );
 
-        showNotification('Question updated successfully!', 'success');
-
-    } else {
-
-        state.currentTestQuestions.push(question);
-
-        showNotification('Question added successfully!', 'success');
+    if (index !== -1) {
+      state.currentTestQuestions[index] = question;
     }
 
-    // RESET
-    state.editingQuestionId = null;
+    showNotification("Question updated successfully!", "success");
+  } else {
+    state.currentTestQuestions.push(question);
 
-    addQuestionBtn.innerHTML =
-        '<i class="fas fa-plus"></i> Add Question';
+    showNotification("Question added successfully!", "success");
+  }
 
-    renderQuestionList();
-    updateQuestionPreview();
+  // RESET
+  state.editingQuestionId = null;
 
-    questionTextElement.value = '';
-    questionPointsElement.value = '1';
-    questionTypeElement.value = 'multiple-choice';
+  addQuestionBtn.innerHTML = '<i class="fas fa-plus"></i> Add Question';
 
-    handleQuestionTypeChange();
+  renderQuestionList();
+  updateQuestionPreview();
+
+  questionTextElement.value = "";
+  questionPointsElement.value = "1";
+  questionTypeElement.value = "multiple-choice";
+
+  handleQuestionTypeChange();
 }
 
 // Render question list
 function renderQuestionList() {
-    if (state.currentTestQuestions.length === 0) {
-        questionListElement.innerHTML = `
+  if (state.currentTestQuestions.length === 0) {
+    questionListElement.innerHTML = `
             <div class="empty-state" style="padding: 20px;">
                 <i class="fas fa-question-circle"></i>
                 <p>No questions added yet. Add your first question below.</p>
             </div>
         `;
-        return;
-    }
+    return;
+  }
 
-    questionListElement.innerHTML = '';
+  questionListElement.innerHTML = "";
 
-    state.currentTestQuestions.forEach((question, index) => {
-        const questionDiv = document.createElement('div');
-        questionDiv.className = 'question-item';
+  state.currentTestQuestions.forEach((question, index) => {
+    const questionDiv = document.createElement("div");
+    questionDiv.className = "question-item";
 
-        questionDiv.innerHTML = `
+    questionDiv.innerHTML = `
             <div class="question-header">
                 <div class="question-text">
                     Q${index + 1}: ${question.text}
@@ -1751,19 +1870,28 @@ function renderQuestionList() {
                 </div>
             </div>
 
-            ${question.options ? `
+            ${
+              question.options
+                ? `
                 <div class="question-options">
-                    ${question.options.map(option => `
-                        <div class="question-option ${option.isCorrect ? 'correct' : ''}">
+                    ${question.options
+                      .map(
+                        (option) => `
+                        <div class="question-option ${option.isCorrect ? "correct" : ""}">
                             ${String.fromCharCode(65 + option.id)}. ${option.text}
-                            ${option.isCorrect ?
-                '<i class="fas fa-check" style="color:#27ae60; margin-left:6px;"></i>'
-                : ''
-            }
+                            ${
+                              option.isCorrect
+                                ? '<i class="fas fa-check" style="color:#27ae60; margin-left:6px;"></i>'
+                                : ""
+                            }
                         </div>
-                    `).join('')}
+                    `,
+                      )
+                      .join("")}
                 </div>
-            ` : ''}
+            `
+                : ""
+            }
 
             <div class="question-marks">
                 Marks: ${question.points} | Difficulty: ${question.difficulty}
@@ -1787,394 +1915,406 @@ function renderQuestionList() {
             </div>
         `;
 
-        questionListElement.appendChild(questionDiv);
-    });
+    questionListElement.appendChild(questionDiv);
+  });
 }
 
 // edit question
 function editQuestion(questionId) {
-    const question = state.currentTestQuestions.find(
-        q => String(q.id) === String(questionId)
-    );
+  const question = state.currentTestQuestions.find(
+    (q) => String(q.id) === String(questionId),
+  );
 
-    if (!question) return;
+  if (!question) return;
 
-    state.editingQuestionId = question.id;
+  state.editingQuestionId = question.id;
 
-    questionTextElement.value = question.text;
-    questionTypeElement.value = question.type;
-    questionPointsElement.value = question.points;
-    questionDifficultyElement.value = question.difficulty;
+  questionTextElement.value = question.text;
+  questionTypeElement.value = question.type;
+  questionPointsElement.value = question.points;
+  questionDifficultyElement.value = question.difficulty;
 
-    handleQuestionTypeChange();
+  handleQuestionTypeChange();
 
-    if (question.options && question.type === 'multiple-choice') {
-        optionsList.innerHTML = '';
-        question.options.forEach((opt, index) => {
-            optionsList.innerHTML += `
+  if (question.options && question.type === "multiple-choice") {
+    optionsList.innerHTML = "";
+    question.options.forEach((opt, index) => {
+      optionsList.innerHTML += `
                 <div class="question-option-input">
-                    <input type="radio" name="correctOption" value="${index}" ${opt.isCorrect ? 'checked' : ''}>
+                    <input type="radio" name="correctOption" value="${index}" ${opt.isCorrect ? "checked" : ""}>
                     <input type="text" class="form-control" value="${opt.text}">
                 </div>
             `;
-        });
-    }
+    });
+  }
 
-    addQuestionBtn.innerHTML = '<i class="fas fa-save"></i> Update Question';
+  addQuestionBtn.innerHTML = '<i class="fas fa-save"></i> Update Question';
 }
-
-
-
 
 // Remove question
 function removeQuestion(questionId) {
-    if (!confirm("Remove this question?")) return;
+  if (!confirm("Remove this question?")) return;
 
-    state.currentTestQuestions =
-        state.currentTestQuestions.filter(q => q.id !== questionId);
+  state.currentTestQuestions = state.currentTestQuestions.filter(
+    (q) => q.id !== questionId,
+  );
 
-    renderQuestionList();
-    updateQuestionPreview();
+  renderQuestionList();
+  updateQuestionPreview();
 
-    showNotification('Question removed.', 'info');
+  showNotification("Question removed.", "info");
 }
-
 
 // Update question preview
 function updateQuestionPreview() {
-    const count = state.currentTestQuestions.length;
-    questionCountElement.textContent = count;
+  const count = state.currentTestQuestions.length;
+  questionCountElement.textContent = count;
 
-    if (count === 0) {
-        questionPreviewElement.innerHTML = '<p style="color: #7f8c8d; text-align: center;">No questions added yet.</p>';
-        return;
-    }
+  if (count === 0) {
+    questionPreviewElement.innerHTML =
+      '<p style="color: #7f8c8d; text-align: center;">No questions added yet.</p>';
+    return;
+  }
 
-    let previewHTML = '';
-    state.currentTestQuestions.slice(0, 3).forEach((question, index) => {
-        previewHTML += `
+  let previewHTML = "";
+  state.currentTestQuestions.slice(0, 3).forEach((question, index) => {
+    previewHTML += `
                     <div style="margin-bottom: 10px; padding: 10px; border-bottom: 1px solid #eee;">
-                        <strong>Q${index + 1}:</strong> ${question.text.substring(0, 50)}${question.text.length > 50 ? '...' : ''}
+                        <strong>Q${index + 1}:</strong> ${question.text.substring(0, 50)}${question.text.length > 50 ? "..." : ""}
                         <div style="font-size: 0.8rem; color: #7f8c8d;">
                             Type: ${question.type} | Marks: ${question.points}
                         </div>
                     </div>
                 `;
-    });
+  });
 
-    if (count > 3) {
-        previewHTML += `<div style="text-align: center; color: #3498db; font-weight: 600;">
+  if (count > 3) {
+    previewHTML += `<div style="text-align: center; color: #3498db; font-weight: 600;">
                     +${count - 3} more questions
                 </div>`;
-    }
+  }
 
-    questionPreviewElement.innerHTML = previewHTML;
+  questionPreviewElement.innerHTML = previewHTML;
 }
 
 // Save questions
 function saveQuestions() {
+  if (state.currentTestQuestions.length === 0) {
+    alert("Please add at least one question before saving.");
+    return;
+  }
 
-    if (state.currentTestQuestions.length === 0) {
-        alert('Please add at least one question before saving.');
-        return;
-    }
+  // save
+  localStorage.setItem(
+    "currentTestQuestions",
+    JSON.stringify(state.currentTestQuestions),
+  );
 
-    // save
-    localStorage.setItem(
-        'currentTestQuestions',
-        JSON.stringify(state.currentTestQuestions)
-    );
+  // update preview
+  updateQuestionPreview();
 
-    // update preview
-    updateQuestionPreview();
+  // close modal directly
+  const modal = document.getElementById("createTestModal");
 
-    // close modal directly
-    const modal = document.getElementById('createTestModal');
+  if (modal) {
+    modal.style.display = "none";
+  }
 
-    if (modal) {
-        modal.style.display = 'none';
-    }
+  // mobile repaint fix
+  document.body.style.overflow = "hidden";
 
-    // mobile repaint fix
-    document.body.style.overflow = 'hidden';
+  setTimeout(() => {
+    document.body.style.overflow = "auto";
+  }, 50);
 
-    setTimeout(() => {
-        document.body.style.overflow = 'auto';
-    }, 50);
-
-    showNotification(
-        `Saved ${state.currentTestQuestions.length} questions successfully!`,
-        'success'
-    );
+  showNotification(
+    `Saved ${state.currentTestQuestions.length} questions successfully!`,
+    "success",
+  );
 }
 // Create a new test
 async function createTest(e) {
+  e.preventDefault();
 
-    e.preventDefault();
+  try {
+    const data = {
+      name: document.getElementById("test-name").value.trim(),
+      subject: document.getElementById("test-subject").value.trim(),
+      duration: Number(document.getElementById("test-duration").value),
+      description: document.getElementById("test-description").value.trim(),
+      questions: state.currentTestQuestions,
+    };
 
-    try {
-
-        const data = {
-            name: document.getElementById("test-name").value.trim(),
-            subject: document.getElementById("test-subject").value.trim(),
-            duration: Number(document.getElementById("test-duration").value),
-            description: document.getElementById("test-description").value.trim(),
-            questions: state.currentTestQuestions
-        };
-
-        // ✅ Validation
-        if (!data.name || !data.subject) {
-            alert("Please enter test name and subject.");
-            return;
-        }
-
-        if (data.questions.length === 0) {
-            alert("Please add at least one question.");
-            return;
-        }
-
-        // ✅ Route
-        let url = "/teacher-tests/api/create-test";
-        let method = "POST";
-
-        // ✅ Edit Mode
-        if (state.editingTestId) {
-            url = `/teacher-tests/update/${state.editingTestId}`;
-            method = "PUT";
-        }
-
-        // ✅ API Call
-        const res = await fetch(url, {
-            method,
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-
-        const result = await res.json();
-
-        console.log("Server Response:", result);
-
-        // ❌ Failed
-        if (!result.success) {
-            alert(result.error || "Failed to save test.");
-            return;
-        }
-
-        // ✅ Success
-        alert(
-            state.editingTestId
-                ? "Test Updated Successfully!"
-                : "Test Created Successfully!"
-        );
-
-        // ✅ Reset
-        state.editingTestId = null;
-
-        resetTestForm();
-
-        state.currentTestQuestions = [];
-
-        // reload
-        try {
-            await loadTestsFromDB();
-        } catch (e) {
-            console.log("load ignored");
-        }
-
-        // ✅ DIRECT CLICK TEST CATEGORY
-        const testCategoryBtn =
-            document.getElementById("nav-test-services");
-
-        if (testCategoryBtn) {
-            testCategoryBtn.click();
-        }
-
-    } catch (err) {
-
-        console.error("CREATE TEST ERROR:", err);
-
-        alert("Server error while creating test.");
+    // ✅ Validation
+    if (!data.name || !data.subject) {
+      alert("Please enter test name and subject.");
+      return;
     }
+
+    if (data.questions.length === 0) {
+      alert("Please add at least one question.");
+      return;
+    }
+
+    // ✅ Route
+    let url = "/teacher-tests/api/create-test";
+    let method = "POST";
+
+    // ✅ Edit Mode
+    if (state.editingTestId) {
+      url = `/teacher-tests/update/${state.editingTestId}`;
+      method = "PUT";
+    }
+
+    // ✅ API Call
+    const res = await fetch(url, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await res.json();
+
+    console.log("Server Response:", result);
+
+    // ❌ Failed
+    if (!result.success) {
+      alert(result.error || "Failed to save test.");
+      return;
+    }
+
+    // ✅ Success
+    alert(
+      state.editingTestId
+        ? "Test Updated Successfully!"
+        : "Test Created Successfully!",
+    );
+
+    // ✅ Reset
+    state.editingTestId = null;
+
+    resetTestForm();
+
+    state.currentTestQuestions = [];
+
+    // reload
+    try {
+      await loadTestsFromDB();
+    } catch (e) {
+      console.log("load ignored");
+    }
+
+    // ✅ DIRECT CLICK TEST CATEGORY
+    const testCategoryBtn = document.getElementById("nav-test-services");
+
+    if (testCategoryBtn) {
+      testCategoryBtn.click();
+    }
+  } catch (err) {
+    console.error("CREATE TEST ERROR:", err);
+
+    alert("Server error while creating test.");
+  }
 }
 
 // Create test card from form data
 function createTestCardFromForm() {
-    const testName = document.getElementById('test-name').value;
-    const testSubject = document.getElementById('test-subject').value;
-    const testDuration = document.getElementById('test-duration').value;
-    const testDifficulty = document.getElementById('test-difficulty').value;
-    const testDescription = document.getElementById('test-description').value;
+  const testName = document.getElementById("test-name").value;
+  const testSubject = document.getElementById("test-subject").value;
+  const testDuration = document.getElementById("test-duration").value;
+  const testDifficulty = document.getElementById("test-difficulty").value;
+  const testDescription = document.getElementById("test-description").value;
 
-    if (!testName || !testSubject) {
-        alert('Please fill in test name and subject.');
-        return;
-    }
+  if (!testName || !testSubject) {
+    alert("Please fill in test name and subject.");
+    return;
+  }
 
-    // Create test object
-    const test = {
-        id: Date.now(),
-        name: testName,
-        subject: testSubject,
-        duration: testDuration,
-        difficulty: testDifficulty,
-        description: testDescription,
-        questions: state.currentTestQuestions,
-        totalQuestions: state.currentTestQuestions.length,
-        totalMarks: state.currentTestQuestions.reduce((sum, q) => sum + q.points, 0)
-    };
+  // Create test object
+  const test = {
+    id: Date.now(),
+    name: testName,
+    subject: testSubject,
+    duration: testDuration,
+    difficulty: testDifficulty,
+    description: testDescription,
+    questions: state.currentTestQuestions,
+    totalQuestions: state.currentTestQuestions.length,
+    totalMarks: state.currentTestQuestions.reduce(
+      (sum, q) => sum + q.points,
+      0,
+    ),
+  };
 
-    createTestCardFromTest(test);
+  createTestCardFromTest(test);
 }
 
 // Create test card from test object
 function createTestCardFromTest(test) {
-    // ❌ This function is no longer needed
-    // because cards are created from database
+  // ❌ This function is no longer needed
+  // because cards are created from database
 
-    console.log("Card creation handled by DB loader");
+  console.log("Card creation handled by DB loader");
 }
 
 // Create quick test card
 function createQuickTestCard() {
-    alert("Quick create is disabled. Please create full test so it saves in database.");
+  alert(
+    "Quick create is disabled. Please create full test so it saves in database.",
+  );
 }
-
 
 function findCourseBySubject(subject) {
-    return coursesData.find(course =>
-        course.title.toLowerCase() === subject.toLowerCase()
-    );
+  return coursesData.find(
+    (course) => course.title.toLowerCase() === subject.toLowerCase(),
+  );
 }
-
 
 // Get random color
 function getRandomColor() {
-    const colors = [
-        "#e34f26", "#1572b6", "#f7df1e", "#339933",
-        "#3776ab", "#777bb4", "#4479a1", "#47a248",
-        "#9b59b6", "#e74c3c", "#1abc9c", "#3498db",
-        "#f39c12", "#d35400", "#c0392b", "#8e44ad"
-    ];
-    return colors[Math.floor(Math.random() * colors.length)];
+  const colors = [
+    "#e34f26",
+    "#1572b6",
+    "#f7df1e",
+    "#339933",
+    "#3776ab",
+    "#777bb4",
+    "#4479a1",
+    "#47a248",
+    "#9b59b6",
+    "#e74c3c",
+    "#1abc9c",
+    "#3498db",
+    "#f39c12",
+    "#d35400",
+    "#c0392b",
+    "#8e44ad",
+  ];
+  return colors[Math.floor(Math.random() * colors.length)];
 }
 
 // Get icon for subject
 function getIconForSubject(subject) {
-    // Check if subject matches any predefined ones
-    const subjectLower = subject.toLowerCase();
-    if (subjectLower.includes('html')) return 'fab fa-html5';
-    if (subjectLower.includes('css')) return 'fab fa-css3-alt';
-    if (subjectLower.includes('javascript') || subjectLower.includes('js')) return 'fab fa-js';
-    if (subjectLower.includes('python')) return 'fab fa-python';
-    if (subjectLower.includes('php')) return 'fab fa-php';
-    if (subjectLower.includes('mysql')) return 'fas fa-database';
-    if (subjectLower.includes('node')) return 'fab fa-node-js';
-    if (subjectLower.includes('mongo')) return 'fas fa-server';
-    if (subjectLower.includes('math')) return 'fas fa-calculator';
-    if (subjectLower.includes('science')) return 'fas fa-flask';
-    if (subjectLower.includes('history')) return 'fas fa-landmark';
-    if (subjectLower.includes('english')) return 'fas fa-book';
-    if (subjectLower.includes('computer')) return 'fas fa-laptop-code';
+  // Check if subject matches any predefined ones
+  const subjectLower = subject.toLowerCase();
+  if (subjectLower.includes("html")) return "fab fa-html5";
+  if (subjectLower.includes("css")) return "fab fa-css3-alt";
+  if (subjectLower.includes("javascript") || subjectLower.includes("js"))
+    return "fab fa-js";
+  if (subjectLower.includes("python")) return "fab fa-python";
+  if (subjectLower.includes("php")) return "fab fa-php";
+  if (subjectLower.includes("mysql")) return "fas fa-database";
+  if (subjectLower.includes("node")) return "fab fa-node-js";
+  if (subjectLower.includes("mongo")) return "fas fa-server";
+  if (subjectLower.includes("math")) return "fas fa-calculator";
+  if (subjectLower.includes("science")) return "fas fa-flask";
+  if (subjectLower.includes("history")) return "fas fa-landmark";
+  if (subjectLower.includes("english")) return "fas fa-book";
+  if (subjectLower.includes("computer")) return "fas fa-laptop-code";
 
-    // Default icon
-    return 'fas fa-file-alt';
+  // Default icon
+  return "fas fa-file-alt";
 }
 
 // Get level class for difficulty
 function getLevelClass(difficulty) {
-    const levelMap = {
-        'Beginner': 'level-beginner',
-        'Intermediate': 'level-intermediate',
-        'Advanced': 'level-advanced'
-    };
+  const levelMap = {
+    Beginner: "level-beginner",
+    Intermediate: "level-intermediate",
+    Advanced: "level-advanced",
+  };
 
-    return levelMap[difficulty] || 'level-intermediate';
+  return levelMap[difficulty] || "level-intermediate";
 }
 
 // Update course count
 function updateCourseCount() {
-    const count = coursesData.length;
-    totalCoursesCountElement.textContent = count;
-    footerCoursesCountElement.textContent = count;
+  const count = coursesData.length;
+  totalCoursesCountElement.textContent = count;
+  footerCoursesCountElement.textContent = count;
 }
 
 // Reset the test form
 function resetTestForm() {
+  if (!state.paymentCompleted) {
+    return;
+  }
 
-    if (!state.paymentCompleted) {
-        return;
-    }
+  testForm.reset();
 
-    testForm.reset();
+  // duration reset
+  const durationInput = document.getElementById("test-duration");
 
-    // duration reset
-    const durationInput =
-        document.getElementById('test-duration');
+  if (durationInput) {
+    durationInput.value = 60;
+  }
 
-    if (durationInput) {
-        durationInput.value = 60;
-    }
+  // difficulty reset safely
+  const difficultyInput = document.getElementById("test-difficulty");
 
-    // difficulty reset safely
-    const difficultyInput =
-        document.getElementById('test-difficulty');
+  if (difficultyInput) {
+    difficultyInput.value = "Intermediate";
+  }
 
-    if (difficultyInput) {
-        difficultyInput.value = 'Intermediate';
-    }
+  // reset questions
+  state.currentTestQuestions = [];
 
-    // reset questions
-    state.currentTestQuestions = [];
+  // reset preview
+  renderQuestionList();
 
-    // reset preview
-    renderQuestionList();
-
-    updateQuestionPreview();
+  updateQuestionPreview();
 }
 
 // Update dashboard
 function updateDashboard() {
-    // Update statistics
-    const totalTests = Array.isArray(state.tests) && state.tests.length > 0
-        ? state.tests.length
-        : Object.values(testServicesData).reduce((sum, arr) => sum + (Array.isArray(arr) ? arr.length : 0), 0);
+  // Update statistics
+  const totalTests =
+    Array.isArray(state.tests) && state.tests.length > 0
+      ? state.tests.length
+      : Object.values(testServicesData).reduce(
+          (sum, arr) => sum + (Array.isArray(arr) ? arr.length : 0),
+          0,
+        );
 
-    totalTestsElement.textContent = totalTests;
+  totalTestsElement.textContent = totalTests;
 
-    const totalQuestions = Array.isArray(state.tests)
-        ? state.tests.reduce((total, test) => total + (test.questions ? test.questions.length : 0), 0)
-        : 0;
+  const totalQuestions = Array.isArray(state.tests)
+    ? state.tests.reduce(
+        (total, test) => total + (test.questions ? test.questions.length : 0),
+        0,
+      )
+    : 0;
 
-    totalQuestionsElement.textContent = totalQuestions;
+  totalQuestionsElement.textContent = totalQuestions;
 
-    const activeTemplates = state.templates.filter(t => t && t.active).length || Object.keys(testServicesData).length;
-    activeTemplatesElement.textContent = activeTemplates;
+  const activeTemplates =
+    state.templates.filter((t) => t && t.active).length ||
+    Object.keys(testServicesData).length;
+  activeTemplatesElement.textContent = activeTemplates;
 
-    // Update dashboard animations if dashboard is visible
-    if (state.currentSection === 'dashboard-section') {
-        animateDashboard();
-    }
+  // Update dashboard animations if dashboard is visible
+  if (state.currentSection === "dashboard-section") {
+    animateDashboard();
+  }
 }
-
 
 // Render all courses
 function renderCourses() {
-    coursesContainer.innerHTML = '';
+  coursesContainer.innerHTML = "";
 
-    coursesData.forEach(course => {
+  coursesData.forEach((course) => {
+    // Get real sub card  count from services
+    let testCount = 0;
+    if (testServicesData[course.title]) {
+      testCount = testServicesData[course.title].length;
+    }
 
-        // Get real sub card  count from services
-        let testCount = 0;
-        if (testServicesData[course.title]) {
-            testCount = testServicesData[course.title].length;
-        }
+    const courseCard = document.createElement("div");
+    courseCard.className = "course-card";
 
-        const courseCard = document.createElement('div');
-        courseCard.className = 'course-card';
-
-        courseCard.innerHTML = `
+    courseCard.innerHTML = `
             <div class="course-card-header" style="background: linear-gradient(135deg, ${course.color}, #2c3e50); position: relative;">
     <div class="card-icon">
         <i class="${course.icon}"></i>
@@ -2214,20 +2354,20 @@ function renderCourses() {
 
         `;
 
-        coursesContainer.appendChild(courseCard);
-    });
+    coursesContainer.appendChild(courseCard);
+  });
 
-    updateCourseCount();
+  updateCourseCount();
 }
 
 // Render test services for a specific course
 function renderTestServices(courseName) {
-    testServicesContainer.innerHTML = '';
+  testServicesContainer.innerHTML = "";
 
-    const services = testServicesData[courseName];
+  const services = testServicesData[courseName];
 
-    if (!services || services.length === 0) {
-        testServicesContainer.innerHTML = `
+  if (!services || services.length === 0) {
+    testServicesContainer.innerHTML = `
             <div class="empty-state">
                 <i class="fas fa-exclamation-circle"></i>
                 <h3>No Test Services Available</h3>
@@ -2235,14 +2375,14 @@ function renderTestServices(courseName) {
                 <p>Check back soon for updates!</p>
             </div>
         `;
-        return;
-    }
+    return;
+  }
 
-    services.forEach(service => {
-        const serviceCard = document.createElement('div');
-        serviceCard.className = 'test-service-card';
+  services.forEach((service) => {
+    const serviceCard = document.createElement("div");
+    serviceCard.className = "test-service-card";
 
-        serviceCard.innerHTML = `
+    serviceCard.innerHTML = `
        <div class="test-service-header" style="background: linear-gradient(135deg, ${service.color}, #2980b9);">
            <i class="fas fa-trash delete-test-icon"
            data-id="${service._id || service.id}"
@@ -2303,8 +2443,9 @@ data-id="${service._id || service.id}"
 style="background: linear-gradient(90deg, #9b59b6, #8e44ad);">
 <i class="fas fa-chart-bar"></i> Result
 </button>
-${String(service.status || "").toLowerCase() === "published"
-                ? `
+${
+  String(service.status || "").toLowerCase() === "published"
+    ? `
 <button 
     class="action-btn-modern publish-btn-modern"
     style="
@@ -2318,7 +2459,7 @@ ${String(service.status || "").toLowerCase() === "published"
 
 </button>
 `
-                : `
+    : `
 <button 
     class="action-btn-modern publish-btn-modern"
     onclick="makeTestLive('${service._id || service.id}')">
@@ -2328,474 +2469,463 @@ ${String(service.status || "").toLowerCase() === "published"
 
 </button>
 `
-            }
+}
  
             </div>
         `;
 
-        testServicesContainer.appendChild(serviceCard);
-    });
+    testServicesContainer.appendChild(serviceCard);
+  });
 
-    // Update footer text
-    serviceFooterText.textContent = `${services.length} Test Services for ${courseName}`;
+  // Update footer text
+  serviceFooterText.textContent = `${services.length} Test Services for ${courseName}`;
 }
 
 // Show test services page for a specific course
 function showTestServicesPage(courseName) {
-    // Find course data
-    const course = coursesData.find(c => c.title === courseName);
+  // Find course data
+  const course = coursesData.find((c) => c.title === courseName);
 
-    if (!course) return;
-    state.currentCourseName = courseName;
-    // Update page content
-    // serviceTitle.textContent = `${courseName} Test Services`;
-    // serviceDescription.textContent = `Explore all ${testServicesData[courseName]?.length || 0} test services available for ${courseName}. From beginner to advanced level tests.`;
-    // serviceIcon.innerHTML = `<i class="${course.icon}"></i>`;
-    // serviceHeader.style.background = `linear-gradient(135deg, ${course.color}, #8e44ad)`;
-    servicePageTitle.textContent = `${courseName} Test Services`;
+  if (!course) return;
+  state.currentCourseName = courseName;
+  // Update page content
+  // serviceTitle.textContent = `${courseName} Test Services`;
+  // serviceDescription.textContent = `Explore all ${testServicesData[courseName]?.length || 0} test services available for ${courseName}. From beginner to advanced level tests.`;
+  // serviceIcon.innerHTML = `<i class="${course.icon}"></i>`;
+  // serviceHeader.style.background = `linear-gradient(135deg, ${course.color}, #8e44ad)`;
+  servicePageTitle.textContent = `${courseName} Test Services`;
 
-    // Render test services
-    renderTestServices(courseName);
+  // Render test services
+  renderTestServices(courseName);
 
-    // Show test services page, hide main dashboard
-    testServicesMainDashboard.style.display = 'none';
-    testServicesPage.style.display = 'block';
+  // Show test services page, hide main dashboard
+  testServicesMainDashboard.style.display = "none";
+  testServicesPage.style.display = "block";
 
-    // Scroll to top on mobile
-    if (window.innerWidth <= 768) {
-        document.querySelector('.page-content-wrapper').scrollTop = 0;
-    }
+  // Scroll to top on mobile
+  if (window.innerWidth <= 768) {
+    document.querySelector(".page-content-wrapper").scrollTop = 0;
+  }
 }
-
 
 // Universal translator (question + all options)
 async function translateAuto() {
-    const questionText = questionTextElement.value.trim();
-    const optionInputs = optionsList.querySelectorAll('input[type="text"]');
+  const questionText = questionTextElement.value.trim();
+  const optionInputs = optionsList.querySelectorAll('input[type="text"]');
 
-    if (!questionText && optionInputs.length === 0) {
-        alert("Nothing to translate.");
-        return;
+  if (!questionText && optionInputs.length === 0) {
+    alert("Nothing to translate.");
+    return;
+  }
+
+  // Detect Hindi or English
+  function detectLanguage(text) {
+    const hindiRegex = /[\u0900-\u097F]/; // Hindi unicode range
+    return hindiRegex.test(text) ? "hi" : "en";
+  }
+
+  async function translateText(text, from, to) {
+    const res = await fetch(
+      `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${from}|${to}`,
+    );
+    const data = await res.json();
+
+    if (data && data.responseData && data.responseData.translatedText) {
+      return data.responseData.translatedText;
     }
+    return text;
+  }
 
-    // Detect Hindi or English
-    function detectLanguage(text) {
-        const hindiRegex = /[\u0900-\u097F]/; // Hindi unicode range
-        return hindiRegex.test(text) ? "hi" : "en";
-    }
+  try {
+    if (questionText) {
+      const fromLang = detectLanguage(questionText);
+      const toLang = fromLang === "en" ? "hi" : "en";
 
-    async function translateText(text, from, to) {
-        const res = await fetch(
-            `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${from}|${to}`
-        );
-        const data = await res.json();
+      const lines = questionText.split("\n");
+      const translatedLines = [];
 
-        if (data && data.responseData && data.responseData.translatedText) {
-            return data.responseData.translatedText;
+      for (let line of lines) {
+        if (line.trim() === "") {
+          translatedLines.push("");
+          continue;
         }
-        return text;
+        const translated = await translateText(line, fromLang, toLang);
+        translatedLines.push(translated);
+      }
+
+      questionTextElement.value = translatedLines.join("\n");
+
+      // Translate options also
+      for (let input of optionInputs) {
+        const text = input.value.trim();
+        if (!text) continue;
+
+        const translated = await translateText(text, fromLang, toLang);
+        input.value = translated;
+      }
     }
-
-    try {
-        if (questionText) {
-            const fromLang = detectLanguage(questionText);
-            const toLang = fromLang === "en" ? "hi" : "en";
-
-            const lines = questionText.split("\n");
-            const translatedLines = [];
-
-            for (let line of lines) {
-                if (line.trim() === "") {
-                    translatedLines.push("");
-                    continue;
-                }
-                const translated = await translateText(line, fromLang, toLang);
-                translatedLines.push(translated);
-            }
-
-            questionTextElement.value = translatedLines.join("\n");
-
-            // Translate options also
-            for (let input of optionInputs) {
-                const text = input.value.trim();
-                if (!text) continue;
-
-                const translated = await translateText(text, fromLang, toLang);
-                input.value = translated;
-            }
-        }
-
-    } catch (error) {
-        console.error(error);
-        alert("Translation error. Check internet connection.");
-    }
+  } catch (error) {
+    console.error(error);
+    alert("Translation error. Check internet connection.");
+  }
 }
 async function loadTestsFromDB() {
-    try {
-        const res = await fetch("/teacher-tests/api/my-tests");
-        const tests = await res.json();
+  try {
+    const res = await fetch("/teacher-tests/api/my-tests");
+    const tests = await res.json();
 
-        // Keep a local copy for dashboard counts and animations
-        state.tests = Array.isArray(tests) ? tests : [];
+    // Keep a local copy for dashboard counts and animations
+    state.tests = Array.isArray(tests) ? tests : [];
 
-        // RESET
-        coursesData.length = 0;
-        Object.keys(testServicesData).forEach(k => delete testServicesData[k]);
+    // RESET
+    coursesData.length = 0;
+    Object.keys(testServicesData).forEach((k) => delete testServicesData[k]);
 
-        const subjectsMap = {};
+    const subjectsMap = {};
 
-        state.tests.forEach(test => {
+    state.tests.forEach((test) => {
+      const subjectKey = test.subject || "Uncategorized";
 
-            const subjectKey = test.subject || "Uncategorized";
+      // 👉 अगर subject नहीं है तो new main card बनाओ
+      if (!subjectsMap[subjectKey]) {
+        subjectsMap[subjectKey] = {
+          id: Date.now() + Math.random(),
+          title: subjectKey,
+          icon: getIconForSubject(subjectKey),
+          color: getRandomColor(),
+          viewers: 1,
+          level: test.difficulty,
+          levelClass: getLevelClass(test.difficulty),
+          description: test.description || `Test for ${subjectKey}`,
+        };
 
-            // 👉 अगर subject नहीं है तो new main card बनाओ
-            if (!subjectsMap[subjectKey]) {
-                subjectsMap[subjectKey] = {
-                    id: Date.now() + Math.random(),
-                    title: subjectKey,
-                    icon: getIconForSubject(subjectKey),
-                    color: getRandomColor(),
-                    viewers: 1,
-                    level: test.difficulty,
-                    levelClass: getLevelClass(test.difficulty),
-                    description: test.description || `Test for ${subjectKey}`
-                };
+        coursesData.push(subjectsMap[subjectKey]);
+        testServicesData[subjectKey] = [];
+      }
 
-                coursesData.push(subjectsMap[subjectKey]);
-                testServicesData[subjectKey] = [];
-            }
+      // 👉 sub card add
+      testServicesData[subjectKey].push({
+        id: test._id,
+        name: test.name,
+        icon: getIconForSubject(subjectKey),
+        level: test.difficulty,
+        levelClass: getLevelClass(test.difficulty),
+        description: test.description || "",
+        duration: `${test.duration || 0} min`,
+        questions: Array.isArray(test.questions) ? test.questions.length : 0,
+        students: test.students || 0,
+        color: subjectsMap[subjectKey].color,
+        status: test.status || "draft",
+        visibility: test.visibility || "private",
+      });
+    });
 
-            // 👉 sub card add
-            testServicesData[subjectKey].push({
-                id: test._id,
-                name: test.name,
-                icon: getIconForSubject(subjectKey),
-                level: test.difficulty,
-                levelClass: getLevelClass(test.difficulty),
-                description: test.description || "",
-                duration: `${test.duration || 0} min`,
-                questions: Array.isArray(test.questions) ? test.questions.length : 0,
-                students: test.students || 0,
-                color: subjectsMap[subjectKey].color,
-                status: test.status || "draft",
-                visibility: test.visibility || "private"
-            });
-        });
+    // 🔥 IMPORTANT: अगर कोई subject empty है → remove
+    Object.keys(testServicesData).forEach((subject) => {
+      if (testServicesData[subject].length === 0) {
+        delete testServicesData[subject];
 
-        // 🔥 IMPORTANT: अगर कोई subject empty है → remove
-        Object.keys(testServicesData).forEach(subject => {
-            if (testServicesData[subject].length === 0) {
-                delete testServicesData[subject];
-
-                const index = coursesData.findIndex(c => c.title === subject);
-                if (index !== -1) {
-                    coursesData.splice(index, 1);
-                }
-            }
-        });
-
-        renderCourses();
-        updateCourseCount();
-        updateDashboard();
-
-        if (state.currentCourseName && testServicesData[state.currentCourseName]) {
-            renderTestServices(state.currentCourseName);
+        const index = coursesData.findIndex((c) => c.title === subject);
+        if (index !== -1) {
+          coursesData.splice(index, 1);
         }
+      }
+    });
 
-        // If dashboard is already visible, refresh it with the latest data
-        if (state.currentSection === "dashboard-section") {
-            loadDashboardStats();
-        }
+    renderCourses();
+    updateCourseCount();
+    updateDashboard();
 
-    } catch (err) {
-        console.error("Error loading tests:", err);
+    if (state.currentCourseName && testServicesData[state.currentCourseName]) {
+      renderTestServices(state.currentCourseName);
     }
+
+    // If dashboard is already visible, refresh it with the latest data
+    if (state.currentSection === "dashboard-section") {
+      loadDashboardStats();
+    }
+  } catch (err) {
+    console.error("Error loading tests:", err);
+  }
 }
 
-
-
 function openRequestModal() {
-    const modal = document.getElementById("requestModal");
-    modal.style.display = "flex"; // 🔥 IMPORTANT
+  const modal = document.getElementById("requestModal");
+  modal.style.display = "flex"; // 🔥 IMPORTANT
 }
 
 function closeRequestModal() {
-    document.getElementById("requestModal").style.display = "none";
+  document.getElementById("requestModal").style.display = "none";
 }
 
 // outside click close
 window.addEventListener("click", function (e) {
-    const modal = document.getElementById("requestModal");
-    if (e.target === modal) {
-        modal.style.display = "none";
-    }
+  const modal = document.getElementById("requestModal");
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
 });
-
-
 
 // Reserch papper
 function showResearchSection() {
-    hideAllSections();
-    researchSection.classList.remove('hidden');
-    updateActiveNav('nav-research');
-    state.currentSection = 'research-section';
+  hideAllSections();
+  researchSection.classList.remove("hidden");
+  updateActiveNav("nav-research");
+  state.currentSection = "research-section";
 }
 // notes upload and sheres
 function showNotesSection() {
-    hideAllSections();
-    notesSection.classList.remove('hidden');
-    updateActiveNav('nav-notes');
-    state.currentSection = 'notes-section';
+  hideAllSections();
+  notesSection.classList.remove("hidden");
+  updateActiveNav("nav-notes");
+  state.currentSection = "notes-section";
 }
-// previous year papers 
+// previous year papers
 function showPreviousSection() {
-    hideAllSections();
-    previousSection.classList.remove('hidden');
-    updateActiveNav('nav-previous');
-    state.currentSection = 'previous-section';
+  hideAllSections();
+  previousSection.classList.remove("hidden");
+  updateActiveNav("nav-previous");
+  state.currentSection = "previous-section";
 }
 function showSyllabusSection() {
-    hideAllSections();
-    syllabusSection.classList.remove('hidden');
-    updateActiveNav('nav-syllabus');
-    state.currentSection = 'syllabus-section';
+  hideAllSections();
+  syllabusSection.classList.remove("hidden");
+  updateActiveNav("nav-syllabus");
+  state.currentSection = "syllabus-section";
 }
 
 // show calculater function
 function showCalculatorSection() {
-    hideAllSections();
-    calculatorSection.classList.remove('hidden');
-    updateActiveNav('nav-calculator');
-    state.currentSection = 'calculator-section';
+  hideAllSections();
+  calculatorSection.classList.remove("hidden");
+  updateActiveNav("nav-calculator");
+  state.currentSection = "calculator-section";
 }
 // calculater codes
 function calc(val) {
-    document.getElementById('calc-display').value += val;
+  document.getElementById("calc-display").value += val;
 }
 
 function calculate() {
-    const display = document.getElementById('calc-display');
-    try {
-        display.value = eval(display.value);
-    } catch {
-        display.value = "Error";
-    }
+  const display = document.getElementById("calc-display");
+  try {
+    display.value = eval(display.value);
+  } catch {
+    display.value = "Error";
+  }
 }
 
 function clearCalc() {
-    document.getElementById('calc-display').value = "";
+  document.getElementById("calc-display").value = "";
 }
-// calendar parts 
+// calendar parts
 function showCalendarSection() {
-    hideAllSections();
-    calendarSection.classList.remove('hidden');
-    updateActiveNav('nav-calendar');
-    state.currentSection = 'calendar-section';
-    renderCalendar();
+  hideAllSections();
+  calendarSection.classList.remove("hidden");
+  updateActiveNav("nav-calendar");
+  state.currentSection = "calendar-section";
+  renderCalendar();
 }
 let currentDate = new Date();
 let events = JSON.parse(localStorage.getItem("calendarEvents") || "{}");
 
 function renderCalendar() {
-    const grid = document.getElementById("calendar-grid");
-    const monthLabel = document.getElementById("calendar-month");
+  const grid = document.getElementById("calendar-grid");
+  const monthLabel = document.getElementById("calendar-month");
 
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
 
-    const firstDay = new Date(year, month, 1).getDay();
-    const totalDays = new Date(year, month + 1, 0).getDate();
+  const firstDay = new Date(year, month, 1).getDay();
+  const totalDays = new Date(year, month + 1, 0).getDate();
 
-    monthLabel.textContent =
-        currentDate.toLocaleString("default", { month: "long" }) +
-        " " + year;
+  monthLabel.textContent =
+    currentDate.toLocaleString("default", { month: "long" }) + " " + year;
 
-    grid.innerHTML = "";
+  grid.innerHTML = "";
 
-    // Empty cells
-    for (let i = 0; i < firstDay; i++) {
-        grid.innerHTML += `<div></div>`;
-    }
+  // Empty cells
+  for (let i = 0; i < firstDay; i++) {
+    grid.innerHTML += `<div></div>`;
+  }
 
-    // Days
-    for (let day = 1; day <= totalDays; day++) {
-        const key = `${year}-${month}-${day}`;
-        const hasEvent = events[key];
+  // Days
+  for (let day = 1; day <= totalDays; day++) {
+    const key = `${year}-${month}-${day}`;
+    const hasEvent = events[key];
 
-        const cell = document.createElement("div");
-        cell.style.padding = "10px";
-        cell.style.background = hasEvent ? "#27ae60" : "#ecf0f1";
-        cell.style.color = hasEvent ? "white" : "#333";
-        cell.style.borderRadius = "8px";
-        cell.style.textAlign = "center";
-        cell.style.cursor = "pointer";
-        cell.textContent = day;
+    const cell = document.createElement("div");
+    cell.style.padding = "10px";
+    cell.style.background = hasEvent ? "#27ae60" : "#ecf0f1";
+    cell.style.color = hasEvent ? "white" : "#333";
+    cell.style.borderRadius = "8px";
+    cell.style.textAlign = "center";
+    cell.style.cursor = "pointer";
+    cell.textContent = day;
 
-        cell.onclick = () => addEvent(year, month, day);
+    cell.onclick = () => addEvent(year, month, day);
 
-        grid.appendChild(cell);
-    }
+    grid.appendChild(cell);
+  }
 
-    renderEventList();
+  renderEventList();
 }
 
 function addEvent(year, month, day) {
-    const key = `${year}-${month}-${day}`;
-    const text = prompt("Enter event for this date:");
+  const key = `${year}-${month}-${day}`;
+  const text = prompt("Enter event for this date:");
 
-    if (!text) return;
+  if (!text) return;
 
-    events[key] = text;
-    localStorage.setItem("calendarEvents", JSON.stringify(events));
-    renderCalendar();
+  events[key] = text;
+  localStorage.setItem("calendarEvents", JSON.stringify(events));
+  renderCalendar();
 }
 
 function renderEventList() {
-    const list = document.getElementById("event-list");
-    list.innerHTML = "";
+  const list = document.getElementById("event-list");
+  list.innerHTML = "";
 
-    const keys = Object.keys(events);
+  const keys = Object.keys(events);
 
-    if (keys.length === 0) {
-        list.innerHTML = `<p style="color:#7f8c8d;">No events added.</p>`;
-        return;
-    }
+  if (keys.length === 0) {
+    list.innerHTML = `<p style="color:#7f8c8d;">No events added.</p>`;
+    return;
+  }
 
-    keys.forEach(key => {
-        const div = document.createElement("div");
-        div.style.padding = "10px";
-        div.style.borderBottom = "1px solid #eee";
-        div.textContent = `${key}: ${events[key]}`;
-        list.appendChild(div);
-    });
+  keys.forEach((key) => {
+    const div = document.createElement("div");
+    div.style.padding = "10px";
+    div.style.borderBottom = "1px solid #eee";
+    div.textContent = `${key}: ${events[key]}`;
+    list.appendChild(div);
+  });
 }
 
 // Month controls
 document.addEventListener("click", function (e) {
-    if (e.target.id === "prev-month") {
-        currentDate.setMonth(currentDate.getMonth() - 1);
-        renderCalendar();
-    }
-    if (e.target.id === "next-month") {
-        currentDate.setMonth(currentDate.getMonth() + 1);
-        renderCalendar();
-    }
+  if (e.target.id === "prev-month") {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar();
+  }
+  if (e.target.id === "next-month") {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar();
+  }
 });
 
-// gmail alerts system 
+// gmail alerts system
 function showAlertsSection() {
-    hideAllSections();
-    alertsSection.classList.remove('hidden');
-    updateActiveNav('nav-alerts');
-    state.currentSection = 'alerts-section';
+  hideAllSections();
+  alertsSection.classList.remove("hidden");
+  updateActiveNav("nav-alerts");
+  state.currentSection = "alerts-section";
 }
 
 let editingTestId = null;
 
 function openTestForEdit(test) {
+  state.editingTestId = test._id;
 
-    state.editingTestId = test._id;
+  // ✅ FORM SECTION OPEN (backup)
+  showCreateTestSection();
 
-    // ✅ FORM SECTION OPEN (backup)
-    showCreateTestSection();
+  // ✅ FILL FORM
+  document.getElementById("test-name").value = test.name || "";
+  document.getElementById("test-subject").value = test.subject || "";
+  document.getElementById("test-duration").value = test.duration || 60;
+  document.getElementById("test-description").value = test.description || "";
 
-    // ✅ FILL FORM
-    document.getElementById("test-name").value = test.name || "";
-    document.getElementById("test-subject").value = test.subject || "";
-    document.getElementById("test-duration").value = test.duration || 60;
-    document.getElementById("test-description").value = test.description || "";
+  // ✅ QUESTIONS LOAD
+  state.currentTestQuestions = test.questions || [];
 
-    // ✅ QUESTIONS LOAD
-    state.currentTestQuestions = test.questions || [];
+  initializeQuestionManagement(true);
+  updateQuestionPreview();
 
-    initializeQuestionManagement(true);
-    updateQuestionPreview();
+  // ❌ REMOVE THIS IF EXISTS
+  // openQuestionModal();
 
-    // ❌ REMOVE THIS IF EXISTS
-    // openQuestionModal();
-
-    // ✅ BUTTON CHANGE
-    document.querySelector("#test-creation-form button[type='submit']")
-        .innerText = "Update Test";
+  // ✅ BUTTON CHANGE
+  document.querySelector(
+    "#test-creation-form button[type='submit']",
+  ).innerText = "Update Test";
 }
 // ===== QR SHARE SYSTEM =====
 let currentShareUrl = "";
 
 // Send button click
 document.addEventListener("click", function (e) {
-    const sendBtn = e.target.closest(".enroll-btn");
+  const sendBtn = e.target.closest(".enroll-btn");
 
-    if (sendBtn && sendBtn.innerText.includes("Send")) {
-        const card = sendBtn.closest(".test-service-card");
-        const viewBtn = card.querySelector(".view-btn");
+  if (sendBtn && sendBtn.innerText.includes("Send")) {
+    const card = sendBtn.closest(".test-service-card");
+    const viewBtn = card.querySelector(".view-btn");
 
-        if (!viewBtn) return;
+    if (!viewBtn) return;
 
-        const testId = viewBtn.dataset.id;
-        openQrPopup(testId);
-    }
+    const testId = viewBtn.dataset.id;
+    openQrPopup(testId);
+  }
 });
 
 function updateQuestionPreview() {
-    const preview = document.getElementById("question-preview");
-    preview.innerHTML = "";
+  const preview = document.getElementById("question-preview");
+  preview.innerHTML = "";
 
-    if (!state.currentTestQuestions.length) {
-        preview.innerHTML = "<p>No questions added</p>";
-        return;
-    }
+  if (!state.currentTestQuestions.length) {
+    preview.innerHTML = "<p>No questions added</p>";
+    return;
+  }
 
-    state.currentTestQuestions.forEach((q, i) => {
-        const div = document.createElement("div");
-        div.innerHTML = `<b>Q${i + 1}:</b> ${q.text}`;
-        preview.appendChild(div);
-    });
+  state.currentTestQuestions.forEach((q, i) => {
+    const div = document.createElement("div");
+    div.innerHTML = `<b>Q${i + 1}:</b> ${q.text}`;
+    preview.appendChild(div);
+  });
 }
 
 function openQrPopup(testId) {
-    const modal = document.getElementById("qrModal");
-    const canvas = document.getElementById("qrCanvas");
-    const linkInput = document.getElementById("testLink");
+  const modal = document.getElementById("qrModal");
+  const canvas = document.getElementById("qrCanvas");
+  const linkInput = document.getElementById("testLink");
 
-    const url = `${window.location.origin}/teacher-tests/open/${testId}`;
+  const url = `${window.location.origin}/teacher-tests/open/${testId}`;
 
-    currentShareUrl = url;
+  currentShareUrl = url;
 
-    linkInput.value = url;
+  linkInput.value = url;
 
-    QRCode.toCanvas(canvas, url, { width: 200 }, function (error) {
-        if (error) console.error(error);
-    });
+  QRCode.toCanvas(canvas, url, { width: 200 }, function (error) {
+    if (error) console.error(error);
+  });
 
-    modal.style.display = "flex";
+  modal.style.display = "flex";
 }
 
 // Close
 document.getElementById("closeQrBtn").onclick = () => {
-    document.getElementById("qrModal").style.display = "none";
+  document.getElementById("qrModal").style.display = "none";
 };
 
 // Copy
 document.getElementById("copyBtn").onclick = () => {
-    navigator.clipboard.writeText(currentShareUrl);
-    alert("Link copied!");
+  navigator.clipboard.writeText(currentShareUrl);
+  alert("Link copied!");
 };
 
 // Download QR
 document.getElementById("downloadBtn").onclick = () => {
-    const canvas = document.getElementById("qrCanvas");
-    const link = document.createElement("a");
-    link.download = "test-qr.png";
-    link.href = canvas.toDataURL();
-    link.click();
+  const canvas = document.getElementById("qrCanvas");
+  const link = document.createElement("a");
+  link.download = "test-qr.png";
+  link.href = canvas.toDataURL();
+  link.click();
 };
 
 // WhatsApp send
 document.getElementById("whatsappBtn").onclick = () => {
-    const text = encodeURIComponent(
-        "Take this test:\n" + currentShareUrl
-    );
-    window.open(`https://wa.me/?text=${text}`, "_blank");
+  const text = encodeURIComponent("Take this test:\n" + currentShareUrl);
+  window.open(`https://wa.me/?text=${text}`, "_blank");
 };
 // AI Ask toggle
 const aiBtn = document.getElementById("aiAskBtn");
@@ -2803,15 +2933,15 @@ const aiBox = document.getElementById("aiAskBox");
 const closeAi = document.getElementById("closeAiAsk");
 
 if (aiBtn) {
-    aiBtn.onclick = () => {
-        aiBox.style.display = "flex";
-    };
+  aiBtn.onclick = () => {
+    aiBox.style.display = "flex";
+  };
 }
 
 if (closeAi) {
-    closeAi.onclick = () => {
-        aiBox.style.display = "none";
-    };
+  closeAi.onclick = () => {
+    aiBox.style.display = "none";
+  };
 }
 
 // Real AI message
@@ -2820,67 +2950,65 @@ const aiInput = document.getElementById("aiInput");
 const aiMessages = document.getElementById("aiMessages");
 
 if (aiSend) {
-    aiSend.onclick = async () => {
-        const text = aiInput.value.trim();
-        if (!text) return;
+  aiSend.onclick = async () => {
+    const text = aiInput.value.trim();
+    if (!text) return;
 
-        // user message
-        const userMsg = document.createElement("div");
-        userMsg.className = "ai-msg";
-        userMsg.textContent = "You: " + text;
-        aiMessages.appendChild(userMsg);
+    // user message
+    const userMsg = document.createElement("div");
+    userMsg.className = "ai-msg";
+    userMsg.textContent = "You: " + text;
+    aiMessages.appendChild(userMsg);
 
-        aiInput.value = "";
+    aiInput.value = "";
 
-        // call backend
-        try {
-            const res = await fetch("/ai/ask", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ question: text })
-            });
+    // call backend
+    try {
+      const res = await fetch("/ai/ask", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ question: text }),
+      });
 
-            const data = await res.json();
+      const data = await res.json();
 
-            const botMsg = document.createElement("div");
-            botMsg.className = "ai-msg";
-            botMsg.textContent = "AI: " + data.answer;
-            aiMessages.appendChild(botMsg);
+      const botMsg = document.createElement("div");
+      botMsg.className = "ai-msg";
+      botMsg.textContent = "AI: " + data.answer;
+      aiMessages.appendChild(botMsg);
+    } catch (err) {
+      const botMsg = document.createElement("div");
+      botMsg.className = "ai-msg";
+      botMsg.textContent = "AI: Server error.";
+      aiMessages.appendChild(botMsg);
+    }
 
-        } catch (err) {
-            const botMsg = document.createElement("div");
-            botMsg.className = "ai-msg";
-            botMsg.textContent = "AI: Server error.";
-            aiMessages.appendChild(botMsg);
-        }
-
-        aiMessages.scrollTop = aiMessages.scrollHeight;
-    };
+    aiMessages.scrollTop = aiMessages.scrollHeight;
+  };
 }
 async function loadAnalyticsCards() {
-    try {
-        const res = await fetch("/api/teacher/analytics/tests-summary", {
-            credentials: "include"
-        });
-        const data = await res.json();
+  try {
+    const res = await fetch("/api/teacher/analytics/tests-summary", {
+      credentials: "include",
+    });
+    const data = await res.json();
 
-        const container = document.getElementById("analytics-cards-container");
-        if (!container) return;
+    const container = document.getElementById("analytics-cards-container");
+    if (!container) return;
 
-        if (!data.length) {
-            container.innerHTML =
-                "<tr><td colspan='7'>No analytics yet</td></tr>";
-            return;
-        }
+    if (!data.length) {
+      container.innerHTML = "<tr><td colspan='7'>No analytics yet</td></tr>";
+      return;
+    }
 
-        container.innerHTML = "";
+    container.innerHTML = "";
 
-        data.forEach((test, index) => {
-            const row = document.createElement("tr");
+    data.forEach((test, index) => {
+      const row = document.createElement("tr");
 
-            row.innerHTML = `
+      row.innerHTML = `
                 <td>${index + 1}</td>
                 <td>${test.testName}</td>
                 <td>${test.subject || "-"}</td>
@@ -2894,143 +3022,162 @@ async function loadAnalyticsCards() {
                 </td>
             `;
 
-            container.appendChild(row);
-        });
+      container.appendChild(row);
+    });
+  } catch (err) {
+    console.error("Analytics load error", err);
 
-    } catch (err) {
-        console.error("Analytics load error", err);
-
-        const container = document.getElementById("analytics-cards-container");
-        if (container) {
-            container.innerHTML =
-                "<tr><td colspan='7'>Error loading analytics</td></tr>";
-        }
+    const container = document.getElementById("analytics-cards-container");
+    if (container) {
+      container.innerHTML =
+        "<tr><td colspan='7'>Error loading analytics</td></tr>";
     }
+  }
 }
 
 function openAnalytics(testId) {
-    window.location.href = `/teacher-tests/analytics?testId=${testId}`;
+  window.location.href = `/teacher-tests/analytics?testId=${testId}`;
 }
 
 // Update progress bars for dashboard stats
 function updateProgress(type, current, max) {
-    const percentage = Math.min((current / max) * 100, 100);
+  const percentage = Math.min((current / max) * 100, 100);
 
-    const progressElement = document.getElementById(`${type}-progress`);
-    const progressValueElement = document.getElementById(`${type}-progress-value`);
-    const progressTextElement = document.getElementById(`${type}-progress-text`);
+  const progressElement = document.getElementById(`${type}-progress`);
+  const progressValueElement = document.getElementById(
+    `${type}-progress-value`,
+  );
+  const progressTextElement = document.getElementById(`${type}-progress-text`);
 
-    if (progressElement) {
-        progressElement.style.width = percentage + '%';
-    }
+  if (progressElement) {
+    progressElement.style.width = percentage + "%";
+  }
 
-    if (progressValueElement) {
-        progressValueElement.textContent = Math.round(percentage) + '%';
-    }
+  if (progressValueElement) {
+    progressValueElement.textContent = Math.round(percentage) + "%";
+  }
 
-    if (progressTextElement) {
-        progressTextElement.textContent = Math.round(percentage) + '%';
-    }
+  if (progressTextElement) {
+    progressTextElement.textContent = Math.round(percentage) + "%";
+  }
 }
 
-// test count system 
+// test count system
 async function loadDashboardStats() {
-    try {
-        if (!TEACHER_ID) {
-            console.error("Teacher ID missing");
-            return;
-        }
-
-        const res = await fetch(`/dashboard/stats/${TEACHER_ID}`);
-        const data = await res.json();
-
-        console.log("Dashboard data:", data);
-
-        const localTotalTests = Array.isArray(state.tests) && state.tests.length > 0
-            ? state.tests.length
-            : Object.values(testServicesData).reduce((sum, arr) => sum + (Array.isArray(arr) ? arr.length : 0), 0);
-
-        const localTotalQuestions = Array.isArray(state.tests)
-            ? state.tests.reduce((sum, test) => sum + (Array.isArray(test.questions) ? test.questions.length : 0), 0)
-            : 0;
-
-        const localActiveTemplates = state.templates.filter(t => t && t.active).length || Object.keys(testServicesData).length;
-
-        const totalTestsRaw = Number(data.totalTests);
-        const totalAttemptsRaw = Number(data.totalAttempts);
-        const totalStudentsRaw = Number(data.totalStudents);
-        const totalTemplatesRaw = Number(data.totalTemplates);
-
-        const totalTests = totalTestsRaw > 0 ? totalTestsRaw : localTotalTests;
-        const totalQuestions = totalAttemptsRaw > 0 ? totalAttemptsRaw : (totalStudentsRaw > 0 ? totalStudentsRaw : localTotalQuestions);
-        const totalTemplates = totalTemplatesRaw > 0 ? totalTemplatesRaw : localActiveTemplates;
-
-        document.getElementById("total-tests").textContent = totalTests;
-        document.getElementById("total-questions").textContent = totalQuestions;
-        document.getElementById("active-templates").textContent = totalTemplates;
-
-        updateProgress("tests", totalTests, 50);
-        updateProgress("questions", totalQuestions, 200);
-        updateProgress("templates", totalTemplates, 20);
-
-    } catch (err) {
-        console.error("Dashboard load error:", err);
-        updateDashboard();
+  try {
+    if (!TEACHER_ID) {
+      console.error("Teacher ID missing");
+      return;
     }
-}
 
+    const res = await fetch(`/dashboard/stats/${TEACHER_ID}`);
+    const data = await res.json();
+
+    console.log("Dashboard data:", data);
+
+    const localTotalTests =
+      Array.isArray(state.tests) && state.tests.length > 0
+        ? state.tests.length
+        : Object.values(testServicesData).reduce(
+            (sum, arr) => sum + (Array.isArray(arr) ? arr.length : 0),
+            0,
+          );
+
+    const localTotalQuestions = Array.isArray(state.tests)
+      ? state.tests.reduce(
+          (sum, test) =>
+            sum + (Array.isArray(test.questions) ? test.questions.length : 0),
+          0,
+        )
+      : 0;
+
+    const localActiveTemplates =
+      state.templates.filter((t) => t && t.active).length ||
+      Object.keys(testServicesData).length;
+
+    const totalTestsRaw = Number(data.totalTests);
+    const totalAttemptsRaw = Number(data.totalAttempts);
+    const totalStudentsRaw = Number(data.totalStudents);
+    const totalTemplatesRaw = Number(data.totalTemplates);
+
+    const totalTests = totalTestsRaw > 0 ? totalTestsRaw : localTotalTests;
+    const totalQuestions =
+      totalAttemptsRaw > 0
+        ? totalAttemptsRaw
+        : totalStudentsRaw > 0
+          ? totalStudentsRaw
+          : localTotalQuestions;
+    const totalTemplates =
+      totalTemplatesRaw > 0 ? totalTemplatesRaw : localActiveTemplates;
+
+    document.getElementById("total-tests").textContent = totalTests;
+    document.getElementById("total-questions").textContent = totalQuestions;
+    document.getElementById("active-templates").textContent = totalTemplates;
+
+    updateProgress("tests", totalTests, 50);
+    updateProgress("questions", totalQuestions, 200);
+    updateProgress("templates", totalTemplates, 20);
+  } catch (err) {
+    console.error("Dashboard load error:", err);
+    updateDashboard();
+  }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
-    initApp();
-    loadDashboardStats();
+  initApp();
+  loadDashboardStats();
 });
 // ===== THEME SYSTEM =====
 // ===== THEME SYSTEM =====
 function applyTheme(theme) {
-    const body = document.body;
+  const body = document.body;
 
-    if (theme === "dark") {
-        body.classList.add("dark-theme");
-    } else if (theme === "light") {
-        body.classList.remove("dark-theme");
-    } else if (theme === "auto") {
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        body.classList.toggle("dark-theme", prefersDark);
-    }
+  if (theme === "dark") {
+    body.classList.add("dark-theme");
+  } else if (theme === "light") {
+    body.classList.remove("dark-theme");
+  } else if (theme === "auto") {
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
+    body.classList.toggle("dark-theme", prefersDark);
+  }
 
-    localStorage.setItem("dashboardTheme", theme);
+  localStorage.setItem("dashboardTheme", theme);
 }
 
 // Load saved theme
 function loadSavedTheme() {
-    const savedTheme = localStorage.getItem("dashboardTheme") || "light";
-    applyTheme(savedTheme);
+  const savedTheme = localStorage.getItem("dashboardTheme") || "light";
+  applyTheme(savedTheme);
 
-    const radio = document.querySelector(`input[name="theme"][value="${savedTheme}"]`);
-    if (radio) radio.checked = true;
+  const radio = document.querySelector(
+    `input[name="theme"][value="${savedTheme}"]`,
+  );
+  if (radio) radio.checked = true;
 }
 
 // Theme radio change listener
 function setupThemeControls() {
-    const themeRadios = document.querySelectorAll('input[name="theme"]');
+  const themeRadios = document.querySelectorAll('input[name="theme"]');
 
-    themeRadios.forEach(radio => {
-        radio.addEventListener("change", () => {
-            applyTheme(radio.value);
-        });
+  themeRadios.forEach((radio) => {
+    radio.addEventListener("change", () => {
+      applyTheme(radio.value);
     });
+  });
 }
 
-//=================================================research papper sections 
+//research papper sections
 
 function addResearchCard(data) {
-    const container = document.getElementById("research-cards-container");
-    if (!container) return;
+  const container = document.getElementById("research-cards-container");
+  if (!container) return;
 
-    const card = document.createElement("div");
-    card.className = "col-md-4";
+  const card = document.createElement("div");
+  card.className = "col-md-4";
 
-    card.innerHTML = `
+  card.innerHTML = `
         <div class="card mb-3 shadow-sm">
             <div class="card-body">
                 <h5 class="card-title">${data.title || "Research Paper"}</h5>
@@ -3046,243 +3193,226 @@ function addResearchCard(data) {
         </div>
     `;
 
-    container.prepend(card);
+  container.prepend(card);
 }
 async function research() {
-    const subject = document.getElementById("research-subject").value.trim();
-    const title = document.getElementById("research-title").value.trim();
-    const author = document.getElementById("research-author").value.trim();
-    const year = document.getElementById("research-year").value.trim();
-    const journal = document.getElementById("research-journal").value.trim();
-    const access = document.getElementById("research-access").value;
-    const fileInput = document.getElementById("research-file");
+  const subject = document.getElementById("research-subject").value.trim();
+  const title = document.getElementById("research-title").value.trim();
+  const author = document.getElementById("research-author").value.trim();
+  const year = document.getElementById("research-year").value.trim();
+  const journal = document.getElementById("research-journal").value.trim();
+  const access = document.getElementById("research-access").value;
+  const fileInput = document.getElementById("research-file");
 
-    if (!subject || !title || !author || !year) {
-        alert("Please fill all required fields.");
-        return;
+  if (!subject || !title || !author || !year) {
+    alert("Please fill all required fields.");
+    return;
+  }
+
+  if (!fileInput.files.length) {
+    alert("Please select a PDF file.");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("subject", subject);
+  formData.append("title", title);
+  formData.append("author", author);
+  formData.append("year", year);
+  formData.append("journal", journal);
+  formData.append("access", access);
+  formData.append("file", fileInput.files[0]);
+
+  try {
+    const res = await fetch("/api/research/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      alert("Research paper uploaded successfully!");
+      window.location.href = "/research-papper";
+    } else {
+      alert(data.message || "Upload failed");
     }
-
-    if (!fileInput.files.length) {
-        alert("Please select a PDF file.");
-        return;
-    }
-
-    const formData = new FormData();
-    formData.append("subject", subject);
-    formData.append("title", title);
-    formData.append("author", author);
-    formData.append("year", year);
-    formData.append("journal", journal);
-    formData.append("access", access);
-    formData.append("file", fileInput.files[0]);
-
-    try {
-        const res = await fetch("/api/research/upload", {
-            method: "POST",
-            body: formData
-        });
-
-        const data = await res.json();
-
-        if (data.success) {
-            alert("Research paper uploaded successfully!");
-            window.location.href = "/research-papper";
-        } else {
-            alert(data.message || "Upload failed");
-        }
-    } catch (err) {
-        console.error("Upload error:", err);
-        alert("Server error");
-    }
+  } catch (err) {
+    console.error("Upload error:", err);
+    alert("Server error");
+  }
 }
 function previous() {
-    window.location.href = "/previous-year-paper";
+  window.location.href = "/previous-year-paper";
 }
 
-const generateLinkBtn = document.getElementById('generate-link-btn');
+const generateLinkBtn = document.getElementById("generate-link-btn");
 
 if (generateLinkBtn) {
-    generateLinkBtn.addEventListener('click', () => {
+  generateLinkBtn.addEventListener("click", () => {
+    const link = `${window.location.origin}/student-register/${TEACHER_ID}`;
 
-        const link = `${window.location.origin}/student-register/${TEACHER_ID}`;
-
-        prompt("Copy this link and send to students:", link);
-    });
+    prompt("Copy this link and send to students:", link);
+  });
 }
-
-
-let inviteLink = "";
 
 // Open Modal
+let inviteLink = "";
+
 function openInviteModal() {
-    inviteLink = `${window.location.origin}/student-register/${TEACHER_ID}`;
+  inviteLink = `${window.location.origin}/student-register/${TEACHER_ID}`;
 
-    document.getElementById("inviteLinkInput").value = inviteLink;
+  document.getElementById("inviteLinkInput").value = inviteLink;
+  document.getElementById("inviteModal").style.display = "flex";
 
-    // QR Generate
-    QRCode.toCanvas(document.getElementById("qrCanvas"), inviteLink);
-
-    document.getElementById("inviteModal").style.display = "flex";
+  QRCode.toCanvas(
+    document.getElementById("qrCanvas"),
+    inviteLink,
+    function (error) {
+      if (error) console.error(error);
+    },
+  );
 }
-
 // Close Modal
 function closeInviteModal() {
-    document.getElementById("inviteModal").style.display = "none";
+  document.getElementById("inviteModal").style.display = "none";
 }
 
 // Copy Link
 function copyInviteLink() {
-    navigator.clipboard.writeText(inviteLink);
-    alert("Link copied ✅");
+  navigator.clipboard.writeText(inviteLink);
+  alert("Link copied ✅");
 }
 
 // WhatsApp Share
 function shareWhatsApp() {
-    const text = encodeURIComponent("Register here:\n" + inviteLink);
-    window.open(`https://wa.me/?text=${text}`, "_blank");
+  const text = encodeURIComponent("Register here:\n" + inviteLink);
+  window.open(`https://wa.me/?text=${text}`, "_blank");
 }
 
 // Download QR
 function downloadQR() {
-    const canvas = document.getElementById("qrCanvas");
-    const link = document.createElement("a");
-    link.download = "invite-qr.png";
-    link.href = canvas.toDataURL();
-    link.click();
+  const canvas = document.getElementById("qrCanvas");
+  const link = document.createElement("a");
+  link.download = "invite-qr.png";
+  link.href = canvas.toDataURL();
+  link.click();
 }
 window.addEventListener("click", function (e) {
-    const modal = document.getElementById("inviteModal");
-    if (e.target === modal) {
-        modal.style.display = "none";
-    }
+  const modal = document.getElementById("inviteModal");
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
 });
 
-
 function viewStudent(studentId) {
-    const student = state.students.find(s => s._id === studentId);
+  const student = state.students.find((s) => s._id === studentId);
 
-    if (!student) {
-        alert("Student not found");
-        return;
-    }
+  if (!student) {
+    alert("Student not found");
+    return;
+  }
 
-    const modal = document.getElementById("viewStudentModal");
-    const details = document.getElementById("studentDetails");
+  const modal = document.getElementById("viewStudentModal");
+  const details = document.getElementById("studentDetails");
 
-    details.innerHTML = `
+  details.innerHTML = `
         <p><b>Name:</b> ${student.name}</p>
-        <p><b>Class:</b> ${student.className || '-'}</p>
-        <p><b>Roll:</b> ${student.roll || '-'}</p>
-        <p><b>Email:</b> ${student.email || '-'}</p>
-        <p><b>Parent Contact:</b> ${student.parentContact || '-'}</p>
+        <p><b>Class:</b> ${student.className || "-"}</p>
+        <p><b>Roll:</b> ${student.roll || "-"}</p>
+        <p><b>Email:</b> ${student.email || "-"}</p>
+        <p><b>Parent Contact:</b> ${student.parentContact || "-"}</p>
     `;
 
-    modal.style.display = "flex";
+  modal.style.display = "flex";
 }
 
 function closeViewStudent() {
-    document.getElementById("viewStudentModal").style.display = "none";
+  document.getElementById("viewStudentModal").style.display = "none";
 }
 
-
-
-//public test on all india test serice 
+//public test on all india test serice
 async function publishTest(testId) {
+  try {
+    const res = await fetch(`/teacher-tests/publish/${testId}`, {
+      method: "PUT",
+    });
 
-    try {
+    const data = await res.json();
 
-        const res = await fetch(`/teacher-tests/publish/${testId}`, {
-            method: "PUT"
-        });
+    if (data.success) {
+      alert("Test Public Successfully!");
 
-        const data = await res.json();
-
-        if (data.success) {
-
-            alert("Test Public Successfully!");
-
-            loadTestsFromDB();
-
-        } else {
-
-            alert(data.error || "Publish failed");
-
-        }
-
-    } catch (err) {
-
-        console.error(err);
-
-        alert("Server error");
-
+      loadTestsFromDB();
+    } else {
+      alert(data.error || "Publish failed");
     }
+  } catch (err) {
+    console.error(err);
+
+    alert("Server error");
+  }
 }
 async function makeTestLive(testId) {
-    try {
-        const res = await fetch(`/National-Test-Series/live/${testId}`, {
-            method: "POST"
+  try {
+    const res = await fetch(`/National-Test-Series/live/${testId}`, {
+      method: "POST",
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      const index = state.tests.findIndex((t) => (t._id || t.id) === testId);
+
+      if (index !== -1) {
+        state.tests[index].status = "published";
+        state.tests[index].visibility = "public";
+      }
+
+      Object.keys(testServicesData).forEach((course) => {
+        testServicesData[course] = testServicesData[course].map((service) => {
+          if ((service._id || service.id) === testId) {
+            return {
+              ...service,
+              status: "published",
+              visibility: "public",
+            };
+          }
+          return service;
         });
+      });
 
-        const data = await res.json();
+      if (state.currentCourseName) {
+        renderTestServices(state.currentCourseName);
+      }
 
-        if (data.success) {
-            const index = state.tests.findIndex(t => (t._id || t.id) === testId);
-
-            if (index !== -1) {
-                state.tests[index].status = "published";
-                state.tests[index].visibility = "public";
-            }
-
-            Object.keys(testServicesData).forEach(course => {
-                testServicesData[course] = testServicesData[course].map(service => {
-                    if ((service._id || service.id) === testId) {
-                        return {
-                            ...service,
-                            status: "published",
-                            visibility: "public"
-                        };
-                    }
-                    return service;
-                });
-            });
-
-            if (state.currentCourseName) {
-                renderTestServices(state.currentCourseName);
-            }
-
-            showNotification("Test Published Successfully", "success");
-        } else {
-            alert(data.msg || "Publish failed");
-        }
-    } catch (err) {
-        console.log(err);
-        alert("Server error");
+      showNotification("Test Published Successfully", "success");
+    } else {
+      alert(data.msg || "Publish failed");
     }
+  } catch (err) {
+    console.log(err);
+    alert("Server error");
+  }
 }
 
 // ================= LOAD ANALYTICS =================
 
 async function loadAnalyticsCards() {
+  try {
+    const res = await fetch("/api/my-tests");
 
-    try {
+    const response = await res.json();
 
-        const res = await fetch("/api/my-tests");
+    const tests = Array.isArray(response) ? response : response.tests || [];
 
-        const response = await res.json();
+    const container = document.getElementById("analytics-cards-container");
 
-        const tests = Array.isArray(response)
-    ? response
-    : (response.tests || []);
+    if (!container) return;
 
-        const container =
-            document.getElementById("analytics-cards-container");
-
-        if (!container) return;
-
-        // EMPTY
-        if (!tests.length) {
-
-            container.innerHTML = `
+    // EMPTY
+    if (!tests.length) {
+      container.innerHTML = `
                 <tr>
                     <td colspan="7"
                         style="text-align:center;padding:20px;">
@@ -3291,21 +3421,18 @@ async function loadAnalyticsCards() {
                 </tr>
             `;
 
-            return;
-        }
+      return;
+    }
 
-        container.innerHTML = "";
+    container.innerHTML = "";
 
-        tests.forEach((test, index) => {
+    tests.forEach((test, index) => {
+      const submissions = test.submissions || 0;
 
-            const submissions = test.submissions || 0;
+      const avgMarks =
+        submissions > 0 ? (test.totalMarks || 0) / submissions : 0;
 
-            const avgMarks =
-                submissions > 0
-                    ? (test.totalMarks || 0) / submissions
-                    : 0;
-
-            container.innerHTML += `
+      container.innerHTML += `
                 <tr>
 
                     <td>${index + 1}</td>
@@ -3342,13 +3469,8 @@ async function loadAnalyticsCards() {
 
                 </tr>
             `;
-        });
-
-    } catch (err) {
-
-        console.log(
-            "Analytics Load Error:",
-            err
-        );
-    }
+    });
+  } catch (err) {
+    console.log("Analytics Load Error:", err);
+  }
 }

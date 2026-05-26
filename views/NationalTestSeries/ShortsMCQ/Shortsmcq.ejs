@@ -1,100 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>RIDTECH — Smart Search | Empty = All Videos | Sticky Chips</title>
+    <title>RIDTECH — Smart Search | Responsive Shorts</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- आपकी original CSS files (यदि कोई extra style हो तो वो भी लोड होंगी, हम नीचे override कर देंगे) -->
     <link rel="stylesheet" href="css/Allindiatestserice/testserice.css">
-<link rel="stylesheet" href="/css/Allindiatestserice/shortmcq/shortmcqtest.css">
+    <link rel="stylesheet" href="/css/Allindiatestserice/shortmcq/shortmcqtest.css">
+    
+    <style>
+        /* ----- FULLY RESPONSIVE FIXES – BACKEND UNCHANGED ----- */
+   
+    </style>
 </head>
-
 <body>
 
     <%- include("../common/allindiatestheader.ejs") %>
 
-        <div class="short-container">
-            <% let totalQuestions=questions.length; %>
+    <div class="short-container">
+        <% let totalQuestions = questions.length; %>
+        <% questions.forEach((q, idx) => { %>
+            <div class="short">
+                <!-- Progress Bar -->
+                <div class="story-progress">
+                    <% for(let i = 0; i < totalQuestions; i++) { %>
+                        <div class="progress-segment <%= i <= idx ? 'visited' : '' %> <%= i === idx ? 'active' : '' %>"></div>
+                    <% } %>
+                </div>
 
-                <% questions.forEach((q, idx)=> { %>
-                    <div class="short">
-
-                        <!-- Progress Bar -->
-                        <div class="story-progress">
-                            <% for(let i=0; i < totalQuestions; i++) { %>
-                                <div
-                                    class="progress-segment <%= i <= idx ? 'visited' : '' %> <%= i === idx ? 'active' : '' %>">
-                                </div>
-                                <% } %>
+                <!-- Card -->
+                <div class="creative-card">
+                    <!-- Teacher Info -->
+                    <div class="teacher-header">
+                        <div class="teacher-avatar">👨‍🏫</div>
+                        <div class="teacher-info">
+                            <div class="teacher-name"><%= q.teacher?.name || "Unknown Teacher" %></div>
+                            <div class="teacher-badge"><span>🎓 Educator</span> • <span>⚡ MCQ</span></div>
                         </div>
-
-                        <!-- Card -->
-                        <div class="creative-card">
-
-                            <!-- Teacher Info -->
-                            <div class="teacher-header">
-                                <div class="teacher-avatar">👨‍🏫</div>
-                                <div class="teacher-info">
-                                    <div class="teacher-name">
-                                        <%= q.teacher?.name || "Unknown Teacher" %>
-                                    </div>
-                                    <div class="teacher-badge">
-                                        <span>🎓 Educator</span> • <span>⚡ MCQ</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Question -->
-                            <div class="question-text">
-                                <%= q.text %>
-                            </div>
-
-                            <!-- Options (FIXED 🔥) -->
-                            <div class="options">
-                                <% if(q.options && q.options.length> 0){ %>
-                                    <% q.options.forEach((opt, i)=> { %>
-                                        <button onclick="check(this, <%= opt.isCorrect %>)">
-                                            <span class="opt-prefix">
-                                                <%= String.fromCharCode(65+i) %>
-                                            </span>
-                                            <span>
-                                                <%= opt.text %>
-                                            </span>
-                                        </button>
-                                        <% }) %>
-                                            <% } else { %>
-                                                <p style="color:red;">No options found</p>
-                                                <% } %>
-                            </div>
-
-                            <!-- Teacher Profile -->
-                            <a href="/teacher/<%= q.teacher?._id %>" class="profile-link">
-                                👤 View Teacher Profile →
-                            </a>
-
-                        </div>
-
-                        <!-- Counter -->
-                        <div class="question-counter">
-                            <%= idx+1 %> / <%= totalQuestions %>
-                        </div>
-
                     </div>
-                    <% }); %>
-        </div>
 
-        <script>
-            function check(btn, isCorrect) {
-                if (isCorrect) {
-                    btn.style.background = "green";
-                } else {
-                    btn.style.background = "red";
-                }
+                    <!-- Question -->
+                    <div class="question-text"><%= q.text %></div>
+
+                    <!-- Options -->
+                    <div class="options">
+                        <% if(q.options && q.options.length > 0) { %>
+                            <% q.options.forEach((opt, i) => { %>
+                                <button onclick="check(this, <%= opt.isCorrect %>)">
+                                    <span class="opt-prefix"><%= String.fromCharCode(65+i) %></span>
+                                    <span><%= opt.text %></span>
+                                </button>
+                            <% }) %>
+                        <% } else { %>
+                            <p style="color:red;">No options found</p>
+                        <% } %>
+                    </div>
+
+                    <!-- Teacher Profile Link -->
+                    <a href="/teacher/<%= q.teacher?._id %>" class="profile-link">👤 View Teacher Profile →</a>
+                </div>
+
+                <!-- Counter -->
+                <div class="question-counter"><%= idx+1 %> / <%= totalQuestions %></div>
+            </div>
+        <% }); %>
+    </div>
+
+    <script>
+        // original check function (unchanged logic)
+        function check(btn, isCorrect) {
+            if (isCorrect) {
+                btn.style.background = "green";
+            } else {
+                btn.style.background = "red";
             }
-        </script>
+        }
 
+        // Dynamic header height adjustment (so content never hides behind header)
+        function updateHeaderHeight() {
+            const headerElem = document.querySelector('.header');
+            if (headerElem) {
+                let h = headerElem.offsetHeight;
+                if (h < 40) h = 64; // fallback
+                document.documentElement.style.setProperty('--header-real-h', h + 'px');
+            } else {
+                document.documentElement.style.setProperty('--header-real-h', '64px');
+            }
+        }
+
+        window.addEventListener('load', updateHeaderHeight);
+        window.addEventListener('resize', updateHeaderHeight);
+        // Also run after any dynamic content change (optional)
+        setTimeout(updateHeaderHeight, 100);
+    </script>
 </body>
-
 </html>
