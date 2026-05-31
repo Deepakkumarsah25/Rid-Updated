@@ -222,56 +222,73 @@ router.post("/approve-request", async (req, res) => {
     const { id, questions } = req.body;
 
     const request = await TestRequest.findById(id);
+    if (!request) {
+      return res.status(404).json({ success: false, message: "Request not found" });
+    }
 
-    // 🔥 text → array
-   const questionArray = questions.split("\n").map(line => {
+    const questionArray = questions.split("\n").map(line => {
+      const parts = line.split("|");
+      const questionText = parts[0]?.trim();
+      const correctIndex = parseInt(parts[parts.length - 1]) - 1;
 
-  const parts = line.split("|");
+      const options = parts.slice(1, -1).map((opt, i) => ({
+        text: opt.trim(),
+        isCorrect: i === correctIndex
+      }));
 
-  const questionText = parts[0];
-  const correctIndex = parseInt(parts[parts.length - 1]) - 1;
+      return {
+        text: questionText,
+        type: "MCQ",   // ✅ not "multiple-choice"
+        difficulty: "easy",
+        points: 1,
+        options
+      };
+    });
 
-  const options = parts.slice(1, -1).map((opt, i) => ({
-    text: opt,
-    isCorrect: i === correctIndex
-  }));
-
-  return {
-    text: questionText,
-    type: "multiple-choice",
-    difficulty: "easy",
-    points: 1,
-    options
-  };
-});
-
-    // 🔥 create test
-  const newTest = new TeacherTest({
-  teacher: request.teacherId,
-  name: "Admin Created Test",
-  subject: "Auto",
-  duration: 30,
-  difficulty: "easy",
-  description: request.description,
-
-  questions: questionArray
-});
+    const newTest = new TeacherTest({
+      createdBy: request.teacherId,
+      creatorModel: "Teacher",
+      teacher: request.teacherId,
+      name: request.testName || "Admin Created Test",
+      subject: request.subject || "Auto",
+      duration: request.duration || 30,
+      difficulty: "easy",
+      description: request.description || "",
+      questions: questionArray
+      // status hata do jab tak schema ka exact allowed enum confirm na ho
+    });
 
     await newTest.save();
 
     request.status = "approved";
     request.questionsText = questions;
-
     await request.save();
 
     res.json({ success: true });
-
   } catch (err) {
     console.log(err);
-    res.json({ success: false });
+    res.status(500).json({ success: false, message: err.message });
   }
 });
 
+router.post("/cancel-request/:id", async (req, res) => {
+  try {
+    const request = await TestRequest.findById(req.params.id);
+
+    if (!request) {
+      return res.status(404).json({ success: false, message: "Request not found" });
+    }
+
+    await TestRequest.findByIdAndDelete(req.params.id);
+
+    res.json({ success: true, message: "Request canceled successfully" });
+  } catch (err) {
+    console.error("Cancel request error:", err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+ 
 router.get("/test-requests-data", async (req, res) => {
   try {
     const requests = await TestRequest.find({ status: "pending" })

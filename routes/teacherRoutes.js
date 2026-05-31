@@ -596,25 +596,22 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post("/send-request", upload.single("banner"), async (req, res) => {
+router.post("/send-request", upload.single("notes"), async (req, res) => {
   try {
-    const token = req.cookies.token;
-    const decoded = require("jsonwebtoken").verify(token, process.env.JWT_SECRET);
+    const teacherId = req.user?.id || req.teacher?._id || req.body.teacherId;
 
-    const newRequest = new TestRequest({
-      teacherId: decoded.userId,
-      banner: req.file ? "/uploads/" + req.file.filename : "",
-      notes: req.body.notes,
-      description: req.body.description
+    const request = await TestRequest.create({
+      teacherId,
+      notesFile: req.file ? `/uploads/${req.file.filename}` : "",
+      description: req.body.description,
+      status: "pending",
+      banner: req.body.banner || ""
     });
 
-    await newRequest.save();
-
-    res.json({ success: true });
-
+    res.json({ success: true, request });
   } catch (err) {
-    console.log(err);
-    res.json({ success: false });
+    console.error(err);
+    res.status(500).json({ success: false, message: err.message });
   }
 });
 
@@ -632,36 +629,7 @@ router.put("/api/update-test/:id", async (req, res) => {
     }
 });
 
-// Show student registration page
-router.get('/student-register/:teacherId', (req, res) => {
-    res.render('tracher_deshboard/advance-version/student-register', {
-        teacherId: req.params.teacherId
-    });
-});
 
-router.post('/student-register', async (req, res) => {
-
-    const { name, class: className, roll, email, parentContact, teacherId } = req.body;
-
-    try {
-        await Student.create({
-            name,
-            class: className,
-            roll,
-            email,
-            parentContact,
-
-            // ✅ YAHI FIX
-            teacherId: teacherId
-        });
-
-        res.send("Registration Successful ✅");
-
-    } catch (err) {
-        console.log(err);
-        res.send("Error ❌");
-    }
-});
 
 
    const tests = await TeacherTest.find({
@@ -743,33 +711,76 @@ router.post(
     }
   }
 );
+// Student Register Page
+router.get(
+    "/teacher/student-register/:teacherId",
+    async (req, res) => {
 
+        res.render(
+            "tracher_deshboard/advance-version/student-register.ejs",
+            {
+                teacherId: req.params.teacherId
+            }
+        );
+    }
+);
+// ================= PUBLIC ADD STUDENT =================
 
-// public test on all india test 
-
-router.put("/teacher-tests/publish/:id", async (req, res) => {
+router.post(
+  "/teacher/public-add-student",
+  async (req, res) => {
 
     try {
 
-        await Test.findByIdAndUpdate(req.params.id, {
+      const {
+        teacherId,
+        name,
+        email,
+        class: className,
+        roll,
+        parentContact
+      } = req.body;
 
-            visibility: "public",
-            status: "published"
+      // ✅ check duplicate roll in same class
+      const existingStudent = await Student.findOne({
+        teacherId,
+        class: className,
+        roll: roll
+      });
 
+      if (existingStudent) {
+
+        return res.json({
+          success: false,
+          message: "This roll number already exists in this class."
         });
+      }
 
-        res.json({
-            success: true
-        });
+      // ✅ create student
+      const student = new Student({
+        teacherId,
+        name,
+        email,
+        class: className,
+        roll,
+        parentContact
+      });
+
+      await student.save();
+
+      res.json({
+        success: true
+      });
 
     } catch (err) {
 
-        console.log(err);
+      console.log(err);
 
-        res.json({
-            success: false,
-            error: "Publish failed"
-        });
+      res.json({
+        success: false,
+        message: "Server error"
+      });
     }
-});
+  }
+);
 module.exports = router;

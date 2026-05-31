@@ -1,29 +1,415 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Registration</title>
+
+    <style>
+        :root {
+            --bg1: #0f172a;
+            --bg2: #1e293b;
+            --card: rgba(255, 255, 255, 0.96);
+            --text: #0f172a;
+            --muted: #64748b;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #16a34a;
+            --border: #dbe3ee;
+            --shadow: 0 20px 60px rgba(15, 23, 42, 0.18);
+            --radius: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(37, 99, 235, 0.25), transparent 35%),
+                radial-gradient(circle at bottom right, rgba(22, 163, 74, 0.18), transparent 30%),
+                linear-gradient(135deg, var(--bg1), var(--bg2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            color: var(--text);
+        }
+
+        .page {
+            width: 100%;
+            max-width: 920px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .hero,
+        .box {
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .hero {
+            padding: 38px;
+            color: white;
+            background: linear-gradient(160deg, rgba(37, 99, 235, 0.95), rgba(30, 41, 59, 0.95));
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100%;
+        }
+
+        .hero h1 {
+            margin: 0 0 14px;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+        }
+
+        .hero p {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.82);
+            max-width: 38ch;
+        }
+
+        .hero .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.9rem;
+            margin-bottom: 18px;
+            backdrop-filter: blur(8px);
+        }
+
+        .hero .points {
+            margin-top: 28px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .point {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.96rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.12);
+            flex: 0 0 auto;
+        }
+
+        .box {
+            background: var(--card);
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(12px);
+        }
+
+        .box h2 {
+            margin: 0 0 8px;
+            font-size: 1.6rem;
+            letter-spacing: -0.03em;
+        }
+
+        .subtext {
+            margin: 0 0 24px;
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            outline: none;
+            font-size: 1rem;
+            background: #fff;
+            transition: 0.2s ease;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        button {
+            width: 100%;
+            border: none;
+            border-radius: 14px;
+            padding: 14px 18px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            margin-top: 10px;
+            box-shadow: 0 14px 30px rgba(37, 99, 235, 0.28);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.75;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .hint {
+            margin-top: 14px;
+            font-size: 0.88rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .success-box,
+        .error-box {
+            display: none;
+            margin-bottom: 16px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .success-box {
+            background: rgba(22, 163, 74, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(22, 163, 74, 0.18);
+        }
+
+        .error-box {
+            background: rgba(239, 68, 68, 0.1);
+            color: #dc2626;
+            border: 1px solid rgba(239, 68, 68, 0.18);
+        }
+
+        .footer-note {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        @media (max-width: 860px) {
+            .page {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 28px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            body {
+                padding: 14px;
+            }
+
+            .box, .hero {
+                padding: 22px;
+                border-radius: 20px;
+            }
+
+            .row {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
+    <div class="page">
+        <section class="hero">
+            <div>
+                <div class="badge">Student Registration Portal</div>
+                <h1>Join your class in a few simple steps</h1>
+                <p>
+                    Fill in your details carefully and submit the form. Your teacher will receive your information and
+                    add you to the dashboard.
+                </p>
 
-<h2>Student Registration</h2>
+                <div class="points">
+                    <div class="point"><span class="dot"></span> Fast and secure registration</div>
+                    <div class="point"><span class="dot"></span> Works on mobile and desktop</div>
+                    <div class="point"><span class="dot"></span> Student details saved instantly</div>
+                </div>
+            </div>
 
-<form action="/student-register" method="POST">
+            <div class="footer-note">
+                Please enter correct details so your teacher can identify you properly.
+            </div>
+        </section>
 
-    <input type="hidden" name="teacherId" value="<%= teacherId %>">
+        <section class="box">
+            <h2>Student Registration</h2>
+            <p class="subtext">
+                Complete the form below. All fields should be filled with accurate information.
+            </p>
 
-    <input type="text" name="name" placeholder="Full Name" required><br><br>
+            <div id="successMsg" class="success-box">Registration successful.</div>
+            <div id="errorMsg" class="error-box">Something went wrong. Please try again.</div>
 
-    <input type="text" name="class" placeholder="Class" required><br><br>
+            <form id="studentRegisterForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your full name" required />
+                </div>
 
-    <input type="text" name="roll" placeholder="Roll No" required><br><br>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email" required />
+                </div>
 
-    <input type="email" name="email" placeholder="Email" required><br><br>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="className">Class</label>
+                        <input type="text" id="className" placeholder="e.g. 10-A" />
+                    </div>
 
-    <input type="text" name="parentContact" placeholder="Parent Contact"><br><br>
+                    <div class="form-group">
+                        <label for="roll">Roll Number</label>
+                        <input type="text" id="roll" placeholder="Enter roll number" />
+                    </div>
+                </div>
 
-    <button type="submit">Register</button>
+                <div class="form-group">
+                    <label for="parentContact">Parent Contact</label>
+                    <input type="text" id="parentContact" placeholder="Enter parent contact number" />
+                </div>
 
-</form>
+                <button type="submit" id="submitBtn" class="submit-btn">Submit Registration</button>
+            </form>
 
+            <div class="hint">
+                By submitting this form, you confirm that the details provided are correct.
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const form = document.getElementById("studentRegisterForm");
+        const submitBtn = document.getElementById("submitBtn");
+        const successMsg = document.getElementById("successMsg");
+        const errorMsg = document.getElementById("errorMsg");
+
+        function showMessage(type, text) {
+            successMsg.style.display = "none";
+            errorMsg.style.display = "none";
+
+            if (type === "success") {
+                successMsg.textContent = text;
+                successMsg.style.display = "block";
+            } else {
+                errorMsg.textContent = text;
+                errorMsg.style.display = "block";
+            }
+        }
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Submitting...";
+
+            try {
+                const payload = {
+                    teacherId: "<%= teacherId %>",
+                    name: document.getElementById("name").value.trim(),
+                    email: document.getElementById("email").value.trim(),
+                    class: document.getElementById("className").value.trim(),
+                    roll: document.getElementById("roll").value.trim(),
+                    parentContact: document.getElementById("parentContact").value.trim()
+                };
+
+                const res = await fetch("/teacher/public-add-student", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+
+    showMessage(
+        "success",
+        "Registration successful."
+    );
+
+    alert("Registration successful!");
+
+    form.reset();
+
+} else {
+
+    alert(
+        data.message || "Registration failed."
+    );
+
+    showMessage(
+        "error",
+        data.message || "Registration failed."
+    );
+}
+            } catch (err) {
+                showMessage("error", "Network error. Please try again.");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Submit Registration";
+            }
+        });
+    </script>
 </body>
 </html>

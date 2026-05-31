@@ -44,11 +44,11 @@
         <div class="top-navbar">
             <ul>
                 <li class="nav-item" id="top-nav-ppt">
-                    <a href="#">
+                    <!-- <a href="#">
                         <i class="fas fa-file-powerpoint"></i>
                         <span>Create PPT</span>
 
-                    </a>
+                    </a> -->
                 </li>
 
                 <li class="nav-item" id="top-nav-research">
@@ -165,11 +165,11 @@
 
                     <li class="nav-item" id="nav-templates-sidebar">
 
-                        <a href="#">
+                        <!-- <a href="#">
                             <i class="fas fa-layer-group"></i>
                             <span>Assignment Creator</span>
 
-                        </a>
+                        </a> -->
                     </li>
                     <li class="nav-item" id="nav-analytics">
                         <a href="#">
@@ -200,29 +200,29 @@
                     </li>
 
                     <li class="nav-item" id="nav-notes">
-                        <a href="#">
+                        <!-- <a href="#">
                             <i class="fas fa-book-open"></i>
                             <span>Notes Upload & Share</span>
 
-                        </a>
+                        </a> -->
                     </li>
 
 
                     <li class="nav-item" id="nav-previous">
-                        <a href="#">
+                        <!-- <a href="#">
                             <i class="fas fa-folder-open"></i>
                             <span>Previous Year Papers</span>
 
-                        </a>
+                        </a> -->
                     </li>
 
 
                     <li class="nav-item" id="nav-syllabus">
-                        <a href="#">
+                        <!-- <a href="#">
                             <i class="fas fa-list"></i>
                             <span>Syllabus Manager</span>
 
-                        </a>
+                        </a> -->
                     </li>
 
 
@@ -418,9 +418,9 @@
                                     <p>View and add students directly from your teacher dashboard.</p>
                                 </div>
 
-                                <button onclick="openInviteModal()" class="btn btn-primary">
-                                    <i class="fas fa-link"></i> Invite Students
-                                </button>
+                                <button class="btn btn-success" onclick="openInviteModal()">
+    <i class="fas fa-link"></i> Invite Students
+</button>
                                 <button class="btn btn-primary" id="add-student-btn">
                                     <i class="fas fa-user-plus"></i> Add Student
                                 </button>
@@ -1417,66 +1417,26 @@
     </div>
 
     <!-- MODAL -->
-    <div id="requestModal" class="modal-overlay">
+   <div id="requestModal" class="modal-overlay">
+  <div class="modal-box">
+    <span class="close-btn" onclick="closeRequestModal()">&times;</span>
+    <h3>Send Test Request</h3>
 
-        <div class="modal-box">
+    <label>Test Name</label>
+    <input type="text" id="testName" placeholder="Test name">
 
-            <span class="close-btn" onclick="closeRequestModal()">&times;</span>
+    <label>Subject</label>
+    <input type="text" id="subject" placeholder="Math, Science, English...">
 
-            <h3>Send Test Request</h3>
+    <label>Upload Notes (PDF)</label>
+    <input type="file" id="notes" accept=".pdf,.doc,.docx"><br><br>
 
-            <label>Upload Banner</label>
-            <input type="file" id="banner" accept="image/*"><br><br>
+    <textarea id="description" placeholder="Description"></textarea><br><br>
 
-            <label>Upload Notes (PDF)</label>
-            <input type="file" id="notes" accept=".pdf,.doc,.docx"><br><br>
-
-            <textarea id="description" placeholder="Description"></textarea><br><br>
-
-            <button onclick="submitRequest()">Send</button>
-
-        </div>
-
-    </div>
-    <div id="inviteModal" class="invite-modal">
-        <div class="invite-box">
-
-            <h2><i class="fas fa-user-plus"></i> Invite Students</h2>
-
-            <p>Share this link with students to register</p>
-
-            <div class="invite-link-box">
-                <input type="text" id="inviteLinkInput" readonly>
-                <button onclick="copyInviteLink()">
-                    <i class="fas fa-copy"></i>
-                </button>
-            </div>
-
-            <div class="invite-actions">
-                <button onclick="shareWhatsApp()" class="whatsapp-btn">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </button>
-
-                <button onclick="downloadQR()" class="qr-btn">
-                    <i class="fas fa-download"></i> QR Code
-                </button>
-            </div>
-
-            <canvas id="qrCanvas"></canvas>
-
-            <!-- 🔥 NEW BUTTONS -->
-            <div class="invite-footer">
-                <button class="cancel-btn" onclick="closeInviteModal()">
-                    Cancel
-                </button>
-
-                <button class="close-btn" onclick="closeInviteModal()">
-                    Done
-                </button>
-            </div>
-
-        </div>
-    </div>
+    <button onclick="submitRequest()">Send</button>
+  </div>
+</div>
+    
 
     <div id="viewStudentModal" class="student-modal">
 
@@ -1496,61 +1456,54 @@
         </div>
 
     </div>
-    <script>
-        function openRequestModal() {
-            document.getElementById("requestModal").style.display = "block";
-        }
 
+    <!-- Invite Student Modal -->
+<div id="inviteModal" class="invite-modal" style="display:none;">
+    <div class="invite-modal-content">
+        <div class="invite-modal-header">
+            <div>
+                <h2>Invite Students</h2>
+                <p>Share this registration link with your students</p>
+            </div>
 
-        function submitRequest() {
+            <button type="button" class="invite-close-btn" onclick="closeInviteModal()">
+                &times;
+            </button>
+        </div>
 
-            const bannerFile = document.getElementById("banner").files[0];
-            const notesFile = document.getElementById("notes").files[0];
-            const description = document.getElementById("description").value;
+        <div class="invite-modal-body">
+            <label for="inviteLink">Invite Link</label>
+            <div class="invite-link-box">
+                <input
+                    type="text"
+                    id="inviteLink"
+                    readonly
+                    class="invite-link-input"
+                >
+                <button type="button" class="invite-copy-btn" onclick="copyInviteLink()">
+                    Copy
+                </button>
+            </div>
 
-            const formData = new FormData();
-            formData.append("banner", bannerFile);
-            formData.append("notes", notesFile);
-            formData.append("description", description);
+            <div class="invite-actions">
+                <button type="button" class="btn btn-primary invite-action-btn" onclick="copyInviteLink()">
+                    Copy Link
+                </button>
 
-            fetch("/teacher/send-request", {
-                method: "POST",
-                body: formData
-            })
-                .then(res => res.json())
-                .then(data => {
-                    alert("Request Sent!");
-                    location.reload();
-                });
-        }
-        // Sidebar + Top दोनों के लिए
-        const navSendRequest = document.getElementById('nav-send-request');
-        const topNavSendRequest = document.getElementById('top-nav-send-request');
+                <button type="button" class="btn btn-success invite-action-btn" onclick="shareInviteLink()">
+                    Share
+                </button>
+            </div>
 
-        function handleSendRequestClick(e) {
-            e.preventDefault();
-
-            if (!state.paymentCompleted) {
-                alert('Please complete payment first.');
-                showDashboard();
-                return;
-            }
-
-            openRequestModal();
-        }
-
-        // Sidebar click
-        if (navSendRequest) {
-            navSendRequest.addEventListener('click', handleSendRequestClick);
-        }
-
-        // Top navbar click
-        if (topNavSendRequest) {
-            topNavSendRequest.addEventListener('click', handleSendRequestClick);
-        }
-    </script>
-
-    <script src="js/teacher-advance-version/desbord.js"></script>
+            <div class="invite-note">
+                Students can open this link and submit their details directly.
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="/js/teacher-advance-version/desbord.js"></script>
+     
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
 </body>
 
